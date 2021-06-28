@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj": {}
+    "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj": {
+    "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj",
+        "projectUniqueName": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj",
         "projectName": "OnlineMarketingTools.Client",
-        "projectPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj",
-        "packagesPath": "C:\\Users\\piete\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\obj\\",
+        "projectPath": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj",
+        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\piete\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\piete\\source\\repos\\DotNetArduinoDriver\\DotNetArduinoDriver\\bin\\Release": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj": {
-                "projectPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj"
+              "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj": {
+                "projectPath": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj"
               }
             }
           }
@@ -84,7 +83,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.browser-wasm",
-              "version": "[5.0.5, 5.0.5]"
+              "version": "[5.0.6, 5.0.6]"
             }
           ],
           "frameworkReferences": {
@@ -92,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.5.21302.13\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -101,20 +100,20 @@
         }
       }
     },
-    "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj": {
+    "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj",
         "projectName": "OnlineMarketingTools.Shared",
-        "projectPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj",
-        "packagesPath": "C:\\Users\\piete\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\obj\\",
+        "projectPath": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj",
+        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jonat\\Source\\Repos\\TestOnlineMarketingTools\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\piete\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -123,7 +122,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\piete\\source\\repos\\DotNetArduinoDriver\\DotNetArduinoDriver\\bin\\Release": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -156,7 +154,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.5.21302.13\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

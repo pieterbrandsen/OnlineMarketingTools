@@ -1,7 +1,7 @@
 ﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="/" Path="C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Client\bin\Debug\net5.0\wwwroot\" />
-  <ContentRoot BasePath="/" Path="C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Client\obj\Debug\net5.0\scopedcss\bundle\" />
-  <ContentRoot BasePath="/" Path="C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Client\wwwroot\" />
-  <ContentRoot BasePath="/Identity" Path="C:\Users\piete\.nuget\packages\microsoft.aspnetcore.identity.ui\5.0.7\staticwebassets\V4\" />
-  <ContentRoot BasePath="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication" Path="C:\Users\piete\.nuget\packages\microsoft.aspnetcore.components.webassembly.authentication\5.0.7\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="C:\Users\jonat\Source\Repos\TestOnlineMarketingTools\OnlineMarketingTools\OnlineMarketingTools\Client\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="C:\Users\jonat\Source\Repos\TestOnlineMarketingTools\OnlineMarketingTools\OnlineMarketingTools\Client\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="/" Path="C:\Users\jonat\Source\Repos\TestOnlineMarketingTools\OnlineMarketingTools\OnlineMarketingTools\Client\wwwroot\" />
+  <ContentRoot BasePath="/Identity" Path="C:\Users\jonat\.nuget\packages\microsoft.aspnetcore.identity.ui\5.0.7\staticwebassets\V4\" />
+  <ContentRoot BasePath="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication" Path="C:\Users\jonat\.nuget\packages\microsoft.aspnetcore.components.webassembly.authentication\5.0.7\build\..\staticwebassets\" />
 </StaticWebAssets>
