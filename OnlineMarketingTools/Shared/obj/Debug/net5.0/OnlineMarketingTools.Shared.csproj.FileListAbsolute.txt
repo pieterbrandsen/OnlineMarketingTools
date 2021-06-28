@@ -1,0 +1,12 @@
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\bin\Debug\net5.0\OnlineMarketingTools.Shared.deps.json
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\bin\Debug\net5.0\OnlineMarketingTools.Shared.dll
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\bin\Debug\net5.0\ref\OnlineMarketingTools.Shared.dll
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\bin\Debug\net5.0\OnlineMarketingTools.Shared.pdb
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.csproj.AssemblyReference.cache
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.AssemblyInfoInputs.cache
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.AssemblyInfo.cs
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.csproj.CoreCompileInputs.cache
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.dll
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\ref\OnlineMarketingTools.Shared.dll
+C:\Users\piete\source\repos\OnlineMarketingTools\OnlineMarketingTools\Shared\obj\Debug\net5.0\OnlineMarketingTools.Shared.pdb
