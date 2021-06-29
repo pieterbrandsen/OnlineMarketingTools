@@ -33,7 +33,7 @@ namespace OnlineMarketingTools.Server
                 options.UseInMemoryDatabase("UsersHobbyDb"));
 
             services.AddDbContext<UserProductsDbContext>(options =>
-                options.UseInMemoryDatabase("UsersHobbyDb"));
+                options.UseInMemoryDatabase("UsersProductDb"));
 
             //****Identity Context****
             services.AddDbContext<IdentityDbContext>(options =>
