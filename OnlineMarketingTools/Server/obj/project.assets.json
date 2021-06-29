@@ -6779,43 +6779,45 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\piete\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\SKIKK\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Server\\OnlineMarketingTools.Server.csproj",
+      "projectUniqueName": "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Server\\OnlineMarketingTools.Server.csproj",
       "projectName": "OnlineMarketingTools.Server",
-      "projectPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Server\\OnlineMarketingTools.Server.csproj",
-      "packagesPath": "C:\\Users\\piete\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Server\\obj\\",
+      "projectPath": "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Server\\OnlineMarketingTools.Server.csproj",
+      "packagesPath": "C:\\Users\\SKIKK\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\piete\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SKIKK\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\piete\\source\\repos\\DotNetArduinoDriver\\DotNetArduinoDriver\\bin\\Release": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj": {
-              "projectPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj"
+            "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj": {
+              "projectPath": "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Client\\OnlineMarketingTools.Client.csproj"
             },
-            "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj": {
-              "projectPath": "C:\\Users\\piete\\source\\repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj"
+            "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj": {
+              "projectPath": "C:\\Users\\SKIKK\\Source\\Repos\\OnlineMarketingTools\\OnlineMarketingTools\\Shared\\OnlineMarketingTools.Shared.csproj"
             }
           }
         }
@@ -6869,12 +6871,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.5, 5.0.5]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -6883,7 +6879,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.5.21302.13\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
