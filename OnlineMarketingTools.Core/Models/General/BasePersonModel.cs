@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Core.Models
+namespace OnlineMarketingTools.Core.Models.General
 {
-    public class UserSeed
+    public class BasePersonModel
     {
-        public int Key { get;set;  }
+        public int Key { get;set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -19,17 +19,5 @@ namespace OnlineMarketingTools.Core.Models
         public int HouseNumber { get; set; }
         public string PostCode { get; set; }
         public string Country { get; set; }
-    }
-    public class MedicalSeed : UserSeed
-    {
-
-    }
-    public class ProductSeed : UserSeed
-    {
-
-    }
-    public class HobbySeed : UserSeed
-    {
-
     }
 }
