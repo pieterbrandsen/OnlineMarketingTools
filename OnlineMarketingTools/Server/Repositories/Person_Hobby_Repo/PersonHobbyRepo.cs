@@ -31,7 +31,7 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Hobby_Repo
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonHobby>> GetAllByFieldName(string fieldName)
+        public Task<IEnumerable<PersonHobby>> GetAllByFieldName(string value, string fieldName)
         {
             throw new NotImplementedException();
         }

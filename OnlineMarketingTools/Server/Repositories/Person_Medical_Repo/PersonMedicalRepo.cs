@@ -3,6 +3,7 @@ using OnlineMarketingTools.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
@@ -21,9 +22,9 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
         /// Gets an IEnumerable<PersonMedical> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
-        public Task<IEnumerable<PersonMedical>> GetAll()
+        public async Task<IEnumerable<PersonMedical>> GetAll()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(context.PersonMedicals);
         }
 
         /// <summary>
@@ -31,9 +32,11 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
-        public Task<IEnumerable<PersonMedical>> GetAllByFieldName(string fieldName)
+        public async Task<IEnumerable<PersonMedical>> GetAllByFieldName(string value, string fieldName)
         {
-            throw new NotImplementedException();
+            var result = context.PersonMedicals.Where(string.Format($"{fieldName}=={value}"));
+
+            return await Task.FromResult(result);
         }
 
         /// <summary>
@@ -43,9 +46,11 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
         /// <param name="lastName"></param>
         /// <param name="postCode"></param>
         /// <returns>Task<PersonMedical></returns>
-        public Task<PersonMedical> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
+        public async Task<PersonMedical> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
         {
-            throw new NotImplementedException();
+            var result = context.PersonMedicals.Where(p => p.FirstName == firstName && p.LastName == lastName && p.PostCode == postCode).First();
+
+            return await Task.FromResult(result);
         }
 
         /// <summary>
@@ -55,7 +60,7 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
         /// <returns>Task<PersonMedical></returns>
         public Task<PersonMedical> GetById(int id)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(context.PersonMedicals.Find(id));
         }
     }
 }

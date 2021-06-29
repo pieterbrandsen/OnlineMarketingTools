@@ -14,7 +14,6 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Product_Repo
         {
             this.context = context;
         }
-
         //Todo
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Product_Repo
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonProduct>></returns>
-        public Task<IEnumerable<PersonProduct>> GetAllByFieldName(string fieldName)
+        public Task<IEnumerable<PersonProduct>> GetAllByFieldName(string value, string fieldName)
         {
             throw new NotImplementedException();
         }

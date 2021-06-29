@@ -10,7 +10,7 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Hobby_Repo
     public interface IPersonHobbyRepo
     {
         public Task<IEnumerable<PersonHobby>> GetAll();
-        public Task<IEnumerable<PersonHobby>> GetAllByFieldName(string fieldName);
+        public Task<IEnumerable<PersonHobby>> GetAllByFieldName(string value, string fieldName);
         public Task<PersonHobby> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode);
         public Task<PersonHobby> GetById(int id);
     }
