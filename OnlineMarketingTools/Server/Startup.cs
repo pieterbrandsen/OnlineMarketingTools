@@ -26,6 +26,16 @@ namespace OnlineMarketingTools.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<UserMedicalDbContext>(options =>
+                options.UseInMemoryDatabase("UsersMedicalDb"));
+
+            services.AddDbContext<UserHobbyDbContext>(options =>
+                options.UseInMemoryDatabase("UsersHobbyDb"));
+
+            services.AddDbContext<UserProductsDbContext>(options =>
+                options.UseInMemoryDatabase("UsersHobbyDb"));
+
+            //****Identity Context****
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
