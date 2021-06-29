@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Medical
 {
-    public class PersonMedical : PersonBase
+    public interface IPersonMedical
+    {
+        public MedicalEnum MedicalState { get; set; }
+    }
+    public class PersonMedical : PersonBase, IPersonMedical
     {
         public MedicalEnum MedicalState { get; set; }
     }

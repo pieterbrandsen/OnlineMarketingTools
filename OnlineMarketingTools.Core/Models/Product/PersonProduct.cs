@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Product
 {
-    public class PersonProduct : PersonBase
+    public interface IPersonProduct
+    {
+        public ProductGenreEnum ProductGenre { get; set; }
+    }
+    public class PersonProduct : PersonBase, IPersonProduct
     {
         public ProductGenreEnum ProductGenre { get; set; }
     }

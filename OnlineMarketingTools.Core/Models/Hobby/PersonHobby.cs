@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Hobby
 {
-    public class PersonHobby : PersonBase
+    public interface IPersonHobby
+    {
+        public HobbyEnum Hobby { get; set; }
+    }
+    public class PersonHobby : PersonBase, IPersonHobby
     {
         public HobbyEnum Hobby { get; set; }
     }
