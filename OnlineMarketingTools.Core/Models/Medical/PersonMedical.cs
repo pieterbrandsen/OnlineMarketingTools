@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Medical
 {
-    public class MedicalPersonModel : BasePersonModel
+    public class PersonMedical : PersonBase
     {
         public MedicalEnum MedicalState { get; set; }
     }

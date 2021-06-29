@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Product
 {
-    class ProductPersonModel : BasePersonModel
+    public class PersonProduct : PersonBase
     {
         public ProductGenreEnum ProductGenre { get; set; }
     }

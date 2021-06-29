@@ -13,7 +13,7 @@ namespace OnlineMarketingTools.Server.Data
     public class IdentityDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         public IdentityDbContext(
-            DbContextOptions options,
+            DbContextOptions<IdentityDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }

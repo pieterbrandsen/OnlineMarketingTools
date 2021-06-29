@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Hobby
 {
-    public class HobbyPersonModel : BasePersonModel
+    public class PersonHobby : PersonBase
     {
         public HobbyEnum Hobby { get; set; }
     }
