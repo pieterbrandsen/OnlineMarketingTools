@@ -11,4 +11,13 @@ namespace OnlineMarketingTools.Core.Models.Hobby
     {
         public HobbyEnum Hobby { get; set; }
     }
+
+    public enum HobbyEnum
+    {
+        Sport,
+        Gaming,
+        BirdWatching
+    }
 }
+
+

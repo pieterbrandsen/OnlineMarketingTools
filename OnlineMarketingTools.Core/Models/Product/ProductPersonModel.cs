@@ -11,4 +11,13 @@ namespace OnlineMarketingTools.Core.Models.Product
     {
         public ProductGenreEnum ProductGenre { get; set; }
     }
+
+    public enum ProductGenreEnum
+    {
+        Sport,
+        Gaming,
+        Birdwatching,
+        Food,
+        Medical
+    }
 }

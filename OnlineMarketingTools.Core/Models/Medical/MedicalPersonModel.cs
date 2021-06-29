@@ -11,4 +11,9 @@ namespace OnlineMarketingTools.Core.Models.Medical
     {
         public MedicalEnum MedicalState { get; set; }
     }
+    public enum MedicalEnum
+    {
+        Injured,
+        Uninjured
+    }
 }
