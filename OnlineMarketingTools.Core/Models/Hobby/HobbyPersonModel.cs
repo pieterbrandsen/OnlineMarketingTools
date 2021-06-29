@@ -9,6 +9,15 @@ namespace OnlineMarketingTools.Core.Models.Hobby
 {
     public class HobbyPersonModel : BasePersonModel
     {
+        public HobbyEnum Hobby { get; set; }
+    }
 
+    public enum HobbyEnum
+    {
+        Sport,
+        Gaming,
+        BirdWatching
     }
 }
+
+
