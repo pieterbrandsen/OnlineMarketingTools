@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineMarketingTools.Server.Data;
 using OnlineMarketingTools.Server.Models;
+using OnlineMarketingTools.Server.Repositories.Person_Hobby_Repo;
+using OnlineMarketingTools.Server.Repositories.Person_Medical_Repo;
+using OnlineMarketingTools.Server.Repositories.Person_Product_Repo;
 using System.Linq;
 
 namespace OnlineMarketingTools.Server
@@ -39,6 +42,12 @@ namespace OnlineMarketingTools.Server
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IPersonHobbyRepo, PersonHobbyRepo>();
+
+            services.AddScoped<IPersonMedicalRepo, PersonMedicalRepo>();
+
+            services.AddScoped<IPersonProductRepo, PersonProductRepo>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

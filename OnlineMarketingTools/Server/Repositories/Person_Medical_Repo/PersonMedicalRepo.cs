@@ -1,4 +1,5 @@
 ﻿using OnlineMarketingTools.Core.Models.Medical;
+using OnlineMarketingTools.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,12 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
 {
     public class PersonMedicalRepo : IPersonMedicalRepo
     {
+        private readonly PersonMedicalDbContext context;
+        public PersonMedicalRepo(PersonMedicalDbContext context)
+        {
+            this.context = context;
+        }
+
         //Todo
 
         /// <summary>

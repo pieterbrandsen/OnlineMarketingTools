@@ -1,4 +1,5 @@
 ﻿using OnlineMarketingTools.Core.Models.Hobby;
+using OnlineMarketingTools.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,14 @@ namespace OnlineMarketingTools.Server.Repositories.Person_Hobby_Repo
 {
     public class PersonHobbyRepo : IPersonHobbyRepo
     {
+        private readonly PersonHobbyDbContext context;
+        public PersonHobbyRepo(PersonHobbyDbContext context)
+        {
+            this.context = context;
+        }
+
         //Todo
+
         /// <summary>
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
