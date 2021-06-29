@@ -9,5 +9,6 @@ namespace OnlineMarketingTools.Core.Models.Product
 {
     class ProductPersonModel : BasePersonModel
     {
+        public ProductGenreEnum ProductGenre { get; set; }
     }
 }

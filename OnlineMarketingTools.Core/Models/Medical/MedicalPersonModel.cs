@@ -9,5 +9,6 @@ namespace OnlineMarketingTools.Core.Models.Medical
 {
     public class MedicalPersonModel : BasePersonModel
     {
+        public MedicalEnum MedicalState { get; set; }
     }
 }
