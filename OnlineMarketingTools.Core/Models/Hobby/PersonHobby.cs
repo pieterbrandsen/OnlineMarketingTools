@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Core.Models.Medical
+namespace OnlineMarketingTools.Core.Models.Hobby
 {
-    public class MedicalPersonModel : BasePersonModel
+    public class PersonHobby : PersonBase
     {
-        public MedicalEnum MedicalState { get; set; }
+        public HobbyEnum Hobby { get; set; }
     }
 }

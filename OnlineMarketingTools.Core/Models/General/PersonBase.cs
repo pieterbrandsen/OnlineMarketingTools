@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.General
 {
-    public class BasePersonModel
+    public class PersonBase
     {
         public int Key { get;set; }
         public string FirstName { get; set; }

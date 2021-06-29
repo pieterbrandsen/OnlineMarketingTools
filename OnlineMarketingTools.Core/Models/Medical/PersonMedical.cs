@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Core.Models.Product
+namespace OnlineMarketingTools.Core.Models.Medical
 {
-    class ProductPersonModel : BasePersonModel
+    public class PersonMedical : PersonBase
     {
-        public ProductGenreEnum ProductGenre { get; set; }
+        public MedicalEnum MedicalState { get; set; }
     }
 }
