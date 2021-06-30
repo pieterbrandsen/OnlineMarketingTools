@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Database.Repositories.Person_Medical_Repo
+namespace OnlineMarketingTools.Core.Interfaces
 {
     public interface IPersonMedicalRepo
     {

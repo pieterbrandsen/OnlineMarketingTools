@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using OnlineMarketingTools.Database.Data;
+using OnlineMarketingTools.Core.Interfaces;
 
 namespace OnlineMarketingTools.Database.Repositories.Person_Medical_Repo
 {
