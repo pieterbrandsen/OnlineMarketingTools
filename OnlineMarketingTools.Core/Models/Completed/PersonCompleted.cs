@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Models.Completed
 {
-    public class PersonCompleted : IPersonHobby, IPersonMedical, IPersonProduct, IPersonBase
+    public class PersonCompleted : PersonBase, IPersonHobby, IPersonMedical, IPersonProduct
     {
         // Hobby
         public HobbyEnum Hobby {get; set; }
@@ -20,17 +20,5 @@ namespace OnlineMarketingTools.Core.Models.Completed
         
         // Product
         public ProductGenreEnum ProductGenre {get; set; }
-    
-        // Base
-        public int Key {get; set; }
-        public string FirstName {get; set; }
-        public string MiddleName {get; set; }
-        public string LastName {get; set; }
-        public string Email {get; set; }
-        public string PhoneNumber {get; set; }
-        public string Adress {get; set; }
-        public int HouseNumber {get; set; }
-        public string PostCode {get; set; }
-        public string Country {get; set; }
     }
 }
