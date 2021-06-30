@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
-{
+namespace OnlineMarketingTools.Core.Interfaces {
     public interface IPersonHobbyRepo
     {
         public Task<IEnumerable<PersonHobby>> GetAll();
