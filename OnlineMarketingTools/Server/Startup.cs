@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnlineMarketingTools.Server.Data;
-using OnlineMarketingTools.Server.Models;
-using OnlineMarketingTools.Server.Repositories.Person_Hobby_Repo;
-using OnlineMarketingTools.Server.Repositories.Person_Medical_Repo;
-using OnlineMarketingTools.Server.Repositories.Person_Product_Repo;
 using System.Linq;
+using OnlineMarketingTools.Database.Data;
+using OnlineMarketingTools.Database.Models;
+using OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo;
+using OnlineMarketingTools.Database.Repositories.Person_Medical_Repo;
+using OnlineMarketingTools.Database.Repositories.Person_Product_Repo;
 
 namespace OnlineMarketingTools.Server
 {

@@ -1,11 +1,11 @@
 ﻿using OnlineMarketingTools.Core.Models.Product;
-using OnlineMarketingTools.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OnlineMarketingTools.Database.Data;
 
-namespace OnlineMarketingTools.Server.Repositories.Person_Product_Repo
+namespace OnlineMarketingTools.Database.Repositories.Person_Product_Repo
 {
     public class PersonProductRepo : IPersonProductRepo
     {

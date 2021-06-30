@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Server.Repositories.Person_Hobby_Repo
+namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
 {
     public interface IPersonHobbyRepo
     {

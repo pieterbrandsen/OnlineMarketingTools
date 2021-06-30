@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Models.Hobby;
 
-namespace OnlineMarketingTools.Server.Data
+namespace OnlineMarketingTools.Database.Data
 {
 	public class PersonHobbyDbContext : DbContext
     {

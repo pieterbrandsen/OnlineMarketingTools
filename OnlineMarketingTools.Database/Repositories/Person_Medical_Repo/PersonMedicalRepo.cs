@@ -1,12 +1,12 @@
 ﻿using OnlineMarketingTools.Core.Models.Medical;
-using OnlineMarketingTools.Server.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using OnlineMarketingTools.Database.Data;
 
-namespace OnlineMarketingTools.Server.Repositories.Person_Medical_Repo
+namespace OnlineMarketingTools.Database.Repositories.Person_Medical_Repo
 {
     public class PersonMedicalRepo : IPersonMedicalRepo
     {
