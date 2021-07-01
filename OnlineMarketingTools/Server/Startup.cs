@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnlineMarketingTools.Server.Data;
-using OnlineMarketingTools.Server.Models;
-using System.Linq;
+using OnlineMarketingTools.Database.Data;
+using OnlineMarketingTools.Database.Models;
+using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.DataExternal.Data;
+using OnlineMarketingTools.DataExternal.Entities;
+using OnlineMarketingTools.Database.Repositories.External;
 
 namespace OnlineMarketingTools.Server
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -26,9 +27,25 @@ namespace OnlineMarketingTools.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PersonMedicalDbContext>(options =>
+                options.UseInMemoryDatabase("PersonMedicalDb"));
+
+            services.AddDbContext<PersonHobbyDbContext>(options =>
+                options.UseInMemoryDatabase("PersonHobbyDb"));
+
+            services.AddDbContext<PersonProductDbContext>(options =>
+                options.UseInMemoryDatabase("PersonProductDb"));
+
+            //****Identity Context****
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IExternalRepository<PersonHobby>, PersonHobbyExternalRepository>();
+
+            services.AddScoped<IExternalRepository<PersonMedical>, PersonMedicalExternalRepository>();
+
+            services.AddScoped<IExternalRepository<PersonProduct>, PersonProductExternalRepository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

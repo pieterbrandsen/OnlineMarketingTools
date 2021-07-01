@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineMarketingTools.Core.Models.General
+﻿namespace OnlineMarketingTools.DataExternal.Entities
 {
-    public class BasePersonModel
+    public class PersonBase
     {
         public int Key { get;set; }
         public string FirstName { get; set; }
