@@ -18,8 +18,6 @@ namespace OnlineMarketingTools.Database.Repositories.External
             this._context = context;
         }
 
-        //Todo
-
         /// <summary>
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>

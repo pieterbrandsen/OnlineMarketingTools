@@ -17,7 +17,6 @@ namespace OnlineMarketingTools.Database.Repositories.External
         {
             _context = context;
         }
-        //Todo
 
         /// <summary>
         /// Gets an IEnumerable<PersonProduct> of All entity's in this DB

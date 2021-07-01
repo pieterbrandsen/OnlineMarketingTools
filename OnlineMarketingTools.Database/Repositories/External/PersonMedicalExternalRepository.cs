@@ -21,8 +21,6 @@ namespace OnlineMarketingTools.Database.Repositories.External
             this._context = context;
         }
 
-        //Todo
-
         /// <summary>
         /// Gets an IEnumerable<PersonMedical> of All entity's in this DB
         /// </summary>
