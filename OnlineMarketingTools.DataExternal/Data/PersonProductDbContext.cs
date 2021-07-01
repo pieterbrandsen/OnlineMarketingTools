@@ -11,5 +11,11 @@ namespace OnlineMarketingTools.DataExternal.Data
 
 		public DbSet<PersonProduct> PersonProducts { get; set; }
 
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+
+		}
+
+
 	}
 }
