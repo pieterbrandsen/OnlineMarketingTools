@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OnlineMarketingTools.Database.Repositories.External
 {
@@ -23,18 +29,20 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
         public async Task<IEnumerable<PersonMedical>> GetAll()
         {
-            return await Task.FromResult(_context.PersonMedicals.ToList<PersonMedical>());
+            return await _context.PersonMedicals.ToListAsync();
         }
 
         /// <summary>
-        /// Gets a list of people by fieldname
+        /// Gets a IEnumerable<PersonMedical> based on the name of the field and the value you want that field to have.
         /// </summary>
-        /// <param name="fieldName"> The name of the field you want to search for </param>
-        /// <returns>Task<IEnumerable<PersonMedical>></returns>
+        /// <param name="value">The value of the field you want</param>
+        /// <param name="fieldName">The name of the field you want to check</param>
+        /// <returns></returns>
         public async Task<IEnumerable<PersonMedical>> GetAllByFieldName(string value, string fieldName)
         {
-            //TODO: select on value and fieldname
-            var result = _context.PersonMedicals.Where(p => p.MedicalState.ToString() == fieldName);
+            var result = _context.PersonMedicals
+                .Where(string.Format("{0} == {1}", fieldName, value))
+                .AsEnumerable<PersonMedical>();
 
             return await Task.FromResult(result);
         }
