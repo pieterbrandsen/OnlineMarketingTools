@@ -1,17 +1,17 @@
-﻿using OnlineMarketingTools.Core.Models.Hobby;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using OnlineMarketingTools.Database.Data;
+using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.DataExternal.Data;
+using OnlineMarketingTools.DataExternal.Entities;
 
-namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
+namespace OnlineMarketingTools.DataExternal.Repositories
 {
-    public class PersonHobbyRepo : IPersonHobbyRepo
+	public class PersonHobbyRepository : IPersonIntegratedRepository
     {
         private readonly PersonHobbyDbContext context;
-        public PersonHobbyRepo(PersonHobbyDbContext context)
+        public PersonHobbyRepository(PersonHobbyDbContext context)
         {
             this.context = context;
         }
@@ -22,7 +22,7 @@ namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonHobby>> GetAll()
+        public Task<IEnumerable<PersonIntegrated>> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonHobby>> GetAllByFieldName(string value, string fieldName)
+        public Task<IEnumerable<PersonIntegrated>> GetAllByFieldName(string value, string fieldName)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +44,7 @@ namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
         /// <param name="lastName"></param>
         /// <param name="postCode"></param>
         /// <returns>Task<PersonHobby></returns>
-        public Task<PersonHobby> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
+        public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,7 @@ namespace OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Task<PersonHobby></returns>
-        public Task<PersonHobby> GetById(int id)
+        public Task<PersonIntegrated> GetById(int id)
         {
             throw new NotImplementedException();
         }

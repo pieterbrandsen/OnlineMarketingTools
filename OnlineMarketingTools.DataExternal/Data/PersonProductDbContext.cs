@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineMarketingTools.Core.Models.Product;
+using OnlineMarketingTools.DataExternal.Entities;
 
-namespace OnlineMarketingTools.Database.Data
+namespace OnlineMarketingTools.DataExternal.Data
 {
 	public class PersonProductDbContext : DbContext
 	{

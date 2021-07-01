@@ -14,6 +14,7 @@ using OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo;
 using OnlineMarketingTools.Database.Repositories.Person_Medical_Repo;
 using OnlineMarketingTools.Database.Repositories.Person_Product_Repo;
 using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.DataExternal.Data;
 
 namespace OnlineMarketingTools.Server
 {
@@ -44,11 +45,11 @@ namespace OnlineMarketingTools.Server
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IPersonHobbyRepo, PersonHobbyRepo>();
+            services.AddScoped<IPersonHobbyRepository, PersonHobbyRepo>();
 
-            services.AddScoped<IPersonMedicalRepo, PersonMedicalRepo>();
+            services.AddScoped<IPersonMedicalRepository, PersonMedicalExternalRepository>();
 
-            services.AddScoped<IPersonProductRepo, PersonProductRepo>();
+            services.AddScoped<IPersonProductRepository, PersonProductRepo>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
