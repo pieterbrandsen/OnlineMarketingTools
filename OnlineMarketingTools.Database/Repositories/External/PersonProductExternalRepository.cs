@@ -29,10 +29,11 @@ namespace OnlineMarketingTools.Database.Repositories.External
         }
 
         /// <summary>
-        /// Gets a list of people by fieldname
+        /// Gets a IEnumerable<PersonHobby> based on the name of the field and the value you want that field to have.
         /// </summary>
-        /// <param name="fieldName"> The name of the field you want to search for </param>
-        /// <returns>Task<IEnumerable<PersonProduct>></returns>
+        /// <param name="value">The value of the field you want</param>
+        /// <param name="fieldName">The name of the field you want to check</param>
+        /// <returns></returns>
         public async Task<IEnumerable<PersonProduct>> GetAllByFieldName(string value, string fieldName)
         {
             var result = _context.PersonProducts
