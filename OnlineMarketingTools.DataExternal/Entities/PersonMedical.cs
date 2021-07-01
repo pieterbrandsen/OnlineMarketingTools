@@ -6,7 +6,10 @@
     }
     public enum MedicalEnum
     {
-        Injured,
-        Uninjured
+        Undetermined,
+        Good,
+        Fair,
+        Serious,
+        Critical
     }
 }

@@ -11,5 +11,10 @@ namespace OnlineMarketingTools.DataExternal.Data
 
 		public DbSet<PersonProduct> PersonHobbies { get; set; }
 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			var productPersons = MockDataGenerator.PersonProductData(100);
+			modelBuilder.Entity<PersonProduct>().HasData(productPersons);
+		}
 	}
 }

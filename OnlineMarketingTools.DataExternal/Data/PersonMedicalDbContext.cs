@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
@@ -9,5 +10,11 @@ namespace OnlineMarketingTools.DataExternal.Data
         {
         }
         public DbSet<PersonMedical> PersonMedicals { get; set; }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var medicalPersons = MockDataGenerator.PersonMedicalData(100);
+            modelBuilder.Entity<PersonMedical>().HasData(medicalPersons);
+        }
     }
 }

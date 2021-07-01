@@ -6,8 +6,9 @@ namespace OnlineMarketingTools.DataExternal.Data
 {
     public static class MockDataGenerator
     {
-        private static readonly Random rnd = new ();
-        public static List<PersonBase> PersonData(int amount)
+        private static readonly Random Rnd = new ();
+
+        private static IEnumerable<PersonBase> PersonData(int amount)
         {
             var adresses = new List<string>()
             {
@@ -128,19 +129,51 @@ namespace OnlineMarketingTools.DataExternal.Data
                 persons.Add(new PersonBase
                 {
                     Key = i, 
-                    Adress = adresses[rnd.Next(adresses.Count)],
-                    Country = countries[rnd.Next(countries.Count)],
-                    Email =  emails[rnd.Next(emails.Count)],
-                    FirstName = firstNames[rnd.Next(firstNames.Count)],
-                    MiddleName = middleNames[rnd.Next(middleNames.Count)],
-                    LastName = lastNames[rnd.Next(lastNames.Count)],
+                    Address = adresses[Rnd.Next(adresses.Count)],
+                    Country = countries[Rnd.Next(countries.Count)],
+                    Email =  emails[Rnd.Next(emails.Count)],
+                    FirstName = firstNames[Rnd.Next(firstNames.Count)],
+                    MiddleName = middleNames[Rnd.Next(middleNames.Count)],
+                    LastName = lastNames[Rnd.Next(lastNames.Count)],
                     HouseNumber = i,
-                    PhoneNumber = phoneNumbers[rnd.Next(phoneNumbers.Count)],
-                    PostCode = postalCodes[rnd.Next(postalCodes.Count)]
+                    PhoneNumber = phoneNumbers[Rnd.Next(phoneNumbers.Count)],
+                    PostalCode = postalCodes[Rnd.Next(postalCodes.Count)]
                 });
             }
 
-            ;
+            return persons;
+        }
+
+        public static List<PersonMedical> PersonMedicalData(int amount)
+        {
+            if (PersonData(amount) is not List<PersonMedical> persons) return null;
+            foreach (var person in persons)
+            {
+                person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
+            }
+
+            return persons;
+        }
+
+        public static List<PersonHobby> PersonHobbiesData(int amount)
+        {
+            if (PersonData(amount) is not List<PersonHobby> persons) return null;
+            foreach (var person in persons)
+            {
+                person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
+            }
+
+            return persons;
+        }
+        
+        public static List<PersonProduct> PersonProductData(int amount)
+        {
+            if (PersonData(amount) is not List<PersonProduct> persons) return null;
+            foreach (var person in persons)
+            {
+                person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<ProductGenreEnum>().Length);
+            }
+
             return persons;
         }
     }

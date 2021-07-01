@@ -1,4 +1,6 @@
-﻿namespace OnlineMarketingTools.DataExternal.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineMarketingTools.DataExternal.Entities
 {
     public class PersonBase
     {
@@ -9,9 +11,9 @@
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
 
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public int HouseNumber { get; set; }
-        public string PostCode { get; set; }
+        public string PostalCode { get; set; }
         public string Country { get; set; }
     }
 }
