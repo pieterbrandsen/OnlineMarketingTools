@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31410.414
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Server", "OnlineMarketingTools\Server\OnlineMarketingTools.Server.csproj", "{B95EE062-D7B3-418D-B962-012416110FCD}"
 EndProject
@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Shared", "OnlineMarketingTools\Shared\OnlineMarketingTools.Shared.csproj", "{0AA2B466-0E60-4CD1-9095-FD69539141B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketingTools.Core", "OnlineMarketingTools.Core\OnlineMarketingTools.Core.csproj", "{359661E2-6296-41D3-8FC0-8C2CB6B8F220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Core", "OnlineMarketingTools.Core\OnlineMarketingTools.Core.csproj", "{359661E2-6296-41D3-8FC0-8C2CB6B8F220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketingTools.Database", "OnlineMarketingTools.Database\OnlineMarketingTools.Database.csproj", "{B6F8874B-27D9-4862-AD0F-F006C5738293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Database", "OnlineMarketingTools.Database\OnlineMarketingTools.Database.csproj", "{B6F8874B-27D9-4862-AD0F-F006C5738293}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketingTools.DataExternal", "OnlineMarketingTools.DataExternal\OnlineMarketingTools.DataExternal.csproj", "{23970CF1-6350-41AE-88E5-547EC5248342}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B6F8874B-27D9-4862-AD0F-F006C5738293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6F8874B-27D9-4862-AD0F-F006C5738293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6F8874B-27D9-4862-AD0F-F006C5738293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23970CF1-6350-41AE-88E5-547EC5248342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23970CF1-6350-41AE-88E5-547EC5248342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23970CF1-6350-41AE-88E5-547EC5248342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23970CF1-6350-41AE-88E5-547EC5248342}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
