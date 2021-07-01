@@ -7,10 +7,10 @@ namespace OnlineMarketingTools.DataExternal.Data
     public static class MockDataGenerator
     {
         private static readonly Random Rnd = new ();
-
-        private static IEnumerable<PersonBase> PersonData(int amount)
+        
+        private static IEnumerable<PersonBase> PersonData(int amount = 10, bool randomData = false)
         {
-            var adresses = new List<string>()
+            var addresses = new List<string>()
             {
                 "7905 Kensington Court",
                 "7 Badeau Parkway",
@@ -124,12 +124,34 @@ namespace OnlineMarketingTools.DataExternal.Data
             };
             
             var persons = new List<PersonBase>();
+            if (!randomData)
+            {
+                for (var i = amount - 1; i >= 0; i--)
+                {
+                    persons.Add(new PersonBase
+                    {
+                        Key = i,
+                        Address = addresses[i],
+                        Country = countries[i],
+                        Email = emails[i],
+                        FirstName = firstNames[i],
+                        MiddleName = middleNames[i],
+                        LastName = lastNames[i],
+                        HouseNumber = i,
+                        PhoneNumber = phoneNumbers[i],
+                        PostalCode = postalCodes[i]
+                    });
+                }
+
+                return persons;
+            }
+
             for (var i = amount - 1; i >= 0; i--)
             {
                 persons.Add(new PersonBase
                 {
                     Key = i, 
-                    Address = adresses[Rnd.Next(adresses.Count)],
+                    Address = addresses[Rnd.Next(addresses.Count)],
                     Country = countries[Rnd.Next(countries.Count)],
                     Email =  emails[Rnd.Next(emails.Count)],
                     FirstName = firstNames[Rnd.Next(firstNames.Count)],
@@ -140,38 +162,55 @@ namespace OnlineMarketingTools.DataExternal.Data
                     PostalCode = postalCodes[Rnd.Next(postalCodes.Count)]
                 });
             }
-
             return persons;
         }
 
-        public static List<PersonMedical> PersonMedicalData(int amount)
+        public static IEnumerable<PersonMedical> PersonMedicalData(int amount, bool randomData)
         {
             if (PersonData(amount) is not List<PersonMedical> persons) return null;
             foreach (var person in persons)
             {
-                person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
+                if (!randomData)
+                {
+                    person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
+                }
+                else
+                {
+                }
             }
 
             return persons;
         }
 
-        public static List<PersonHobby> PersonHobbiesData(int amount)
+        public static IEnumerable<PersonHobby> PersonHobbiesData(int amount, bool randomData)
         {
             if (PersonData(amount) is not List<PersonHobby> persons) return null;
             foreach (var person in persons)
             {
-                person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
+                if (!randomData)
+                {
+                    person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
+                }
+                else
+                {
+                }
             }
 
             return persons;
         }
         
-        public static List<PersonProduct> PersonProductData(int amount)
+        public static IEnumerable<PersonProduct> PersonProductData(int amount, bool randomData = false)
         {
             if (PersonData(amount) is not List<PersonProduct> persons) return null;
             foreach (var person in persons)
             {
-                person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<ProductGenreEnum>().Length);
+                if (!randomData)
+                {
+                    person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<ProductGenreEnum>().Length);
+                }
+                else
+                {
+                }
             }
 
             return persons;
