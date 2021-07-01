@@ -1,18 +1,21 @@
-﻿using OnlineMarketingTools.Core.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Database.Repositories.External
 {
 	public class PersonProductExternalRepository : IExternalRepository<PersonProduct>
     {
-        private readonly PersonProductDbContext context;
+        private readonly PersonProductDbContext _context;
         public PersonProductExternalRepository(PersonProductDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
         //Todo
 
@@ -20,9 +23,9 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// Gets an IEnumerable<PersonProduct> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonProduct>></returns>
-        public Task<IEnumerable<PersonProduct>> GetAll()
-        {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<PersonProduct>> GetAll()
+{
+            return await _context.PersonProducts.ToListAsync();
         }
 
         /// <summary>
@@ -30,9 +33,13 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonProduct>></returns>
-        public Task<IEnumerable<PersonProduct>> GetAllByFieldName(string value, string fieldName)
+        public async Task<IEnumerable<PersonProduct>> GetAllByFieldName(string value, string fieldName)
         {
-            throw new NotImplementedException();
+            var result = _context.PersonProducts
+               .Where(string.Format("{0} == {1}", fieldName, value))
+               .AsEnumerable<PersonProduct>();
+
+            return await Task.FromResult(result);
         }
     }
 }
