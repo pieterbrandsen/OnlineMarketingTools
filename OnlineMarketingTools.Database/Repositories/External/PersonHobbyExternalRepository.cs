@@ -36,26 +36,5 @@ namespace OnlineMarketingTools.Database.Repositories.External
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Gets a single person based on the following 3 fields
-        /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="postCode"></param>
-        /// <returns>Task<PersonHobby></returns>
-        public Task<PersonHobby> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Gets a single person based on Id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Task<PersonHobby></returns>
-        public Task<PersonHobby> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,7 +1,4 @@
-﻿using OnlineMarketingTools.Core.Entities;
-using OnlineMarketingTools.Core.Entities.;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Interfaces
 {

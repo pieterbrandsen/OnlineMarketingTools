@@ -1,24 +1,20 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 using OnlineMarketingTools.Database.Data;
 using OnlineMarketingTools.Database.Models;
-using OnlineMarketingTools.Database.Repositories.Person_Hobby_Repo;
-using OnlineMarketingTools.Database.Repositories.Person_Medical_Repo;
-using OnlineMarketingTools.Database.Repositories.Person_Product_Repo;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
+using OnlineMarketingTools.DataExternal.Entities;
+using OnlineMarketingTools.Database.Repositories.External;
 
 namespace OnlineMarketingTools.Server
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -45,11 +41,11 @@ namespace OnlineMarketingTools.Server
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IPersonHobbyRepository, PersonHobbyRepo>();
+            services.AddScoped<IExternalRepository<PersonHobby>, PersonHobbyExternalRepository>();
 
-            services.AddScoped<IPersonMedicalRepository, PersonMedicalExternalRepository>();
+            services.AddScoped<IExternalRepository<PersonMedical>, PersonMedicalExternalRepository>();
 
-            services.AddScoped<IPersonProductRepository, PersonProductRepo>();
+            services.AddScoped<IExternalRepository<PersonProduct>, PersonProductExternalRepository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
