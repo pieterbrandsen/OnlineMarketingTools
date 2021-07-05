@@ -10,9 +10,9 @@ namespace OnlineMarketingTools.DataExternal.Data
         }
         public DbSet<PersonHobby> PersonHobbies { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
-        {
-	        // modelBuilder.Entity<PersonHobby>().HasData(hobbyPersons);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<PersonHobby>().HasData(hobbyPersons);
+        //}
     }
 }

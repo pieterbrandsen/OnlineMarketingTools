@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
+using Microsoft.EntityFrameworkCore;
+using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.Database;
+using OnlineMarketingTools.DataExternal.Data;
+using OnlineMarketingTools.DataExternal.Entities;
+using System.Linq;
 
 namespace OnlineMarketingTools.Database.Repositories
 {
@@ -19,9 +26,9 @@ namespace OnlineMarketingTools.Database.Repositories
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonIntegrated>> GetAll()
-        {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<PersonIntegrated>> GetAll()
+{
+            return await context.PersonsIntegrated.ToListAsync();
         }
 
         /// <summary>
@@ -29,9 +36,13 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonIntegrated>> GetAllByFieldName(string value, string fieldName)
+        public async Task<IEnumerable<PersonIntegrated>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
         {
-            throw new NotImplementedException();
+            var result = context.PersonsIntegrated
+               .Where(string.Format("{0} == {1}", fieldName, value))
+               .AsEnumerable<PersonIntegrated>();
+
+            return await Task.FromResult(result);
         }
 
         /// <summary>
@@ -43,7 +54,13 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <returns>Task<PersonHobby></returns>
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
         {
-            throw new NotImplementedException();
+            var result = context.PersonsIntegrated
+                .Where(p => p.FirstName == firstName &&
+                p.LastName == lastName && 
+                p.PostCode == postCode)
+                .First();
+
+            return Task.FromResult(result);
         }
 
         /// <summary>
@@ -51,9 +68,66 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Task<PersonHobby></returns>
-        public Task<PersonIntegrated> GetById(int id)
+        public async Task<PersonIntegrated> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await context.PersonsIntegrated.FindAsync(id);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns a bool weither adding succeeded or not.
+        /// </summary>
+        /// <param name="person">The PersonIntergrated object to add</param>
+        /// <returns></returns>
+        public async Task<bool> AddPerson(PersonIntegrated person)
+        {
+            if (!(GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null))
+            {
+                return false;
+            }
+            else
+            {
+                context.PersonsIntegrated.Add(person);
+                await context.SaveChangesAsync();
+
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Returns a bool weither updating succeeded or not.
+        /// </summary>
+        /// <param name="PersonToUpdate">The PersonIntergrated object to update</param>
+        /// <returns></returns>
+        public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
+        {
+            if (!(GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null))
+            {
+                return false;
+            }
+            else
+            {
+                context.Update(PersonToUpdate);
+                await context.SaveChangesAsync();
+
+                return true;
+            }
+        }
+
+        public async Task<IEnumerable<string>> FieldNames()
+        {
+            var result = new List<string>();
+
+            foreach (var entity in context.Model.GetEntityTypes())
+            {
+                foreach (var property in entity.GetProperties())
+                {
+                    result.Add(property.Name);
+                }
+            }
+
+            return await Task.FromResult(result);
         }
     }
 }

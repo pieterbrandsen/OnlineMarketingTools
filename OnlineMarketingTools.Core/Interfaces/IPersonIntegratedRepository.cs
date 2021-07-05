@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Core.Interfaces
 {
@@ -6,5 +7,7 @@ namespace OnlineMarketingTools.Core.Interfaces
 	{
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode);
         public Task<PersonIntegrated> GetById(int id);
+        public Task<bool> AddPerson(PersonIntegrated person);
+        public Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate);    
     }
 }
