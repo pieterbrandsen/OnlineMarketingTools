@@ -9,7 +9,13 @@ namespace OnlineMarketingTools.DataExternal.Data
 		{
 		}
 
-		public DbSet<PersonProduct> PersonHobbies { get; set; }
+		public DbSet<PersonProduct> PersonProducts { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+
+		}
+
 
 	}
 }

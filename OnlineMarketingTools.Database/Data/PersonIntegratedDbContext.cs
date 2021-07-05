@@ -8,7 +8,13 @@ namespace OnlineMarketingTools.Database
 		public PersonIntegratedDbContext(DbContextOptions<PersonIntegratedDbContext> options) : base(options)
         {
         }
-        public DbSet<PersonIntegrated> PersonHobbies { get; set; }
+        public DbSet<PersonIntegrated> PersonsIntegrated { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+
+        }
+
 
     }
 }

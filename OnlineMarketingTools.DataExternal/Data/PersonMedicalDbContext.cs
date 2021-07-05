@@ -9,5 +9,11 @@ namespace OnlineMarketingTools.DataExternal.Data
         {
         }
         public DbSet<PersonMedical> PersonMedicals { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+
+        }
+
     }
 }
