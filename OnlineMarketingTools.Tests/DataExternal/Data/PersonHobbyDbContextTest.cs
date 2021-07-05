@@ -9,15 +9,21 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
     {
         private readonly DbContextOptions<PersonHobbyDbContext> _dbOptions = new DbContextOptionsBuilder<PersonHobbyDbContext>().UseInMemoryDatabase("hobby-db")
             .Options;
-        private PersonHobbyDbContext GetContext()
+        private PersonHobbyDbContext GetNonRandomDataContext()
         {
-            var context = new PersonHobbyDbContext(_dbOptions, false);
+            var context = new PersonHobbyDbContext(_dbOptions,false);
             return context;
         }
         
-        private PersonHobbyDbContext GetContext(int amount)
+        private PersonHobbyDbContext GetRandomDataContext(int amount)
         {
             var context = new PersonHobbyDbContext(_dbOptions, true, amount);
+            return context;
+        }
+
+        private PersonHobbyDbContext GetLiveContext()
+        {
+            var context = new PersonHobbyDbContext(_dbOptions);
             return context;
         }
         
@@ -25,7 +31,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
         public void CreateDatabaseWithoutRandomData()
         {
             const int expectedDataLength = 10;
-            using var context = GetContext();
+            using var context = GetNonRandomDataContext();
             var hobbyPersons = context.PersonHobbies.ToList();
             for (int i = 0; i < hobbyPersons.Count; i++)
             {
@@ -39,7 +45,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
                 Assert.Equal(MockDataGenerator.middleNames[i], person.MiddleName);
                 Assert.Equal(MockDataGenerator.phoneNumbers[i], person.PhoneNumber);
                 Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
-                Assert.Equal(MockDataGenerator.hobbyEnumValues[i], person.Hobby.ToString());
+                Assert.Equal(MockDataGenerator.hobbyEnumValues[i], person.Hobby);
             }
             
             Assert.NotEmpty(hobbyPersons);
@@ -50,11 +56,21 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
         public void CreateDatabaseWithRandomData()
         {
             const int expectedDataLength = 1000;
-            using var context = GetContext(expectedDataLength);
+            using var context = GetRandomDataContext(expectedDataLength);
             var hobbyPersons = context.PersonHobbies.ToList();
             
             Assert.NotEmpty(hobbyPersons);
             Assert.Equal(expectedDataLength, hobbyPersons.Count);
+        }
+
+        [Fact]
+        public void CreateLiveDatabase()
+        {
+            using var context = GetLiveContext();
+            var hobbyPersons = context.PersonHobbies.ToList();
+
+            Assert.NotNull(context.PersonHobbies);
+            Assert.Empty(hobbyPersons);
         }
     }
 }

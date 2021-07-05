@@ -10,15 +10,21 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
        private DbContextOptions<PersonMedicalDbContext> _dbOptions = new DbContextOptionsBuilder<PersonMedicalDbContext>().UseInMemoryDatabase("medical-db")
            .Options;
 
-       private PersonMedicalDbContext GetContext()
+       private PersonMedicalDbContext GetNonRandomDataContext()
        {
-           var context = new PersonMedicalDbContext(_dbOptions, false);
+           var context = new PersonMedicalDbContext(_dbOptions,false);
            return context;
        }
         
-       private PersonMedicalDbContext GetContext(int amount)
+       private PersonMedicalDbContext GetRandomDataContext(int amount)
        {
            var context = new PersonMedicalDbContext(_dbOptions, true, amount);
+           return context;
+       }
+       
+       private PersonMedicalDbContext GetLiveContext()
+       {
+           var context = new PersonMedicalDbContext(_dbOptions);
            return context;
        }
        
@@ -26,7 +32,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
         public void CreateDatabaseWithoutRandomData()
         {
             const int expectedDataLength = 10;
-            using var context = GetContext();
+            using var context = GetNonRandomDataContext();
             var medicalPersons = context.MedicalPersons.ToList();
             for (int i = 0; i < medicalPersons.Count; i++)
             {
@@ -40,7 +46,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
                 Assert.Equal(MockDataGenerator.middleNames[i], person.MiddleName);
                 Assert.Equal(MockDataGenerator.phoneNumbers[i], person.PhoneNumber);
                 Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
-                Assert.Equal(MockDataGenerator.medicalEnumValues[i], person.MedicalState.ToString());
+                Assert.Equal(MockDataGenerator.medicalEnumValues[i], person.MedicalState);
             }
             
             Assert.NotEmpty(medicalPersons);
@@ -51,11 +57,21 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
         public void CreateDatabaseWithRandomData()
         {
             const int expectedDataLength = 1000;
-            using var context = GetContext(expectedDataLength);
+            using var context = GetRandomDataContext(expectedDataLength);
             var medicalPersons = context.MedicalPersons.ToList();
             
             Assert.NotEmpty(medicalPersons);
             Assert.Equal(expectedDataLength, medicalPersons.Count);
+        }
+        
+        [Fact]
+        public void CreateLiveDatabase()
+        {
+            using var context = GetLiveContext();
+            var medicalPersons = context.MedicalPersons.ToList();
+
+            Assert.NotNull(context.MedicalPersons);
+            Assert.Empty(medicalPersons);
         }
     }
 }

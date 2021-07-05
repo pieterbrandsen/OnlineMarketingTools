@@ -133,46 +133,46 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "7148680",
             };
             
-            public static List<string> medicalEnumValues = new()
+            public static List<MedicalEnum> medicalEnumValues = new()
             {
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
+                MedicalEnum.Critical,
+                MedicalEnum.Fair,
+                MedicalEnum.Good,
+                MedicalEnum.Serious,
+                MedicalEnum.Undetermined,
+                MedicalEnum.Critical,
+                MedicalEnum.Fair,
+                MedicalEnum.Good,
+                MedicalEnum.Serious,
+                MedicalEnum.Undetermined,
             };
             
-            public static List<string> hobbyEnumValues = new()
+            public static List<HobbyEnum> hobbyEnumValues = new()
             {
-                "0",
-                "1",
-                "2",
-                "0",
-                "1",
-                "2",
-                "0",
-                "1",
-                "2",
-                "0",
+                HobbyEnum.Gaming,
+                HobbyEnum.Sport,
+                HobbyEnum.BirdWatching,
+                HobbyEnum.Gaming,
+                HobbyEnum.Sport,
+                HobbyEnum.BirdWatching,
+                HobbyEnum.Gaming,
+                HobbyEnum.Sport,
+                HobbyEnum.BirdWatching,
+                HobbyEnum.Gaming,
             };
             
-            public static List<string> productGenreEnumValues = new()
+            public static List<ProductGenreEnum> productGenreEnumValues = new()
             {
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
+                ProductGenreEnum.Birdwatching,
+                ProductGenreEnum.Food,
+                ProductGenreEnum.Gaming,
+                ProductGenreEnum.Medical,
+                ProductGenreEnum.Sport,
+                ProductGenreEnum.Birdwatching,
+                ProductGenreEnum.Food,
+                ProductGenreEnum.Gaming,
+                ProductGenreEnum.Medical,
+                ProductGenreEnum.Sport,
             };
 
             private static IEnumerable<TPerson> PersonData<TPerson>() where TPerson: PersonBase, new()
@@ -226,8 +226,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
-                var medicalEnumValue = medicalEnumValues[i];
-                person.MedicalState = (MedicalEnum) Convert.ToInt32(medicalEnumValue);
+                person.MedicalState = medicalEnumValues[i];
             }
 
             return persons;
@@ -251,7 +250,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             {
                 var person = persons[i];
                 var hobbyEnumValue = hobbyEnumValues[i];
-                person.Hobby = (HobbyEnum) Convert.ToInt32(hobbyEnumValue);
+                person.Hobby = hobbyEnumValues[i];
             }
 
             return persons;
@@ -274,8 +273,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
-                var productGenreEnumValue = productGenreEnumValues[i];
-                person.ProductGenre = (ProductGenreEnum) Convert.ToInt32(productGenreEnumValue);
+                person.ProductGenre = productGenreEnumValues[i];
             }
 
             return persons;

@@ -11,15 +11,21 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
     {
         private readonly DbContextOptions<PersonProductDbContext> _dbOptions = new DbContextOptionsBuilder<PersonProductDbContext>().UseInMemoryDatabase("product-db")
             .Options;
-        private PersonProductDbContext GetContext()
+        private PersonProductDbContext GetNonRandomDataContext()
         {
-            var context = new PersonProductDbContext(_dbOptions, false);
+            var context = new PersonProductDbContext(_dbOptions,false);
             return context;
         }
         
-        private PersonProductDbContext GetContext(int amount)
+        private PersonProductDbContext GetRandomDataContext(int amount)
         {
             var context = new PersonProductDbContext(_dbOptions, true, amount);
+            return context;
+        }
+        
+        private PersonProductDbContext GetLiveContext()
+        {
+            var context = new PersonProductDbContext(_dbOptions);
             return context;
         }
        
@@ -27,7 +33,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
         public void CreateDatabaseWithoutRandomData()
         {
             const int expectedDataLength = 10;
-            using var context = GetContext();
+            using var context = GetNonRandomDataContext();
             var productPersons = context.PersonProducts.ToList();
             for (int i = 0; i < productPersons.Count; i++)
             {
@@ -41,7 +47,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
                 Assert.Equal(MockDataGenerator.middleNames[i], person.MiddleName);
                 Assert.Equal(MockDataGenerator.phoneNumbers[i], person.PhoneNumber);
                 Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
-                Assert.Equal(MockDataGenerator.productGenreEnumValues[i], person.ProductGenre.ToString());
+                Assert.Equal(MockDataGenerator.productGenreEnumValues[i], person.ProductGenre);
             }
             
             Assert.NotEmpty(productPersons);
@@ -52,11 +58,21 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
         public void CreateDatabaseWithRandomData()
         {
             const int expectedDataLength = 1000;
-            using var context = GetContext(expectedDataLength);
+            using var context = GetRandomDataContext(expectedDataLength);
             var productPersons = context.PersonProducts.ToList();
 
             Assert.NotEmpty(productPersons);
             Assert.Equal(expectedDataLength, productPersons.Count);
+        }
+        
+        [Fact]
+        public void CreateLiveDatabase()
+        {
+            using var context = GetLiveContext();
+            var productPersons = context.PersonProducts.ToList();
+
+            Assert.NotNull(context.PersonProducts);
+            Assert.Empty(productPersons);
         }
     }
 }
