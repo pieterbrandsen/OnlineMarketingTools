@@ -2,5 +2,7 @@
 {
 	internal interface IPersonExternalMedical
 	{
+		public string MedicalState { get; set; }
+
 	}
 }

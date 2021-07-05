@@ -2,5 +2,7 @@
 {
 	internal interface IPersonExternalProduct
 	{
+		public string ProductGenre { get; set; }
+
 	}
 }
