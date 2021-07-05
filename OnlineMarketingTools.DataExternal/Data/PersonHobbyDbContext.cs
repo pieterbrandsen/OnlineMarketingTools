@@ -7,9 +7,12 @@ namespace OnlineMarketingTools.DataExternal.Data
 	public class PersonHobbyDbContext : DbContext
 	{
 		private bool UseRandomData { get; }
-		public PersonHobbyDbContext(DbContextOptions<PersonHobbyDbContext> options, bool useRandomData) : base(options)
+		private int RandomDataAmount { get; }
+		public PersonHobbyDbContext(DbContextOptions<PersonHobbyDbContext> options, bool useRandomData, int 
+			randomDataAmount = 1000) : base(options)
 		{
 			UseRandomData = useRandomData;
+			RandomDataAmount = randomDataAmount;
 		}
         public DbSet<PersonHobby> PersonHobbies { get; set; }
 
@@ -17,7 +20,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         {
 	        var hobbyPersons = !UseRandomData
 		        ? MockDataGenerator.PersonHobbiesData()
-		        : MockDataGenerator.PersonHobbiesRandomData();
+		        : MockDataGenerator.PersonHobbiesRandomData(RandomDataAmount);
 	        
 	        modelBuilder.Entity<PersonHobby>().HasData(hobbyPersons);
 		}

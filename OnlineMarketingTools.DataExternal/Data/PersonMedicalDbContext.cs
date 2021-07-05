@@ -7,17 +7,20 @@ namespace OnlineMarketingTools.DataExternal.Data
 	public class PersonMedicalDbContext : DbContext
     {
         private bool UseRandomData { get; }
-		public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options, bool useRandomData) : base(options)
+        private int RandomDataAmount { get; }
+		public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options, bool useRandomData, int 
+            randomDataAmount = 1000) : base(options)
         {
             UseRandomData = useRandomData;
+            RandomDataAmount = randomDataAmount;
         }
-        public DbSet<PersonMedical> PersonMedicals { get;  }
+        public DbSet<PersonMedical> MedicalPersons { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var medicalPersons = !UseRandomData
                 ? MockDataGenerator.PersonMedicalData()
-                : MockDataGenerator.PersonMedicalRandomData();
+                : MockDataGenerator.PersonMedicalRandomData(RandomDataAmount);
 	        
             modelBuilder.Entity<PersonHobby>().HasData(medicalPersons);
         }

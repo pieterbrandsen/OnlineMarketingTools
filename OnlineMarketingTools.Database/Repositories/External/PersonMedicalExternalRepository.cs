@@ -27,7 +27,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
         public async Task<IEnumerable<PersonMedical>> GetAll()
         {
-            return await _context.PersonMedicals.ToListAsync();
+            return await _context.MedicalPersons.ToListAsync();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <returns></returns>
         public async Task<IEnumerable<PersonMedical>> GetAllByFieldName(string value, string fieldName)
         {
-            var result = _context.PersonMedicals
+            var result = _context.MedicalPersons
                 .Where(string.Format("{0} == {1}", fieldName, value))
                 .AsEnumerable<PersonMedical>();
 
