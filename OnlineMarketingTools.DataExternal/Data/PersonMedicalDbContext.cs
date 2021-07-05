@@ -13,8 +13,8 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var medicalPersons = MockDataGenerator.PersonMedicalData(100);
-            modelBuilder.Entity<PersonMedical>().HasData(medicalPersons);
+            // var medicalPersons = MockDataGenerator.PersonMedicalData(100);
+            // modelBuilder.Entity<PersonMedical>().HasData(medicalPersons);
         }
     }
 }
