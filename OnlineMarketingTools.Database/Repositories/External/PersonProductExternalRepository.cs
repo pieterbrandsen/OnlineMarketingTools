@@ -18,6 +18,21 @@ namespace OnlineMarketingTools.Database.Repositories.External
             _context = context;
         }
 
+        public async Task<IEnumerable<string>> FieldNames()
+        {
+            var result = new List<string>();
+
+            foreach (var entity in _context.Model.GetEntityTypes())
+            {
+                foreach (var property in entity.GetProperties())
+                {
+                    result.Add(property.Name);
+                }
+            }
+
+            return await Task.FromResult(result);
+        }
+
         /// <summary>
         /// Gets an IEnumerable<PersonProduct> of All entity's in this DB
         /// </summary>

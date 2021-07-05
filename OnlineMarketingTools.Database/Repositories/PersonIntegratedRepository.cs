@@ -74,5 +74,60 @@ namespace OnlineMarketingTools.DataExternal.Repositories
 
             return result;
         }
+
+        /// <summary>
+        /// Returns a bool weither adding succeeded or not.
+        /// </summary>
+        /// <param name="person">The PersonIntergrated object to add</param>
+        /// <returns></returns>
+        public async Task<bool> AddPerson(PersonIntegrated person)
+        {
+            if (!(GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null))
+            {
+                return false;
+            }
+            else
+            {
+                context.PersonsIntegrated.Add(person);
+                await context.SaveChangesAsync();
+
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Returns a bool weither updating succeeded or not.
+        /// </summary>
+        /// <param name="PersonToUpdate">The PersonIntergrated object to update</param>
+        /// <returns></returns>
+        public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
+        {
+            if (!(GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null))
+            {
+                return false;
+            }
+            else
+            {
+                context.Update(PersonToUpdate);
+                await context.SaveChangesAsync();
+
+                return true;
+            }
+        }
+
+        public async Task<IEnumerable<string>> FieldNames()
+        {
+            var result = new List<string>();
+
+            foreach (var entity in context.Model.GetEntityTypes())
+            {
+                foreach (var property in entity.GetProperties())
+                {
+                    result.Add(property.Name);
+                }
+            }
+
+            return await Task.FromResult(result);
+        }
     }
 }

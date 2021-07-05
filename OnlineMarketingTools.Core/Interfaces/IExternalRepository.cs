@@ -9,5 +9,6 @@ namespace OnlineMarketingTools.Core.Interfaces
 	{
 		public Task<IEnumerable<T>> GetAll();
 		public Task<IEnumerable<T>> GetIEnumerableByFieldNameAndValue(string value, string fieldName);
+		public Task<IEnumerable<string>> FieldNames();
 	}
 }
