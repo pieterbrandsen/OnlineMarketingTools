@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using OnlineMarketingTools.Core.Entities;
 
 namespace OnlineMarketingTools.Core.Interfaces
 {
