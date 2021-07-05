@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IO;
+using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
 {
-	public class PersonProductDbContext : DbContext
+	public sealed class PersonProductDbContext : DbContext
 	{
 		private bool UseRandomData { get; }
 		private int RandomDataAmount { get; }
@@ -11,19 +12,27 @@ namespace OnlineMarketingTools.DataExternal.Data
 		public PersonProductDbContext(DbContextOptions<PersonProductDbContext> options, bool useRandomData, int 
 			randomDataAmount = 1000) : base (options)
 		{
+			Database.EnsureDeleted();
+			Database.EnsureCreated();
 			UseRandomData = useRandomData;
 			RandomDataAmount = randomDataAmount;
+			Seed();
+		}
+		public PersonProductDbContext(DbContextOptions<PersonProductDbContext> options) : base (options)
+		{
+			Database.EnsureCreated();
 		}
 
 		public DbSet<PersonProduct> PersonProducts { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		private void Seed()
 		{
-			var productPersons = !UseRandomData
-				? MockDataGenerator.PersonProductData()
-				: MockDataGenerator.PersonProductRandomData(RandomDataAmount);
-	        
-			modelBuilder.Entity<PersonProduct>().HasData(productPersons);
+				var productPersons = !UseRandomData
+					? MockDataGenerator.PersonProductData()
+					: MockDataGenerator.PersonProductRandomData(RandomDataAmount);
+		        
+				PersonProducts.AddRange(productPersons);
+				SaveChanges();
 		}
 	}
 }

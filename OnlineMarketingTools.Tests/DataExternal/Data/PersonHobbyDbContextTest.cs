@@ -7,32 +7,40 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 {
     public class PersonHobbyDbContextTest
     {
-        private DbContextOptions<PersonHobbyDbContext> _dbOptions = new DbContextOptionsBuilder<PersonHobbyDbContext>().UseInMemoryDatabase("testDatabase")
+        private readonly DbContextOptions<PersonHobbyDbContext> _dbOptions = new DbContextOptionsBuilder<PersonHobbyDbContext>().UseInMemoryDatabase("hobby-db")
             .Options;
-
-        private PersonHobbyDbContext GetContext(bool useRandomData)
+        private PersonHobbyDbContext GetContext()
         {
-            var context = new PersonHobbyDbContext(_dbOptions, useRandomData);
-            context.Database.EnsureCreated();
+            var context = new PersonHobbyDbContext(_dbOptions, false);
+            return context;
+        }
+        
+        private PersonHobbyDbContext GetContext(int amount)
+        {
+            var context = new PersonHobbyDbContext(_dbOptions, true, amount);
             return context;
         }
         
         [Fact]
         public void CreateDatabaseWithoutRandomData()
         {
-            var context = GetContext(false);
+            const int expectedDataLength = 10;
+            using var context = GetContext();
             var hobbyPersons = context.PersonHobbies.ToList();
             
             Assert.NotEmpty(hobbyPersons);
+            Assert.Equal(expectedDataLength, hobbyPersons.Count);
         }
         
         [Fact]
         public void CreateDatabaseWithRandomData()
         {
-            var context = GetContext(true);
+            const int expectedDataLength = 1000;
+            using var context = GetContext(expectedDataLength);
             var hobbyPersons = context.PersonHobbies.ToList();
             
             Assert.NotEmpty(hobbyPersons);
+            Assert.Equal(expectedDataLength, hobbyPersons.Count);
         }
     }
 }

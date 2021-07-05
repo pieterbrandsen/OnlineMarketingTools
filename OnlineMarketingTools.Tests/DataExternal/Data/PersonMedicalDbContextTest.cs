@@ -7,32 +7,41 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 {
     public class PersonMedicalDbContextTest
     {
-       private DbContextOptions<PersonMedicalDbContext> _dbOptions = new DbContextOptionsBuilder<PersonMedicalDbContext>().UseInMemoryDatabase("testDatabase")
+       private DbContextOptions<PersonMedicalDbContext> _dbOptions = new DbContextOptionsBuilder<PersonMedicalDbContext>().UseInMemoryDatabase("medical-db")
            .Options;
 
-       private PersonMedicalDbContext GetContext(bool useRandomData)
+       private PersonMedicalDbContext GetContext()
        {
-           var context = new PersonMedicalDbContext(_dbOptions, useRandomData);
-           context.Database.EnsureCreated();
+           var context = new PersonMedicalDbContext(_dbOptions, false);
+           return context;
+       }
+        
+       private PersonMedicalDbContext GetContext(int amount)
+       {
+           var context = new PersonMedicalDbContext(_dbOptions, true, amount);
            return context;
        }
        
         [Fact]
         public void CreateDatabaseWithoutRandomData()
         {
-            var context = GetContext(true);
+            const int expectedDataLength = 10;
+            using var context = GetContext();
             var medicalPersons = context.MedicalPersons.ToList();
-            
+
             Assert.NotEmpty(medicalPersons);
+            Assert.Equal(expectedDataLength, medicalPersons.Count);
         }
         
         [Fact]
         public void CreateDatabaseWithRandomData()
         {
-            var context = GetContext(true);
+            const int expectedDataLength = 1000;
+            using var context = GetContext(expectedDataLength);
             var medicalPersons = context.MedicalPersons.ToList();
             
             Assert.NotEmpty(medicalPersons);
+            Assert.Equal(expectedDataLength, medicalPersons.Count);
         }
     }
 }

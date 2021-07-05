@@ -117,7 +117,6 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "(814) 5145528",
                 "(320) 4010865",
                 "(213) 7148680",
-                "(476) 7629808",
             };
             
             public static List<string> postalCodes = new()
@@ -132,7 +131,6 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "5145528",
                 "4010865",
                 "7148680",
-                "7629808",
             };
             
             public static List<string> medicalEnumValues = new()
@@ -202,11 +200,11 @@ namespace OnlineMarketingTools.DataExternal.Data
             private static IEnumerable<TPerson> PersonRandomData<TPerson>(int amount) where TPerson: PersonBase, new()
             {
                 var persons = new List<TPerson>();
-                for (var i = amount - 1; i >= 0; i--)
+                for (var i = amount; i >= 1; i--)
                 {
                     persons.Add(new ()
                     {
-                        Id = Ids[i],
+                        Id = i,
                         Address = addresses[Rnd.Next(addresses.Count)],
                         Country = countries[Rnd.Next(countries.Count)],
                         Email = emails[Rnd.Next(emails.Count)],
@@ -224,7 +222,7 @@ namespace OnlineMarketingTools.DataExternal.Data
 
         public static IEnumerable<PersonMedical> PersonMedicalData()
         {
-            if (PersonData<PersonMedical>() is not List<PersonMedical> persons) return null;
+            var persons = PersonData<PersonMedical>().ToList();
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
@@ -237,7 +235,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonMedical> PersonMedicalRandomData(int amount = 10000)
         {
-            if (PersonRandomData<PersonMedical>(amount) is not List<PersonMedical> persons) return null;
+            var persons = PersonRandomData<PersonMedical>(amount).ToList();
             foreach (var person in persons)
             {
                 person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
@@ -248,7 +246,7 @@ namespace OnlineMarketingTools.DataExternal.Data
 
         public static IEnumerable<PersonHobby> PersonHobbiesData()
         {
-            if (PersonData<PersonHobby>() is not List<PersonHobby> persons) return null;
+            var persons = PersonData<PersonHobby>().ToList();
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
@@ -261,7 +259,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonHobby> PersonHobbiesRandomData(int amount = 10000)
         {
-            if (PersonRandomData<PersonHobby>(amount) is not List<PersonHobby> persons) return null;
+            var persons = PersonRandomData<PersonHobby>(amount).ToList();
             foreach (var person in persons)
             {
                 person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
@@ -272,7 +270,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonProduct> PersonProductData()
         {
-            if (PersonData<PersonHobby>() is not List<PersonProduct> persons) return null;
+            var persons = PersonData<PersonProduct>().ToList();
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
@@ -285,7 +283,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonProduct> PersonProductRandomData(int amount = 10000)
         {
-            if (PersonRandomData<PersonProduct>(amount) is not List<PersonProduct> persons) return null;
+            var persons = PersonRandomData<PersonProduct>(amount).ToList();
             foreach (var person in persons)
             {
                 person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
