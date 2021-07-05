@@ -5,15 +5,21 @@ namespace OnlineMarketingTools.DataExternal.Data
 {
 	public class PersonProductDbContext : DbContext
 	{
-		public PersonProductDbContext(DbContextOptions<PersonMedicalDbContext> options) : base (options)
+		private bool UseRandomData { get; }
+
+		public PersonProductDbContext(DbContextOptions<PersonMedicalDbContext> options, bool useRandomData) : base (options)
 		{
+			UseRandomData = useRandomData;
 		}
 
-		public DbSet<PersonProduct> PersonProducts { get; set; }
+		public DbSet<PersonProduct> PersonProducts { get; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			var productPersons = MockDataGenerator.PersonProductRandomData();
+			var productPersons = !UseRandomData
+				? MockDataGenerator.PersonProductData()
+				: MockDataGenerator.PersonProductRandomData();
+	        
 			modelBuilder.Entity<PersonProduct>().HasData(productPersons);
 		}
 	}

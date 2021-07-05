@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
@@ -8,6 +9,19 @@ namespace OnlineMarketingTools.DataExternal.Data
     {
         private static readonly Random Rnd = new ();
         
+        public static List<int> Ids = new()
+        {
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+        };
             public static List<string> addresses = new()
             {
                 "7905 Kensington Court",
@@ -163,14 +177,14 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "4",
             };
 
-            private static IEnumerable<PersonBase> PersonData()
+            private static IEnumerable<TPerson> PersonData<TPerson>() where TPerson: PersonBase, new()
             {
-                var persons = new List<PersonBase>();
+                var persons = new List<TPerson>();
                 for (var i = 0; i < 10; i++)
                 {
-                    persons.Add(new PersonBase
+                    persons.Add(new()
                     {
-                        Key = i,
+                        Id = Ids[i],
                         Address = addresses[i],
                         Country = countries[i],
                         Email = emails[i],
@@ -185,13 +199,14 @@ namespace OnlineMarketingTools.DataExternal.Data
 
                 return persons;
             }
-            private static IEnumerable<PersonBase> PersonRandomData(int amount) {
-                var persons = new List<PersonBase>();
+            private static IEnumerable<TPerson> PersonRandomData<TPerson>(int amount) where TPerson: PersonBase, new()
+            {
+                var persons = new List<TPerson>();
                 for (var i = amount - 1; i >= 0; i--)
                 {
-                    persons.Add(new PersonBase
+                    persons.Add(new ()
                     {
-                        Key = i,
+                        Id = Ids[i],
                         Address = addresses[Rnd.Next(addresses.Count)],
                         Country = countries[Rnd.Next(countries.Count)],
                         Email = emails[Rnd.Next(emails.Count)],
@@ -209,7 +224,7 @@ namespace OnlineMarketingTools.DataExternal.Data
 
         public static IEnumerable<PersonMedical> PersonMedicalData()
         {
-            if (PersonData() is not List<PersonMedical> persons) return null;
+            if (PersonData<PersonMedical>() is not List<PersonMedical> persons) return null;
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
@@ -222,7 +237,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonMedical> PersonMedicalRandomData(int amount = 10000)
         {
-            if (PersonRandomData(amount) is not List<PersonMedical> persons) return null;
+            if (PersonRandomData<PersonMedical>(amount) is not List<PersonMedical> persons) return null;
             foreach (var person in persons)
             {
                 person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
@@ -233,7 +248,7 @@ namespace OnlineMarketingTools.DataExternal.Data
 
         public static IEnumerable<PersonHobby> PersonHobbiesData()
         {
-            if (PersonData() is not List<PersonHobby> persons) return null;
+            if (PersonData<PersonHobby>() is not List<PersonHobby> persons) return null;
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
@@ -246,7 +261,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonHobby> PersonHobbiesRandomData(int amount = 10000)
         {
-            if (PersonRandomData(amount) is not List<PersonHobby> persons) return null;
+            if (PersonRandomData<PersonHobby>(amount) is not List<PersonHobby> persons) return null;
             foreach (var person in persons)
             {
                 person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
@@ -257,7 +272,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonProduct> PersonProductData()
         {
-            if (PersonData() is not List<PersonProduct> persons) return null;
+            if (PersonData<PersonHobby>() is not List<PersonProduct> persons) return null;
             for (int i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
@@ -270,7 +285,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         
         public static IEnumerable<PersonProduct> PersonProductRandomData(int amount = 10000)
         {
-            if (PersonRandomData(amount) is not List<PersonProduct> persons) return null;
+            if (PersonRandomData<PersonProduct>(amount) is not List<PersonProduct> persons) return null;
             foreach (var person in persons)
             {
                 person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
