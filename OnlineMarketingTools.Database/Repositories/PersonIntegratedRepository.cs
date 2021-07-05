@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
-using OnlineMarketingTools.DataExternal.Data;
-using OnlineMarketingTools.DataExternal.Entities;
 
-namespace OnlineMarketingTools.DataExternal.Repositories
+namespace OnlineMarketingTools.Database.Repositories
 {
 	public class PersonIntegratedRepositoy : IPersonIntegratedRepository
     {
-        private readonly PersonHobbyDbContext context;
-        public PersonIntegratedRepositoy(PersonHobbyDbContext context)
+        private readonly PersonIntegratedDbContext context;
+        public PersonIntegratedRepositoy(PersonIntegratedDbContext context)
         {
             this.context = context;
         }

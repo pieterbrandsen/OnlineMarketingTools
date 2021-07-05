@@ -11,6 +11,7 @@ using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
 using OnlineMarketingTools.Database.Repositories.External;
+using OnlineMarketingTools.Database.Repositories;
 
 namespace OnlineMarketingTools.Server
 {
@@ -40,6 +41,8 @@ namespace OnlineMarketingTools.Server
             services.AddDbContext<IdentityDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IPersonIntegratedRepository, PersonIntegratedRepositoy>();
 
             services.AddScoped<IExternalRepository<PersonHobby>, PersonHobbyExternalRepository>();
 
