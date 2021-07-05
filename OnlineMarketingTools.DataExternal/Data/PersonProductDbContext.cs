@@ -17,5 +17,10 @@ namespace OnlineMarketingTools.DataExternal.Data
 		}
 
 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			var productPersons = MockDataGenerator.PersonProductData(100);
+			modelBuilder.Entity<PersonProduct>().HasData(productPersons);
+		}
 	}
 }
