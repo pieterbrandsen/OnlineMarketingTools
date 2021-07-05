@@ -129,5 +129,53 @@ namespace OnlineMarketingTools.DataExternal.Repositories
 
             return await Task.FromResult(result);
         }
+
+        public async Task<bool> AddRange(IEnumerable<PersonIntegrated> people)
+        {
+            var newPeople = new List<PersonIntegrated>();
+            foreach (var person in people)
+            {
+                var result = !(await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null);
+                if (result == true)
+                {
+                    newPeople.Add(person);
+                }
+            }
+
+            if (newPeople.Count() <= 0)
+            {
+                return false;
+            }
+
+            await context.AddRangeAsync(newPeople);
+
+            context.SaveChanges();
+
+            return true;
+        }
+
+        public async Task<bool> UpdateRange(IEnumerable<PersonIntegrated> PeopleToUpdate)
+        {
+            var peopleThatCanBeUpdated = new List<PersonIntegrated>();
+            foreach (var person in PeopleToUpdate)
+            {
+                var result = !(await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null);
+                if (result == true)
+                {
+                    peopleThatCanBeUpdated.Add(person);
+                }
+            }
+
+            if (peopleThatCanBeUpdated.Count() <= 0)
+            {
+                return false;
+            }
+
+            context.UpdateRange(peopleThatCanBeUpdated);
+
+            context.SaveChanges();
+
+            return true;
+        }
     }
 }
