@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using System.Transactions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using OnlineMarketingTools.DataExternal.Data;
 using Xunit;
 
@@ -9,33 +7,35 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 {
     public class PersonProductDbContextTest
     {
-        private readonly DbContextOptions<PersonProductDbContext> _dbOptions = new DbContextOptionsBuilder<PersonProductDbContext>().UseInMemoryDatabase("product-db")
-            .Options;
+        private readonly DbContextOptions<PersonProductDbContext> _dbOptions =
+            new DbContextOptionsBuilder<PersonProductDbContext>().UseInMemoryDatabase("product-db")
+                .Options;
+
         private PersonProductDbContext GetNonRandomDataContext()
         {
-            var context = new PersonProductDbContext(_dbOptions,false);
+            var context = new PersonProductDbContext(_dbOptions, false);
             return context;
         }
-        
+
         private PersonProductDbContext GetRandomDataContext(int amount)
         {
             var context = new PersonProductDbContext(_dbOptions, true, amount);
             return context;
         }
-        
+
         private PersonProductDbContext GetLiveContext()
         {
             var context = new PersonProductDbContext(_dbOptions);
             return context;
         }
-       
+
         [Fact]
         public void CreateDatabaseWithoutRandomData()
         {
             const int expectedDataLength = 10;
             using var context = GetNonRandomDataContext();
             var productPersons = context.PersonProducts.ToList();
-            for (int i = 0; i < productPersons.Count; i++)
+            for (var i = 0; i < productPersons.Count; i++)
             {
                 var person = productPersons[i];
                 Assert.Equal(MockDataGenerator.addresses[i], person.Address);
@@ -49,11 +49,11 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
                 Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
                 Assert.Equal(MockDataGenerator.productGenreEnumValues[i], person.ProductGenre);
             }
-            
+
             Assert.NotEmpty(productPersons);
             Assert.Equal(expectedDataLength, productPersons.Count);
         }
-        
+
         [Fact]
         public void CreateDatabaseWithRandomData()
         {
@@ -64,7 +64,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
             Assert.NotEmpty(productPersons);
             Assert.Equal(expectedDataLength, productPersons.Count);
         }
-        
+
         [Fact]
         public void CreateLiveDatabase()
         {

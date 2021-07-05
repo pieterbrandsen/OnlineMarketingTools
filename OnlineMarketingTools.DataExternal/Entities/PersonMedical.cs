@@ -4,6 +4,7 @@
     {
         public MedicalEnum MedicalState { get; set; }
     }
+
     public enum MedicalEnum
     {
         Undetermined,

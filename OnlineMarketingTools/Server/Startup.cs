@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.Database.Data;
 using OnlineMarketingTools.Database.Models;
-using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.Database.Repositories.External;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
-using OnlineMarketingTools.Database.Repositories.External;
 
 namespace OnlineMarketingTools.Server
 {
-	public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {

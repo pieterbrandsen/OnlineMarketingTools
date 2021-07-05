@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace OnlineMarketingTools.Database.Repositories.External
 {
-	public class PersonMedicalExternalRepository : IExternalRepository<PersonMedical>
+    public class PersonMedicalExternalRepository : IExternalRepository<PersonMedical>
     {
         private readonly PersonMedicalDbContext _context;
+
         public PersonMedicalExternalRepository(PersonMedicalDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         /// <summary>
-        /// Gets an IEnumerable<PersonMedical> of All entity's in this DB
+        ///     Gets an IEnumerable<PersonMedical> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
         public async Task<IEnumerable<PersonMedical>> GetAll()
@@ -31,7 +28,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         }
 
         /// <summary>
-        /// Gets a IEnumerable<PersonMedical> based on the name of the field and the value that field should have.
+        ///     Gets a IEnumerable<PersonMedical> based on the name of the field and the value that field should have.
         /// </summary>
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
@@ -44,5 +41,5 @@ namespace OnlineMarketingTools.Database.Repositories.External
 
             return await Task.FromResult(result);
         }
-	}
+    }
 }
