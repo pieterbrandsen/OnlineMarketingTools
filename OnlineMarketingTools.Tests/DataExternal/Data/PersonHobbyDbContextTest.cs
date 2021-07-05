@@ -27,6 +27,20 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
             const int expectedDataLength = 10;
             using var context = GetContext();
             var hobbyPersons = context.PersonHobbies.ToList();
+            for (int i = 0; i < hobbyPersons.Count; i++)
+            {
+                var person = hobbyPersons[i];
+                Assert.Equal(MockDataGenerator.addresses[i], person.Address);
+                Assert.Equal(MockDataGenerator.countries[i], person.Country);
+                Assert.Equal(MockDataGenerator.emails[i], person.Email);
+                Assert.Equal(MockDataGenerator.firstNames[i], person.FirstName);
+                Assert.Equal(MockDataGenerator.Ids[i], person.Id);
+                Assert.Equal(MockDataGenerator.lastNames[i], person.LastName);
+                Assert.Equal(MockDataGenerator.middleNames[i], person.MiddleName);
+                Assert.Equal(MockDataGenerator.phoneNumbers[i], person.PhoneNumber);
+                Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
+                Assert.Equal(MockDataGenerator.hobbyEnumValues[i], person.Hobby.ToString());
+            }
             
             Assert.NotEmpty(hobbyPersons);
             Assert.Equal(expectedDataLength, hobbyPersons.Count);
