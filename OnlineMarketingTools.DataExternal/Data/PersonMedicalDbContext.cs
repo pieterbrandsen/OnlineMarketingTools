@@ -4,22 +4,33 @@ using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
 {
-	public class PersonMedicalDbContext : DbContext
+	public sealed class PersonMedicalDbContext : DbContext
     {
         private bool UseRandomData { get; }
-		public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options, bool useRandomData) : base(options)
+        private int RandomDataAmount { get; }
+        public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options, bool useRandomData, int 
+            randomDataAmount = 1000) : base (options)
         {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
             UseRandomData = useRandomData;
+            RandomDataAmount = randomDataAmount;
+            Seed();
         }
-        public DbSet<PersonMedical> PersonMedicals { get;  }
+        public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options) : base (options)
+        {
+            Database.EnsureCreated();
+        }
+        public DbSet<PersonMedical> MedicalPersons { get; set; }
         
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        private void Seed()
         {
             var medicalPersons = !UseRandomData
                 ? MockDataGenerator.PersonMedicalData()
-                : MockDataGenerator.PersonMedicalRandomData();
+                : MockDataGenerator.PersonMedicalRandomData(RandomDataAmount);
 	        
-            modelBuilder.Entity<PersonHobby>().HasData(medicalPersons);
+            MedicalPersons.AddRange(medicalPersons);
+            SaveChanges();
         }
     }
 }
