@@ -22,7 +22,7 @@ namespace OnlineMarketingTools.Client.Controllers
         public async Task<IActionResult> GetAll()
         {
             var persons = await _repository.GetAll();
-			if (persons is not null)
+			if (persons.Count() is not 0)
 				return Ok(persons);
 			else
 				return NoContent();

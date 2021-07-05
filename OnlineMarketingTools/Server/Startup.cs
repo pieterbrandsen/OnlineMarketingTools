@@ -12,6 +12,7 @@ using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
 using OnlineMarketingTools.Database.Repositories.External;
 using OnlineMarketingTools.Database.Repositories;
+using OnlineMarketingTools.Database;
 
 namespace OnlineMarketingTools.Server
 {
@@ -28,6 +29,10 @@ namespace OnlineMarketingTools.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PersonIntegratedDbContext>(options =>
+                options.UseInMemoryDatabase("PersonIntegratedDb"));
+
+            /****External DbContexts****/
             services.AddDbContext<PersonMedicalDbContext>(options =>
                 options.UseInMemoryDatabase("PersonMedicalDb"));
 
@@ -37,13 +42,14 @@ namespace OnlineMarketingTools.Server
             services.AddDbContext<PersonProductDbContext>(options =>
                 options.UseInMemoryDatabase("PersonProductDb"));
 
-            //****Identity Context****
-            services.AddDbContext<IdentityDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+			/****Identity Context****/
+			services.AddDbContext<IdentityDbContext>(options =>
+				options.UseSqlServer(
+					Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IPersonIntegratedRepository, PersonIntegratedRepositoy>();
+			services.AddScoped<IPersonIntegratedRepository, PersonIntegratedRepositoy>();
 
+            /****External repositories****/
             services.AddScoped<IExternalRepository<PersonHobby>, PersonHobbyExternalRepository>();
 
             services.AddScoped<IExternalRepository<PersonMedical>, PersonMedicalExternalRepository>();
@@ -52,16 +58,16 @@ namespace OnlineMarketingTools.Server
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<IdentityDbContext>();
+			services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+				.AddEntityFrameworkStores<IdentityDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, IdentityDbContext>();
+			services.AddIdentityServer()
+				.AddApiAuthorization<ApplicationUser, IdentityDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+			services.AddAuthentication()
+				.AddIdentityServerJwt();
 
-            services.AddControllersWithViews();
+			services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
@@ -87,9 +93,9 @@ namespace OnlineMarketingTools.Server
 
             app.UseRouting();
 
-            app.UseIdentityServer();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseIdentityServer();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
