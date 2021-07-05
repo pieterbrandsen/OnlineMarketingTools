@@ -12,7 +12,8 @@ namespace OnlineMarketingTools.DataExternal.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
-	        // modelBuilder.Entity<PersonHobby>().HasData(hobbyPersons);
+			var hobbyPersons = MockDataGenerator.PersonHobbiesRandomData();
+	        modelBuilder.Entity<PersonHobby>().HasData(hobbyPersons);
         }
     }
 }

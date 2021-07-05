@@ -8,9 +8,7 @@ namespace OnlineMarketingTools.DataExternal.Data
     {
         private static readonly Random Rnd = new ();
         
-        private static IEnumerable<PersonBase> PersonData(int amount = 10, bool randomData = false)
-        {
-            var addresses = new List<string>()
+            public static List<string> addresses = new()
             {
                 "7905 Kensington Court",
                 "7 Badeau Parkway",
@@ -23,7 +21,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "9041 Melvin Terrace",
                 "4430 Buena Vista Circle",
             };
-            var countries = new List<string>()
+            public static List<string> countries = new()
             {
                 "Philippines",
                 "Greece",
@@ -37,7 +35,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "Argentina",
             };
 
-            var emails = new List<string>()
+            public static List<string> emails = new()
             {
                 "hkibby0@nbcnews.com",
                 "cklimkovich1@chronoengine.com",
@@ -51,7 +49,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "schampc@prweb.com",
             };
 
-            var firstNames = new List<string>()
+            public static List<string> firstNames = new()
             {
                 "Oswell",
                 "Myron",
@@ -65,7 +63,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "Westley",
             };
             
-            var lastNames = new List<string>()
+            public static List<string> lastNames = new()
             {
                 "Kibby",
                 "Klimkovich",
@@ -79,7 +77,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "Barnewell",
             };
             
-            var middleNames = new List<string>()
+            public static List<string> middleNames = new()
             {
                 "Haley",
                 "Carleton",
@@ -93,7 +91,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "Finlay",
             };
             
-            var phoneNumbers = new List<string>()
+            public static List<string> phoneNumbers = new()
             {
                 "(115) 4055413",
                 "(766) 8489121",
@@ -108,7 +106,7 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "(476) 7629808",
             };
             
-            var postalCodes = new List<string>()
+            public static List<string> postalCodes = new()
             {
                 "4055413",
                 "8489121",
@@ -123,10 +121,52 @@ namespace OnlineMarketingTools.DataExternal.Data
                 "7629808",
             };
             
-            var persons = new List<PersonBase>();
-            if (!randomData)
+            public static List<string> medicalEnumValues = new()
             {
-                for (var i = amount - 1; i >= 0; i--)
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+            };
+            
+            public static List<string> hobbyEnumValues = new()
+            {
+                "0",
+                "1",
+                "2",
+                "0",
+                "1",
+                "2",
+                "0",
+                "1",
+                "2",
+                "0",
+            };
+            
+            public static List<string> productGenreEnumValues = new()
+            {
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+            };
+
+            private static IEnumerable<PersonBase> PersonData()
+            {
+                var persons = new List<PersonBase>();
+                for (var i = 0; i < 10; i++)
                 {
                     persons.Add(new PersonBase
                     {
@@ -145,72 +185,95 @@ namespace OnlineMarketingTools.DataExternal.Data
 
                 return persons;
             }
-
-            for (var i = amount - 1; i >= 0; i--)
-            {
-                persons.Add(new PersonBase
+            private static IEnumerable<PersonBase> PersonRandomData(int amount) {
+                var persons = new List<PersonBase>();
+                for (var i = amount - 1; i >= 0; i--)
                 {
-                    Key = i, 
-                    Address = addresses[Rnd.Next(addresses.Count)],
-                    Country = countries[Rnd.Next(countries.Count)],
-                    Email =  emails[Rnd.Next(emails.Count)],
-                    FirstName = firstNames[Rnd.Next(firstNames.Count)],
-                    MiddleName = middleNames[Rnd.Next(middleNames.Count)],
-                    LastName = lastNames[Rnd.Next(lastNames.Count)],
-                    HouseNumber = i,
-                    PhoneNumber = phoneNumbers[Rnd.Next(phoneNumbers.Count)],
-                    PostalCode = postalCodes[Rnd.Next(postalCodes.Count)]
-                });
-            }
-            return persons;
+                    persons.Add(new PersonBase
+                    {
+                        Key = i,
+                        Address = addresses[Rnd.Next(addresses.Count)],
+                        Country = countries[Rnd.Next(countries.Count)],
+                        Email = emails[Rnd.Next(emails.Count)],
+                        FirstName = firstNames[Rnd.Next(firstNames.Count)],
+                        MiddleName = middleNames[Rnd.Next(middleNames.Count)],
+                        LastName = lastNames[Rnd.Next(lastNames.Count)],
+                        HouseNumber = i,
+                        PhoneNumber = phoneNumbers[Rnd.Next(phoneNumbers.Count)],
+                        PostalCode = postalCodes[Rnd.Next(postalCodes.Count)]
+                    });
+                }
+
+                return persons;
         }
 
-        public static IEnumerable<PersonMedical> PersonMedicalData(int amount, bool randomData)
+        public static IEnumerable<PersonMedical> PersonMedicalData()
         {
-            if (PersonData(amount) is not List<PersonMedical> persons) return null;
-            foreach (var person in persons)
+            if (PersonData() is not List<PersonMedical> persons) return null;
+            for (int i = 0; i < persons.Count; i++)
             {
-                if (!randomData)
-                {
-                    person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
-                }
-                else
-                {
-                }
-            }
-
-            return persons;
-        }
-
-        public static IEnumerable<PersonHobby> PersonHobbiesData(int amount, bool randomData)
-        {
-            if (PersonData(amount) is not List<PersonHobby> persons) return null;
-            foreach (var person in persons)
-            {
-                if (!randomData)
-                {
-                    person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
-                }
-                else
-                {
-                }
+                var person = persons[i];
+                var medicalEnumValue = medicalEnumValues[i];
+                person.MedicalState = (MedicalEnum) Convert.ToInt32(medicalEnumValue);
             }
 
             return persons;
         }
         
-        public static IEnumerable<PersonProduct> PersonProductData(int amount, bool randomData = false)
+        public static IEnumerable<PersonMedical> PersonMedicalRandomData(int amount = 10000)
         {
-            if (PersonData(amount) is not List<PersonProduct> persons) return null;
+            if (PersonRandomData(amount) is not List<PersonMedical> persons) return null;
             foreach (var person in persons)
             {
-                if (!randomData)
-                {
-                    person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<ProductGenreEnum>().Length);
-                }
-                else
-                {
-                }
+                person.MedicalState = (MedicalEnum) Rnd.Next(Enum.GetValues<MedicalEnum>().Length);
+            }
+
+            return persons;
+        }
+
+        public static IEnumerable<PersonHobby> PersonHobbiesData()
+        {
+            if (PersonData() is not List<PersonHobby> persons) return null;
+            for (int i = 0; i < persons.Count; i++)
+            {
+                var person = persons[i];
+                var hobbyEnumValue = hobbyEnumValues[i];
+                person.Hobby = (HobbyEnum) Convert.ToInt32(hobbyEnumValue);
+            }
+
+            return persons;
+        }
+        
+        public static IEnumerable<PersonHobby> PersonHobbiesRandomData(int amount = 10000)
+        {
+            if (PersonRandomData(amount) is not List<PersonHobby> persons) return null;
+            foreach (var person in persons)
+            {
+                person.Hobby = (HobbyEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
+            }
+
+            return persons;
+        }
+        
+        public static IEnumerable<PersonProduct> PersonProductData()
+        {
+            if (PersonData() is not List<PersonProduct> persons) return null;
+            for (int i = 0; i < persons.Count; i++)
+            {
+                var person = persons[i];
+                var productGenreEnumValue = productGenreEnumValues[i];
+                person.ProductGenre = (ProductGenreEnum) Convert.ToInt32(productGenreEnumValue);
+            }
+
+            return persons;
+        }
+        
+        public static IEnumerable<PersonProduct> PersonProductRandomData(int amount = 10000)
+        {
+            if (PersonRandomData(amount) is not List<PersonProduct> persons) return null;
+            foreach (var person in persons)
+            {
+                person.ProductGenre = (ProductGenreEnum) Rnd.Next(Enum.GetValues<HobbyEnum>().Length);
             }
 
             return persons;
