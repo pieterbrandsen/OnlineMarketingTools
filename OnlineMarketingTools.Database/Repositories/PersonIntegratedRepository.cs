@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
+using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.Database;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
+using System.Linq;
 
 namespace OnlineMarketingTools.DataExternal.Repositories
 {
 	public class PersonIntegratedRepositoy : IPersonIntegratedRepository
     {
-        private readonly PersonHobbyDbContext context;
-        public PersonIntegratedRepositoy(PersonHobbyDbContext context)
+        private readonly PersonIntegratedDbContext context;
+        public PersonIntegratedRepositoy(PersonIntegratedDbContext context)
         {
             this.context = context;
         }
@@ -22,9 +26,9 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonIntegrated>> GetAll()
-        {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<PersonIntegrated>> GetAll()
+{
+            return await context.PersonsIntegrated.ToListAsync();
         }
 
         /// <summary>
@@ -32,9 +36,13 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public Task<IEnumerable<PersonIntegrated>> GetAllByFieldName(string value, string fieldName)
+        public async Task<IEnumerable<PersonIntegrated>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
         {
-            throw new NotImplementedException();
+            var result = context.PersonsIntegrated
+               .Where(string.Format("{0} == {1}", fieldName, value))
+               .AsEnumerable<PersonIntegrated>();
+
+            return await Task.FromResult(result);
         }
 
         /// <summary>
@@ -46,7 +54,13 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// <returns>Task<PersonHobby></returns>
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName, string postCode)
         {
-            throw new NotImplementedException();
+            var result = context.PersonsIntegrated
+                .Where(p => p.FirstName == firstName &&
+                p.LastName == lastName && 
+                p.PostCode == postCode)
+                .First();
+
+            return Task.FromResult(result);
         }
 
         /// <summary>
@@ -54,9 +68,11 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Task<PersonHobby></returns>
-        public Task<PersonIntegrated> GetById(int id)
+        public async Task<PersonIntegrated> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await context.PersonsIntegrated.FindAsync(id);
+
+            return result;
         }
     }
 }
