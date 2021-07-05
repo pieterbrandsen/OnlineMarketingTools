@@ -3,9 +3,9 @@ using OnlineMarketingTools.Core.Interfaces.External;
 
 namespace OnlineMarketingTools.Core.Interfaces
 {
-	public class PersonIntegrated : PersonIntegratedBase,
+	public class PersonIntegrated : PersonIntegratedBase
                                     //External data interfaces, plugin style
-                                    IPersonExternalHobby, IPersonExternalMedical, IPersonExternalProduct
+                                    //IPersonExternalHobby, IPersonExternalMedical, IPersonExternalProduct
     {
         // Hobby
         public string Hobby {get; set; }

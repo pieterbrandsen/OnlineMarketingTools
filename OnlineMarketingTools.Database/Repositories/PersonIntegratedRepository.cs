@@ -8,10 +8,10 @@ using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Repositories
 {
-	public class PersonHobbyRepository : IPersonIntegratedRepository
+	public class PersonIntegratedRepositoy : IPersonIntegratedRepository
     {
         private readonly PersonHobbyDbContext context;
-        public PersonHobbyRepository(PersonHobbyDbContext context)
+        public PersonIntegratedRepositoy(PersonHobbyDbContext context)
         {
             this.context = context;
         }
