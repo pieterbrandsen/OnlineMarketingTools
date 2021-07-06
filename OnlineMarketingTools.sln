@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Server
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Client", "OnlineMarketingTools\Client\OnlineMarketingTools.Client.csproj", "{4951AD81-4B6D-422B-8109-05603BFE14D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Shared", "OnlineMarketingTools\Shared\OnlineMarketingTools.Shared.csproj", "{0AA2B466-0E60-4CD1-9095-FD69539141B9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Core", "OnlineMarketingTools.Core\OnlineMarketingTools.Core.csproj", "{359661E2-6296-41D3-8FC0-8C2CB6B8F220}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Database", "OnlineMarketingTools.Database\OnlineMarketingTools.Database.csproj", "{B6F8874B-27D9-4862-AD0F-F006C5738293}"
@@ -31,10 +29,6 @@ Global
 		{4951AD81-4B6D-422B-8109-05603BFE14D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4951AD81-4B6D-422B-8109-05603BFE14D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4951AD81-4B6D-422B-8109-05603BFE14D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{359661E2-6296-41D3-8FC0-8C2CB6B8F220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{359661E2-6296-41D3-8FC0-8C2CB6B8F220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{359661E2-6296-41D3-8FC0-8C2CB6B8F220}.Release|Any CPU.ActiveCfg = Release|Any CPU
