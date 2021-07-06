@@ -1,0 +1,66 @@
+﻿@page "/listpersons"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using OnlineMarketingTools.Core.Entities
+@inject PersonHttpRepository PersonHttpRepository
+@inject IJSRuntime IJSRuntime
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<h3>
+	Person List
+</h3>
+@*<AuthorizeView>*@
+@if (persons is null)
+{
+	<p>Loading</p>
+}
+else if (persons.Count() is 0)
+{
+	<p>No Notes Found</p>
+}
+else if (persons is not null)
+{
+	<table class="table table-striped small table-sm">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>FirstName</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (PersonIntegrated person in persons)
+			{
+				<tr>
+					<td>@person.Id</td>
+					<td>@person.FirstName</td>
+					@*<td>
+							<a class="btn btn-sm btn-success small" @onclick="@(() => Method())">Button Text</a>
+							<a class="btn btn-sm btn-danger small" @onclick="@(() => Method())">Button Text</a>
+						</td>*@
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+@*</AuthorizeView>*@
+
+@code {
+	private IEnumerable<PersonIntegrated> persons { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var user = authState.User;
+
+		try
+		{
+			persons = await PersonHttpRepository.GetAllAsync<PersonIntegrated>("api/person");
+		}
+		catch (AccessTokenNotAvailableException ex)
+		{
+			await IJSRuntime.InvokeAsync<bool>("confirm", $"{ex}");
+			ex.Redirect();
+		}
+	}
+}

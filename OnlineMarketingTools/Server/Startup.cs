@@ -13,7 +13,9 @@ using OnlineMarketingTools.DataExternal.Entities;
 using OnlineMarketingTools.Database.Repositories.External;
 using OnlineMarketingTools.Database;
 using OnlineMarketingTools.Database.Repositories;
-using OnlineMarketingTools.Database;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using System;
+using OnlineMarketingTools.Client.Repositories;
 
 namespace OnlineMarketingTools.Server
 {
@@ -94,11 +96,11 @@ namespace OnlineMarketingTools.Server
 
             app.UseRouting();
 
-            //app.UseIdentityServer();
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+			app.UseIdentityServer();
+			app.UseAuthentication();
+			app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+			app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();

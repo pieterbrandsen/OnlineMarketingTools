@@ -7,8 +7,8 @@ namespace OnlineMarketingTools.Core.Interfaces
 	//and perhaps? a specialized get by fiels/demography
 	public interface IExternalRepository<T> where T :class
 	{
-		public Task<IEnumerable<T>> GetAll();
-		public Task<IEnumerable<T>> GetIEnumerableByFieldNameAndValue(string value, string fieldName);
+		public Task<ICollection<T>> GetAll();
+		public Task<ICollection<T>> GetICollectionByFieldNameAndValue(string value, string fieldName);
 		public Task<IEnumerable<string>> FieldNames();
 	}
 }

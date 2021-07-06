@@ -37,7 +37,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<IEnumerable<PersonHobby>> GetAll()
+        public async Task<ICollection<PersonHobby>> GetAll()
         {
             return await _context.PersonHobbies.ToListAsync();
         }
@@ -48,11 +48,11 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonHobby>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<ICollection<PersonHobby>> GetICollectionByFieldNameAndValue(string value, string fieldName)
         {
             var result = _context.PersonHobbies
                .Where(string.Format("{0} == {1}", fieldName, value))
-               .AsEnumerable<PersonHobby>();
+               .ToList<PersonHobby>();
 
             return await Task.FromResult(result);
         }

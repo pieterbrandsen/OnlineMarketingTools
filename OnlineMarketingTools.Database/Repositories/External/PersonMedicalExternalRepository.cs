@@ -40,7 +40,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// Gets an IEnumerable<PersonMedical> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
-        public async Task<IEnumerable<PersonMedical>> GetAll()
+        public async Task<ICollection<PersonMedical>> GetAll()
         {
             return await _context.PersonMedicals.ToListAsync();
         }
@@ -51,11 +51,11 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonMedical>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<ICollection<PersonMedical>> GetICollectionByFieldNameAndValue(string value, string fieldName)
         {
             var result = _context.PersonMedicals
                 .Where(string.Format("{0} == {1}", fieldName, value))
-                .AsEnumerable<PersonMedical>();
+                .ToList<PersonMedical>();
 
             return await Task.FromResult(result);
         }

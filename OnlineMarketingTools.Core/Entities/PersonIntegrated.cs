@@ -1,7 +1,7 @@
 ﻿using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces.External;
 
-namespace OnlineMarketingTools.Core.Interfaces
+namespace OnlineMarketingTools.Core.Entities
 {
 	public class PersonIntegrated : PersonIntegratedBase
                                     //External data interfaces, plugin style

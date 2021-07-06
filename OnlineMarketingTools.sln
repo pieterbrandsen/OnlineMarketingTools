@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Core",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Database", "OnlineMarketingTools.Database\OnlineMarketingTools.Database.csproj", "{B6F8874B-27D9-4862-AD0F-F006C5738293}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketingTools.DataExternal", "OnlineMarketingTools.DataExternal\OnlineMarketingTools.DataExternal.csproj", "{23970CF1-6350-41AE-88E5-547EC5248342}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.DataExternal", "OnlineMarketingTools.DataExternal\OnlineMarketingTools.DataExternal.csproj", "{23970CF1-6350-41AE-88E5-547EC5248342}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketingTools.Tests", "OnlineMarketingTools.Tests\OnlineMarketingTools.Tests.csproj", "{FFF0A7C9-15EB-4FBF-BDDA-A7883F2CD804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Tests", "OnlineMarketingTools.Tests\OnlineMarketingTools.Tests.csproj", "{FFF0A7C9-15EB-4FBF-BDDA-A7883F2CD804}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B95EE062-D7B3-418D-B962-012416110FCD} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
+		{4951AD81-4B6D-422B-8109-05603BFE14D2} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
+		{0AA2B466-0E60-4CD1-9095-FD69539141B9} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE75D40E-7065-4267-9029-FA4AF8E2EEEE}
