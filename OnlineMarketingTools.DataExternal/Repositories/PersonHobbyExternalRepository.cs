@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Interfaces;
@@ -18,7 +19,7 @@ namespace OnlineMarketingTools.DataExternal.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<IEnumerable<string>> GetAllPropertyNames()
         {
             var result = new List<string>();
 
@@ -47,11 +48,12 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// </summary>
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
+        /// <param name="propertyName"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonHobby>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<IEnumerable<PersonHobby>> GetAllByPropertyNameAndValue(string value, string propertyName)
         {
             var result = _context.PersonHobbies
-                .Where(string.Format("{0} == {1}", fieldName, value))
+                .Where(string.Format("{0} == {1}", propertyName, Expression.Constant(value)))
                 .AsEnumerable<PersonHobby>();
 
             return await Task.FromResult(result);

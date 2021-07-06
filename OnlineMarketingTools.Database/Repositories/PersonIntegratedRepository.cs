@@ -37,10 +37,10 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<IEnumerable<PersonIntegrated>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<IEnumerable<PersonIntegrated>> GetAllByPropertyNameAndValue(string value, string propertyName)
         {
             var result = context.PersonsIntegrated
-               .Where(string.Format("{0} == {1}", fieldName, value))
+               .Where(string.Format("{0} == {1}", propertyName, value))
                .AsEnumerable<PersonIntegrated>();
 
             return await Task.FromResult(result);
@@ -57,10 +57,9 @@ namespace OnlineMarketingTools.Database.Repositories
             string postCode)
         {
             var result = context.PersonsIntegrated
-                .Where(p => p.FirstName == firstName &&
-                p.LastName == lastName && 
-                p.PostCode == postCode)
-                .First();
+                .First(p => p.FirstName == firstName &&
+                            p.LastName == lastName && 
+                            p.PostCode == postCode);
 
             return Task.FromResult(result);
         }
@@ -117,7 +116,7 @@ namespace OnlineMarketingTools.Database.Repositories
             }
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<IEnumerable<string>> GetAllPropertyNames()
         {
             var result = new List<string>();
 
