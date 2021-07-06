@@ -56,6 +56,7 @@ namespace OnlineMarketingTools.DataExternal.Repositories
                 .Where(string.Format("{0} == {1}", propertyName, Expression.Constant(value)))
                 .AsEnumerable<PersonMedical>();
 
+            var lenght = result.Count();
             return await Task.FromResult(result);
         }
     }

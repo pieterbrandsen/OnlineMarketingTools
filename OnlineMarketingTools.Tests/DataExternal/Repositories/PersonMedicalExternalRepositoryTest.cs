@@ -74,9 +74,9 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
                 foreach (var propertyName in propertyNames)
                 {
                     var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
-                    var repoHobbyPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
+                    var repoMedicalPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
 
-                    Assert.NotEmpty(repoHobbyPersons); 
+                    Assert.NotEmpty(repoMedicalPersons); 
                 }
             }
 
