@@ -38,20 +38,22 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
             for (var i = 0; i < hobbyPersons.Count; i++)
             {
                 var person = hobbyPersons[i];
-                Assert.Equal(MockDataGenerator.addresses[i], person.Address);
-                Assert.Equal(MockDataGenerator.countries[i], person.Country);
-                Assert.Equal(MockDataGenerator.emails[i], person.Email);
-                Assert.Equal(MockDataGenerator.firstNames[i], person.FirstName);
+                Assert.Equal(MockDataGenerator.Addresses[i], person.Address);
+                Assert.Equal(MockDataGenerator.Countries[i], person.Country);
+                Assert.Equal(MockDataGenerator.Emails[i], person.Email);
+                Assert.Equal(MockDataGenerator.FirstNames[i], person.FirstName);
                 Assert.Equal(MockDataGenerator.Ids[i], person.Id);
-                Assert.Equal(MockDataGenerator.lastNames[i], person.LastName);
-                Assert.Equal(MockDataGenerator.middleNames[i], person.MiddleName);
-                Assert.Equal(MockDataGenerator.phoneNumbers[i], person.PhoneNumber);
-                Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
-                Assert.Equal(MockDataGenerator.hobbyEnumValues[i], person.Hobby);
+                Assert.Equal(MockDataGenerator.LastNames[i], person.LastName);
+                Assert.Equal(MockDataGenerator.MiddleNames[i], person.MiddleName);
+                Assert.Equal(MockDataGenerator.PhoneNumbers[i], person.PhoneNumber);
+                Assert.Equal(MockDataGenerator.PostalCodes[i], person.PostalCode);
+                Assert.Equal(MockDataGenerator.HobbyEnumValues[i], person.Hobby);
+                Assert.Equal(i, person.HouseNumber);
             }
 
             Assert.NotEmpty(hobbyPersons);
             Assert.Equal(expectedDataLength, hobbyPersons.Count);
+            context.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -63,6 +65,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 
             Assert.NotEmpty(hobbyPersons);
             Assert.Equal(expectedDataLength, hobbyPersons.Count);
+            context.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -73,6 +76,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 
             Assert.NotNull(context.PersonHobbies);
             Assert.Empty(hobbyPersons);
+            context.Database.EnsureDeleted();
         }
     }
 }

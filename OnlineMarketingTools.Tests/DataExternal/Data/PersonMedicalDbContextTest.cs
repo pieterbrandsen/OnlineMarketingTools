@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using OnlineMarketingTools.DataExternal.Data;
 using Xunit;
 
@@ -38,20 +39,22 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
             for (var i = 0; i < medicalPersons.Count; i++)
             {
                 var person = medicalPersons[i];
-                Assert.Equal(MockDataGenerator.addresses[i], person.Address);
-                Assert.Equal(MockDataGenerator.countries[i], person.Country);
-                Assert.Equal(MockDataGenerator.emails[i], person.Email);
-                Assert.Equal(MockDataGenerator.firstNames[i], person.FirstName);
+                Assert.Equal(MockDataGenerator.Addresses[i], person.Address);
+                Assert.Equal(MockDataGenerator.Countries[i], person.Country);
+                Assert.Equal(MockDataGenerator.Emails[i], person.Email);
+                Assert.Equal(MockDataGenerator.FirstNames[i], person.FirstName);
                 Assert.Equal(MockDataGenerator.Ids[i], person.Id);
-                Assert.Equal(MockDataGenerator.lastNames[i], person.LastName);
-                Assert.Equal(MockDataGenerator.middleNames[i], person.MiddleName);
-                Assert.Equal(MockDataGenerator.phoneNumbers[i], person.PhoneNumber);
-                Assert.Equal(MockDataGenerator.postalCodes[i], person.PostalCode);
-                Assert.Equal(MockDataGenerator.medicalEnumValues[i], person.MedicalState);
+                Assert.Equal(MockDataGenerator.LastNames[i], person.LastName);
+                Assert.Equal(MockDataGenerator.MiddleNames[i], person.MiddleName);
+                Assert.Equal(MockDataGenerator.PhoneNumbers[i], person.PhoneNumber);
+                Assert.Equal(MockDataGenerator.PostalCodes[i], person.PostalCode);
+                Assert.Equal(MockDataGenerator.MedicalEnumValues[i], person.MedicalState);
+                Assert.Equal(i, person.HouseNumber);
             }
 
             Assert.NotEmpty(medicalPersons);
             Assert.Equal(expectedDataLength, medicalPersons.Count);
+            context.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -63,6 +66,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 
             Assert.NotEmpty(medicalPersons);
             Assert.Equal(expectedDataLength, medicalPersons.Count);
+            context.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -73,6 +77,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Data
 
             Assert.NotNull(context.MedicalPersons);
             Assert.Empty(medicalPersons);
+            context.Database.EnsureDeleted();
         }
     }
 }

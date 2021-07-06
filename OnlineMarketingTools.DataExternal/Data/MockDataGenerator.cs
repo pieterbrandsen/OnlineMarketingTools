@@ -9,7 +9,7 @@ namespace OnlineMarketingTools.DataExternal.Data
     {
         private static readonly Random Rnd = new();
 
-        public static List<int> Ids = new()
+        public static readonly List<int> Ids = new()
         {
             1,
             2,
@@ -23,7 +23,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             10
         };
 
-        public static List<string> addresses = new()
+        public static readonly List<string> Addresses = new()
         {
             "7905 Kensington Court",
             "7 Badeau Parkway",
@@ -37,7 +37,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "4430 Buena Vista Circle"
         };
 
-        public static List<string> countries = new()
+        public static readonly List<string> Countries = new()
         {
             "Philippines",
             "Greece",
@@ -51,7 +51,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "Argentina"
         };
 
-        public static List<string> emails = new()
+        public static readonly List<string> Emails = new()
         {
             "hkibby0@nbcnews.com",
             "cklimkovich1@chronoengine.com",
@@ -65,7 +65,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "schampc@prweb.com"
         };
 
-        public static List<string> firstNames = new()
+        public static readonly List<string> FirstNames = new()
         {
             "Oswell",
             "Myron",
@@ -79,7 +79,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "Westley"
         };
 
-        public static List<string> lastNames = new()
+        public static readonly List<string> LastNames = new()
         {
             "Kibby",
             "Klimkovich",
@@ -93,7 +93,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "Barnewell"
         };
 
-        public static List<string> middleNames = new()
+        public static readonly List<string> MiddleNames = new()
         {
             "Haley",
             "Carleton",
@@ -107,7 +107,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "Finlay"
         };
 
-        public static List<string> phoneNumbers = new()
+        public static readonly List<string> PhoneNumbers = new()
         {
             "(115) 4055413",
             "(766) 8489121",
@@ -121,7 +121,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "(213) 7148680"
         };
 
-        public static List<string> postalCodes = new()
+        public static readonly List<string> PostalCodes = new()
         {
             "4055413",
             "8489121",
@@ -135,7 +135,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             "7148680"
         };
 
-        public static List<MedicalEnum> medicalEnumValues = new()
+        public static readonly List<MedicalEnum> MedicalEnumValues = new()
         {
             MedicalEnum.Critical,
             MedicalEnum.Fair,
@@ -149,7 +149,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             MedicalEnum.Undetermined
         };
 
-        public static List<HobbyEnum> hobbyEnumValues = new()
+        public static readonly List<HobbyEnum> HobbyEnumValues = new()
         {
             HobbyEnum.Gaming,
             HobbyEnum.Sport,
@@ -163,7 +163,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             HobbyEnum.Gaming
         };
 
-        public static List<ProductGenreEnum> productGenreEnumValues = new()
+        public static readonly List<ProductGenreEnum> ProductGenreEnumValues = new()
         {
             ProductGenreEnum.Birdwatching,
             ProductGenreEnum.Food,
@@ -184,15 +184,15 @@ namespace OnlineMarketingTools.DataExternal.Data
                 persons.Add(new TPerson()
                 {
                     Id = Ids[i],
-                    Address = addresses[i],
-                    Country = countries[i],
-                    Email = emails[i],
-                    FirstName = firstNames[i],
-                    MiddleName = middleNames[i],
-                    LastName = lastNames[i],
+                    Address = Addresses[i],
+                    Country = Countries[i],
+                    Email = Emails[i],
+                    FirstName = FirstNames[i],
+                    MiddleName = MiddleNames[i],
+                    LastName = LastNames[i],
                     HouseNumber = i,
-                    PhoneNumber = phoneNumbers[i],
-                    PostalCode = postalCodes[i]
+                    PhoneNumber = PhoneNumbers[i],
+                    PostalCode = PostalCodes[i]
                 });
 
             return persons;
@@ -205,15 +205,15 @@ namespace OnlineMarketingTools.DataExternal.Data
                 persons.Add(new TPerson()
                 {
                     Id = i,
-                    Address = addresses[Rnd.Next(addresses.Count)],
-                    Country = countries[Rnd.Next(countries.Count)],
-                    Email = emails[Rnd.Next(emails.Count)],
-                    FirstName = firstNames[Rnd.Next(firstNames.Count)],
-                    MiddleName = middleNames[Rnd.Next(middleNames.Count)],
-                    LastName = lastNames[Rnd.Next(lastNames.Count)],
+                    Address = Addresses[Rnd.Next(Addresses.Count)],
+                    Country = Countries[Rnd.Next(Countries.Count)],
+                    Email = Emails[Rnd.Next(Emails.Count)],
+                    FirstName = FirstNames[Rnd.Next(FirstNames.Count)],
+                    MiddleName = MiddleNames[Rnd.Next(MiddleNames.Count)],
+                    LastName = LastNames[Rnd.Next(LastNames.Count)],
                     HouseNumber = i,
-                    PhoneNumber = phoneNumbers[Rnd.Next(phoneNumbers.Count)],
-                    PostalCode = postalCodes[Rnd.Next(postalCodes.Count)]
+                    PhoneNumber = PhoneNumbers[Rnd.Next(PhoneNumbers.Count)],
+                    PostalCode = PostalCodes[Rnd.Next(PostalCodes.Count)]
                 });
 
             return persons;
@@ -225,7 +225,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             for (var i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
-                person.MedicalState = medicalEnumValues[i];
+                person.MedicalState = MedicalEnumValues[i];
             }
 
             return persons;
@@ -246,8 +246,8 @@ namespace OnlineMarketingTools.DataExternal.Data
             for (var i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
-                var hobbyEnumValue = hobbyEnumValues[i];
-                person.Hobby = hobbyEnumValues[i];
+                var hobbyEnumValue = HobbyEnumValues[i];
+                person.Hobby = HobbyEnumValues[i];
             }
 
             return persons;
@@ -267,7 +267,7 @@ namespace OnlineMarketingTools.DataExternal.Data
             for (var i = 0; i < persons.Count; i++)
             {
                 var person = persons[i];
-                person.ProductGenre = productGenreEnumValues[i];
+                person.ProductGenre = ProductGenreEnumValues[i];
             }
 
             return persons;
