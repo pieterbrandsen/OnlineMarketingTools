@@ -4,6 +4,7 @@ using OnlineMarketingTools.Server.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OnlineMarketingTools.Core.Entities;
 
 namespace OnlineMarketingTools.Server.Services
 {
@@ -46,16 +47,14 @@ namespace OnlineMarketingTools.Server.Services
                 newPerson.Email = person.Email;
                 newPerson.PhoneNumber = person.PhoneNumber;
                 newPerson.PostCode = person.PostalCode;
-                newPerson.MedicalState = medicalList.Where(
-                    p => p.FirstName == person.FirstName && 
-                    p.LastName == person.LastName && 
-                    p.PostalCode == person.PostalCode)
-                    .First().MedicalState.ToString();
-                newPerson.ProductGenre = productList.Where(
-                    p => p.FirstName == person.FirstName &&
-                    p.LastName == person.LastName &&
-                    p.PostalCode == person.PostalCode)
-                    .First().ProductGenre.ToString();
+                newPerson.MedicalState = medicalList
+                    .First(p => p.FirstName == person.FirstName && 
+                                p.LastName == person.LastName && 
+                                p.PostalCode == person.PostalCode).MedicalState.ToString();
+                newPerson.ProductGenre = productList
+                    .First(p => p.FirstName == person.FirstName &&
+                                p.LastName == person.LastName &&
+                                p.PostalCode == person.PostalCode).ProductGenre.ToString();
 
                 combined.Add(newPerson);
             }

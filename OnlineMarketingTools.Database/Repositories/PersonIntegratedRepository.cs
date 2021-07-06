@@ -9,6 +9,7 @@ using OnlineMarketingTools.Database;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
 using System.Linq;
+using OnlineMarketingTools.Database.Data;
 
 namespace OnlineMarketingTools.Database.Repositories
 {

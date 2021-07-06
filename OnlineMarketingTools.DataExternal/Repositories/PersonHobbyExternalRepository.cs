@@ -7,13 +7,13 @@ using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
 
-namespace OnlineMarketingTools.Database.Repositories.External
+namespace OnlineMarketingTools.DataExternal.Repositories
 {
-    public class PersonMedicalExternalRepository : IExternalRepository<PersonMedical>
+    public class PersonHobbyExternalRepository : IExternalRepository<PersonHobby>
     {
-        private readonly PersonMedicalDbContext _context;
+        private readonly PersonHobbyDbContext _context;
 
-        public PersonMedicalExternalRepository(PersonMedicalDbContext context)
+        public PersonHobbyExternalRepository(PersonHobbyDbContext context)
         {
             _context = context;
         }
@@ -34,25 +34,25 @@ namespace OnlineMarketingTools.Database.Repositories.External
         }
 
         /// <summary>
-        ///     Gets an IEnumerable<PersonMedical> of All entity's in this DB
+        ///     Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
-        /// <returns>Task<IEnumerable<PersonMedical>></returns>
-        public async Task<IEnumerable<PersonMedical>> GetAll()
+        /// <returns>Task<IEnumerable<PersonHobby>></returns>
+        public async Task<IEnumerable<PersonHobby>> GetAll()
         {
-            return await _context.MedicalPersons.ToListAsync();
+            return await _context.PersonHobbies.ToListAsync();
         }
 
         /// <summary>
-        ///     Gets a IEnumerable<PersonMedical> based on the name of the field and the value that field should have.
+        ///     Gets a IEnumerable<PersonHobby> based on the name of the field and the value that field should have.
         /// </summary>
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonMedical>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<IEnumerable<PersonHobby>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
         {
-            var result = _context.MedicalPersons
+            var result = _context.PersonHobbies
                 .Where(string.Format("{0} == {1}", fieldName, value))
-                .AsEnumerable<PersonMedical>();
+                .AsEnumerable<PersonHobby>();
 
             return await Task.FromResult(result);
         }

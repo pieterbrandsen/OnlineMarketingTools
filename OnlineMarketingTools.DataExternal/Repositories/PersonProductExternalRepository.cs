@@ -7,13 +7,13 @@ using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
 
-namespace OnlineMarketingTools.Database.Repositories.External
+namespace OnlineMarketingTools.DataExternal.Repositories
 {
-    public class PersonHobbyExternalRepository : IExternalRepository<PersonHobby>
+    public class PersonProductExternalRepository : IExternalRepository<PersonProduct>
     {
-        private readonly PersonHobbyDbContext _context;
+        private readonly PersonProductDbContext _context;
 
-        public PersonHobbyExternalRepository(PersonHobbyDbContext context)
+        public PersonProductExternalRepository(PersonProductDbContext context)
         {
             _context = context;
         }
@@ -34,12 +34,12 @@ namespace OnlineMarketingTools.Database.Repositories.External
         }
 
         /// <summary>
-        ///     Gets an IEnumerable<PersonHobby> of All entity's in this DB
+        ///     Gets an IEnumerable<PersonProduct> of All entity's in this DB
         /// </summary>
-        /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<IEnumerable<PersonHobby>> GetAll()
+        /// <returns>Task<IEnumerable<PersonProduct>></returns>
+        public async Task<IEnumerable<PersonProduct>> GetAll()
         {
-            return await _context.PersonHobbies.ToListAsync();
+            return await _context.PersonProducts.ToListAsync();
         }
 
         /// <summary>
@@ -48,11 +48,11 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonHobby>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<IEnumerable<PersonProduct>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
         {
-            var result = _context.PersonHobbies
+            var result = _context.PersonProducts
                 .Where(string.Format("{0} == {1}", fieldName, value))
-                .AsEnumerable<PersonHobby>();
+                .AsEnumerable<PersonProduct>();
 
             return await Task.FromResult(result);
         }

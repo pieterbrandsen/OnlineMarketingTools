@@ -8,9 +8,9 @@ using Microsoft.Extensions.Hosting;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.Database.Data;
 using OnlineMarketingTools.Database.Models;
-using OnlineMarketingTools.Database.Repositories.External;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
+using OnlineMarketingTools.DataExternal.Repositories;
 
 namespace OnlineMarketingTools.Server
 {

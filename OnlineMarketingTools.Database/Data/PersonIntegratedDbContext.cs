@@ -3,10 +3,11 @@ using OnlineMarketingTools.Core.Entities;
 
 namespace OnlineMarketingTools.Database.Data
 {
-    public class PersonIntegratedDbContext : DbContext
+    public sealed class PersonIntegratedDbContext : DbContext
     {
         public PersonIntegratedDbContext(DbContextOptions<PersonIntegratedDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<PersonIntegrated> PersonsIntegrated { get; set; }
