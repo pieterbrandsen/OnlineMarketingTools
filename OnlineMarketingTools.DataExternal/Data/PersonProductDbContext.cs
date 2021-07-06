@@ -8,7 +8,6 @@ namespace OnlineMarketingTools.DataExternal.Data
         public PersonProductDbContext(DbContextOptions<PersonProductDbContext> options, bool useRandomData, int
             randomDataAmount = 1000) : base(options)
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
             UseRandomData = useRandomData;
             RandomDataAmount = randomDataAmount;
