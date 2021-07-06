@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\OnlineMarketingTools.Database\OnlineMarketingTools.Database.csproj" />
       <ProjectReference Include="..\OnlineMarketingTools.DataExternal\OnlineMarketingTools.DataExternal.csproj" />
     </ItemGroup>
 
