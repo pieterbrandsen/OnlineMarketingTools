@@ -102,7 +102,7 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// <returns></returns>
         public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
         {
-            if (!(GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null))
+            if (GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null)
             {
                 return false;
             }
@@ -159,8 +159,8 @@ namespace OnlineMarketingTools.DataExternal.Repositories
             var peopleThatCanBeUpdated = new List<PersonIntegrated>();
             foreach (var person in PeopleToUpdate)
             {
-                var result = !(await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null);
-                if (result == true)
+                var result = await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                if (result == false)
                 {
                     peopleThatCanBeUpdated.Add(person);
                 }
