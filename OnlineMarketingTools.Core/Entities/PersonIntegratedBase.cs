@@ -1,7 +1,10 @@
-﻿namespace OnlineMarketingTools.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineMarketingTools.Core.Entities
 {
     public class PersonIntegratedBase
     {
+        [Key]
         public int Key { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

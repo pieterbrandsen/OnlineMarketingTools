@@ -13,7 +13,7 @@ using OnlineMarketingTools.Database.Data;
 
 namespace OnlineMarketingTools.Database.Repositories
 {
-    public class PersonIntegratedRepositoy : IPersonIntegratedRepository
+    public class PersonIntegratedRepositoy : IPersonIntegratedRepository, IDisposable
     {
         private readonly PersonIntegratedDbContext context;
         public PersonIntegratedRepositoy(PersonIntegratedDbContext context)
@@ -56,10 +56,11 @@ namespace OnlineMarketingTools.Database.Repositories
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName,
             string postCode)
         {
-            var result = context.PersonsIntegrated
-                .First(p => p.FirstName == firstName &&
-                            p.LastName == lastName && 
-                            p.PostCode == postCode);
+            PersonIntegrated result = context.PersonsIntegrated
+                .Where(p => p.FirstName == firstName &&
+                p.LastName == lastName && 
+                p.PostCode == postCode)
+                .FirstOrDefault();
 
             return Task.FromResult(result);
         }
@@ -83,7 +84,7 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <returns></returns>
         public async Task<bool> AddPerson(PersonIntegrated person)
         {
-            if (!(GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null))
+            if (!(await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null))
             {
                 return false;
             }
@@ -103,7 +104,7 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <returns></returns>
         public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
         {
-            if (GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null)
+            if (await GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null)
             {
                 return false;
             }
@@ -136,7 +137,7 @@ namespace OnlineMarketingTools.Database.Repositories
             var newPeople = new List<PersonIntegrated>();
             foreach (var person in people)
             {
-                var result = !(await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null);
+                var result = await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
                 if (result == true)
                 {
                     newPeople.Add(person);
@@ -177,6 +178,12 @@ namespace OnlineMarketingTools.Database.Repositories
             context.SaveChanges();
 
             return true;
+        }
+
+        public void Dispose()
+        {
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
         }
     }
 }

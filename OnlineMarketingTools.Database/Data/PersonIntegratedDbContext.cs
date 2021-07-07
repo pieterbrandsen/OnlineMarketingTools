@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Entities;
+using OnlineMarketingTools.DataExternal.Data;
 
 namespace OnlineMarketingTools.Database.Data
 {
@@ -10,10 +11,26 @@ namespace OnlineMarketingTools.Database.Data
             Database.EnsureCreated();
         }
 
+        public PersonIntegratedDbContext(DbContextOptions<PersonIntegratedDbContext> options, bool useRandomData, int
+            randomDataAmount = 1000) : base(options)
+        {
+            Database.EnsureCreated();
+            UseRandomData = useRandomData;
+            RandomDataAmount = randomDataAmount;
+            Seed();
+        }
+
+
+        private bool UseRandomData { get; }
+        private int RandomDataAmount { get; }
         public DbSet<PersonIntegrated> PersonsIntegrated { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        private void Seed()
         {
+            var hobbyPersons = InterGratedMockDataGenerator.InterGratedPersonData();
+
+            PersonsIntegrated.AddRange(hobbyPersons);
+            SaveChanges();
         }
     }
 }
