@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
 using System;
@@ -10,6 +11,7 @@ namespace OnlineMarketingTools.Client.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class PersonController : ControllerBase
 	{
 		private readonly IPersonIntegratedRepository _repository;

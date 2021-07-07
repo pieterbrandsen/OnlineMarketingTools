@@ -10,7 +10,7 @@
 <h3>
 	Person List
 </h3>
-@*<AuthorizeView>*@
+<AuthorizeView>
 @if (persons is null)
 {
 	<p>Loading</p>
@@ -43,7 +43,7 @@ else if (persons is not null)
 		</tbody>
 	</table>
 }
-@*</AuthorizeView>*@
+</AuthorizeView>
 
 @code {
 	private IEnumerable<PersonIntegrated> persons { get; set; }
@@ -60,7 +60,7 @@ else if (persons is not null)
 		catch (AccessTokenNotAvailableException ex)
 		{
 			await IJSRuntime.InvokeAsync<bool>("confirm", $"{ex}");
-			ex.Redirect();
+			//ex.Redirect();
 		}
 	}
 }
