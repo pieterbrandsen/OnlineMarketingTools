@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Entities;
+using OnlineMarketingTools.DataExternal.Data;
 
 namespace OnlineMarketingTools.Database.Data
 {
