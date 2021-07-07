@@ -1,20 +1,36 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
 {
-	public class PersonMedicalDbContext : DbContext
+    public sealed class PersonMedicalDbContext : DbContext
     {
-		public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options) : base(options)
+        public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options, bool useRandomData, int
+            randomDataAmount = 1000) : base(options)
         {
+            Database.EnsureCreated();
+            UseRandomData = useRandomData;
+            RandomDataAmount = randomDataAmount;
+            Seed();
         }
-        public DbSet<PersonMedical> PersonMedicals { get; set; }
-        
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    var medicalPersons = MockDataGenerator.PersonMedicalData(100);
-        //    modelBuilder.Entity<PersonMedical>().HasData(medicalPersons);
-        //}
+
+        public PersonMedicalDbContext(DbContextOptions<PersonMedicalDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+        private bool UseRandomData { get; }
+        private int RandomDataAmount { get; }
+        public DbSet<PersonMedical> MedicalPersons { get; set; }
+
+        private void Seed()
+        {
+            var medicalPersons = !UseRandomData
+                ? MockDataGenerator.PersonMedicalData()
+                : MockDataGenerator.PersonMedicalRandomData(RandomDataAmount);
+
+            MedicalPersons.AddRange(medicalPersons);
+            SaveChanges();
+        }
     }
 }

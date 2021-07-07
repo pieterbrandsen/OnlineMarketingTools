@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\OnlineMarketingTools.Core\OnlineMarketingTools.Core.csproj" />
-    <ProjectReference Include="..\Shared\OnlineMarketingTools.Shared.csproj" />
+    <ProjectReference Include="..\..\OnlineMarketingTools.Shared\OnlineMarketingTools.Shared.csproj" />
   </ItemGroup>
 
 </Project>

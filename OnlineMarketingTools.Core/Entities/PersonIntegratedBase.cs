@@ -1,4 +1,6 @@
-﻿namespace OnlineMarketingTools.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineMarketingTools.Core.Entities
 {
 	public class PersonIntegratedBase
 	{

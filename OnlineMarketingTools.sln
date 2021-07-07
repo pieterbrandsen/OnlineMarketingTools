@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Server
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Client", "OnlineMarketingTools\Client\OnlineMarketingTools.Client.csproj", "{4951AD81-4B6D-422B-8109-05603BFE14D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Shared", "OnlineMarketingTools\Shared\OnlineMarketingTools.Shared.csproj", "{0AA2B466-0E60-4CD1-9095-FD69539141B9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Core", "OnlineMarketingTools.Core\OnlineMarketingTools.Core.csproj", "{359661E2-6296-41D3-8FC0-8C2CB6B8F220}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Database", "OnlineMarketingTools.Database\OnlineMarketingTools.Database.csproj", "{B6F8874B-27D9-4862-AD0F-F006C5738293}"
@@ -18,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketingTools.Tests", "OnlineMarketingTools.Tests\OnlineMarketingTools.Tests.csproj", "{FFF0A7C9-15EB-4FBF-BDDA-A7883F2CD804}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketingTools.Shared", "OnlineMarketingTools.Shared\OnlineMarketingTools.Shared.csproj", "{32D89602-267A-4BC6-9A34-07E5F06EFE8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{4951AD81-4B6D-422B-8109-05603BFE14D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4951AD81-4B6D-422B-8109-05603BFE14D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4951AD81-4B6D-422B-8109-05603BFE14D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{359661E2-6296-41D3-8FC0-8C2CB6B8F220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{359661E2-6296-41D3-8FC0-8C2CB6B8F220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{359661E2-6296-41D3-8FC0-8C2CB6B8F220}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +49,10 @@ Global
 		{FFF0A7C9-15EB-4FBF-BDDA-A7883F2CD804}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFF0A7C9-15EB-4FBF-BDDA-A7883F2CD804}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFF0A7C9-15EB-4FBF-BDDA-A7883F2CD804}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32D89602-267A-4BC6-9A34-07E5F06EFE8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D89602-267A-4BC6-9A34-07E5F06EFE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D89602-267A-4BC6-9A34-07E5F06EFE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D89602-267A-4BC6-9A34-07E5F06EFE8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,7 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B95EE062-D7B3-418D-B962-012416110FCD} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
 		{4951AD81-4B6D-422B-8109-05603BFE14D2} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
-		{0AA2B466-0E60-4CD1-9095-FD69539141B9} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
+		{32D89602-267A-4BC6-9A34-07E5F06EFE8F} = {88F9A748-ABD6-4EE9-B866-9CF0FBC78A9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE75D40E-7065-4267-9029-FA4AF8E2EEEE}

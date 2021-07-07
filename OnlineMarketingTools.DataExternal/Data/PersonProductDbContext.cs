@@ -3,18 +3,35 @@ using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
 {
-	public class PersonProductDbContext : DbContext
-	{
-		public PersonProductDbContext(DbContextOptions<PersonMedicalDbContext> options) : base (options)
-		{
-		}
+    public sealed class PersonProductDbContext : DbContext
+    {
+        public PersonProductDbContext(DbContextOptions<PersonProductDbContext> options, bool useRandomData, int
+            randomDataAmount = 1000) : base(options)
+        {
+            Database.EnsureCreated();
+            UseRandomData = useRandomData;
+            RandomDataAmount = randomDataAmount;
+            Seed();
+        }
 
-		public DbSet<PersonProduct> PersonProducts { get; set; }
+        public PersonProductDbContext(DbContextOptions<PersonProductDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			var productPersons = MockDataGenerator.PersonProductRandomData();
-			modelBuilder.Entity<PersonProduct>().HasData(productPersons);
-		}
-	}
+        private bool UseRandomData { get; }
+        private int RandomDataAmount { get; }
+
+        public DbSet<PersonProduct> PersonProducts { get; set; }
+
+        private void Seed()
+        {
+            var productPersons = !UseRandomData
+                ? MockDataGenerator.PersonProductData()
+                : MockDataGenerator.PersonProductRandomData(RandomDataAmount);
+
+            PersonProducts.AddRange(productPersons);
+            SaveChanges();
+        }
+    }
 }

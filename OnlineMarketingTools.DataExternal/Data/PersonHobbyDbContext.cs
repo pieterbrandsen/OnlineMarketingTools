@@ -3,16 +3,34 @@ using OnlineMarketingTools.DataExternal.Entities;
 
 namespace OnlineMarketingTools.DataExternal.Data
 {
-	public class PersonHobbyDbContext : DbContext
+    public sealed class PersonHobbyDbContext : DbContext
     {
-		public PersonHobbyDbContext(DbContextOptions<PersonHobbyDbContext> options) : base(options)
+        public PersonHobbyDbContext(DbContextOptions<PersonHobbyDbContext> options, bool useRandomData, int
+            randomDataAmount = 1000) : base(options)
         {
+            Database.EnsureCreated();
+            UseRandomData = useRandomData;
+            RandomDataAmount = randomDataAmount;
+            Seed();
         }
+
+        public PersonHobbyDbContext(DbContextOptions<PersonHobbyDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+        private bool UseRandomData { get; }
+        private int RandomDataAmount { get; }
         public DbSet<PersonHobby> PersonHobbies { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<PersonHobby>().HasData(hobbyPersons);
-        //}
+        private void Seed()
+        {
+            var hobbyPersons = !UseRandomData
+                ? MockDataGenerator.PersonHobbiesData()
+                : MockDataGenerator.PersonHobbiesRandomData(RandomDataAmount);
+
+            PersonHobbies.AddRange(hobbyPersons);
+            SaveChanges();
+        }
     }
 }
