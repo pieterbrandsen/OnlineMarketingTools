@@ -6,12 +6,13 @@ using OnlineMarketingTools.Database.Models;
 
 namespace OnlineMarketingTools.Database.Data
 {
-    public class IdentityDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public sealed class IdentityDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         public IdentityDbContext(
             DbContextOptions<IdentityDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            Database.EnsureCreated();
         }
     }
 }
