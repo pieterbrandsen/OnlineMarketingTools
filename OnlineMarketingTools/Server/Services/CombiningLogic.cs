@@ -1,23 +1,23 @@
-﻿using OnlineMarketingTools.Core.Interfaces;
-using OnlineMarketingTools.DataExternal.Entities;
-using OnlineMarketingTools.Server.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OnlineMarketingTools.Core.Entities;
+using OnlineMarketingTools.Core.Interfaces;
+using OnlineMarketingTools.DataExternal.Entities;
+using OnlineMarketingTools.Server.Interfaces;
 
 namespace OnlineMarketingTools.Server.Services
 {
     public class CombiningLogic : ICombiningLogic
     {
         private readonly IExternalRepository<PersonHobby> hobbyContext;
+        private readonly IPersonIntegratedRepository intergratedContext;
         private readonly IExternalRepository<PersonMedical> medicalContext;
         private readonly IExternalRepository<PersonProduct> productContext;
-        private readonly IPersonIntegratedRepository intergratedContext;
 
         public CombiningLogic
-            (IExternalRepository<PersonHobby> hobbyContext,
-            IExternalRepository<PersonMedical> medicalContext, 
+        (IExternalRepository<PersonHobby> hobbyContext,
+            IExternalRepository<PersonMedical> medicalContext,
             IExternalRepository<PersonProduct> productContext,
             IPersonIntegratedRepository intergratedContext)
         {
@@ -33,7 +33,7 @@ namespace OnlineMarketingTools.Server.Services
             var medicalList = await medicalContext.GetAll();
             var productList = await productContext.GetAll();
 
-            List<PersonIntegrated> combined = new List<PersonIntegrated>();
+            var combined = new List<PersonIntegrated>();
 
             foreach (var person in hobbyList)
             {
@@ -48,8 +48,8 @@ namespace OnlineMarketingTools.Server.Services
                 newPerson.PhoneNumber = person.PhoneNumber;
                 newPerson.PostCode = person.PostalCode;
                 newPerson.MedicalState = medicalList
-                    .First(p => p.FirstName == person.FirstName && 
-                                p.LastName == person.LastName && 
+                    .First(p => p.FirstName == person.FirstName &&
+                                p.LastName == person.LastName &&
                                 p.PostalCode == person.PostalCode).MedicalState.ToString();
                 newPerson.ProductGenre = productList
                     .First(p => p.FirstName == person.FirstName &&

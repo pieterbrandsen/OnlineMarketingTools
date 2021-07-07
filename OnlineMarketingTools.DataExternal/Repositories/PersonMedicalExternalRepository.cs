@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Interfaces;
@@ -18,17 +19,13 @@ namespace OnlineMarketingTools.DataExternal.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<IEnumerable<string>> GetAllPropertyNames()
         {
             var result = new List<string>();
 
             foreach (var entity in _context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }
@@ -47,13 +44,15 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// </summary>
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
+        /// <param name="propertyName"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonMedical>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<IEnumerable<PersonMedical>> GetAllByPropertyNameAndValue(string value, string propertyName)
         {
             var result = _context.MedicalPersons
-                .Where(string.Format("{0} == {1}", fieldName, value))
+                .Where(string.Format("{0} == {1}", propertyName, Expression.Constant(value)))
                 .AsEnumerable<PersonMedical>();
 
+            var lenght = result.Count();
             return await Task.FromResult(result);
         }
     }

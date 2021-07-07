@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using OnlineMarketingTools.DataExternal.Data;
 using Xunit;
 

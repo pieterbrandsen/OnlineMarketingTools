@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
-using OnlineMarketingTools.Database;
-using OnlineMarketingTools.DataExternal.Data;
-using OnlineMarketingTools.DataExternal.Entities;
-using System.Linq;
 using OnlineMarketingTools.Database.Data;
 
 namespace OnlineMarketingTools.Database.Repositories
@@ -16,6 +13,7 @@ namespace OnlineMarketingTools.Database.Repositories
     public class PersonIntegratedRepositoy : IPersonIntegratedRepository, IDisposable
     {
         private readonly PersonIntegratedDbContext context;
+
         public PersonIntegratedRepositoy(PersonIntegratedDbContext context)
         {
             this.context = context;
@@ -28,7 +26,7 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
         public async Task<IEnumerable<PersonIntegrated>> GetAll()
-{
+        {
             return await context.PersonsIntegrated.ToListAsync();
         }
 
@@ -37,11 +35,11 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<IEnumerable<PersonIntegrated>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<IEnumerable<PersonIntegrated>> GetAllByPropertyNameAndValue(string value, string propertyName)
         {
             var result = context.PersonsIntegrated
-               .Where(string.Format("{0} == {1}", fieldName, value))
-               .AsEnumerable<PersonIntegrated>();
+                .Where(string.Format("{0} == {1}", propertyName, value))
+                .AsEnumerable<PersonIntegrated>();
 
             return await Task.FromResult(result);
         }
@@ -56,10 +54,10 @@ namespace OnlineMarketingTools.Database.Repositories
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName,
             string postCode)
         {
-            PersonIntegrated result = context.PersonsIntegrated
+            var result = context.PersonsIntegrated
                 .Where(p => p.FirstName == firstName &&
-                p.LastName == lastName && 
-                p.PostCode == postCode)
+                            p.LastName == lastName &&
+                            p.PostCode == postCode)
                 .FirstOrDefault();
 
             return Task.FromResult(result);
@@ -78,7 +76,7 @@ namespace OnlineMarketingTools.Database.Repositories
         }
 
         /// <summary>
-        /// Returns a bool weither adding succeeded or not.
+        ///     Returns a bool weither adding succeeded or not.
         /// </summary>
         /// <param name="person">The PersonIntergrated object to add</param>
         /// <returns></returns>
@@ -88,46 +86,39 @@ namespace OnlineMarketingTools.Database.Repositories
             {
                 return false;
             }
-            else
-            {
-                context.PersonsIntegrated.Add(person);
-                await context.SaveChangesAsync();
 
-                return true;
-            }
+            context.PersonsIntegrated.Add(person);
+            await context.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
-        /// Returns a bool weither updating succeeded or not.
+        ///     Returns a bool weither updating succeeded or not.
         /// </summary>
         /// <param name="PersonToUpdate">The PersonIntergrated object to update</param>
         /// <returns></returns>
         public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
         {
-            if (await GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null)
+            if (await GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName,
+                PersonToUpdate.PostCode) == null)
             {
                 return false;
             }
-            else
-            {
-                context.Update(PersonToUpdate);
-                await context.SaveChangesAsync();
 
-                return true;
-            }
+            context.Update(PersonToUpdate);
+            await context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<IEnumerable<string>> GetAllPropertyNames()
         {
             var result = new List<string>();
 
             foreach (var entity in context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }
@@ -137,17 +128,12 @@ namespace OnlineMarketingTools.Database.Repositories
             var newPeople = new List<PersonIntegrated>();
             foreach (var person in people)
             {
-                var result = await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
-                if (result == true)
-                {
-                    newPeople.Add(person);
-                }
+                var result =
+                    await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                if (result) newPeople.Add(person);
             }
 
-            if (newPeople.Count() <= 0)
-            {
-                return false;
-            }
+            if (newPeople.Count() <= 0) return false;
 
             await context.AddRangeAsync(newPeople);
 
@@ -161,17 +147,12 @@ namespace OnlineMarketingTools.Database.Repositories
             var peopleThatCanBeUpdated = new List<PersonIntegrated>();
             foreach (var person in PeopleToUpdate)
             {
-                var result = await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
-                if (result == false)
-                {
-                    peopleThatCanBeUpdated.Add(person);
-                }
+                var result =
+                    await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                if (result == false) peopleThatCanBeUpdated.Add(person);
             }
 
-            if (peopleThatCanBeUpdated.Count() <= 0)
-            {
-                return false;
-            }
+            if (peopleThatCanBeUpdated.Count() <= 0) return false;
 
             context.UpdateRange(peopleThatCanBeUpdated);
 
