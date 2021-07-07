@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
@@ -22,9 +21,9 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
 
         private PersonMedicalExternalRepository GetRepo(PersonMedicalDbContext context)
         {
-            return new (context);
+            return new(context);
         }
-        
+
         [Fact]
         private async void GetAllFieldNames()
         {
@@ -34,11 +33,8 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var repoAllPropertyNames = await repo.GetAllPropertyNames();
 
             var allPropertyNames = repoAllPropertyNames.ToList();
-            Assert.Equal(properties.Length,allPropertyNames.Count());
-            foreach (var prop in properties)
-            {
-                Assert.Contains(prop.Name, allPropertyNames);
-            }
+            Assert.Equal(properties.Length, allPropertyNames.Count());
+            foreach (var prop in properties) Assert.Contains(prop.Name, allPropertyNames);
 
             await context.Database.EnsureDeletedAsync();
         }
@@ -52,12 +48,9 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var hobbyPersons = context.MedicalPersons.ToList();
             var repoHobbyPersons = (await repo.GetAll()).ToList();
 
-            Assert.Equal(hobbyPersons.Count,repoHobbyPersons.Count());
-            foreach (var person in hobbyPersons)
-            {
-                Assert.Contains(person.Id, repoHobbyPersons.Select(p=>p.Id));
-            } 
-            
+            Assert.Equal(hobbyPersons.Count, repoHobbyPersons.Count());
+            foreach (var person in hobbyPersons) Assert.Contains(person.Id, repoHobbyPersons.Select(p => p.Id));
+
             await context.Database.EnsureDeletedAsync();
         }
 
@@ -70,14 +63,12 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
 
             var propertyNames = (await repo.GetAllPropertyNames()).ToList();
             foreach (var person in hobbyPersons)
+            foreach (var propertyName in propertyNames)
             {
-                foreach (var propertyName in propertyNames)
-                {
-                    var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
-                    var repoMedicalPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
+                var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
+                var repoMedicalPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
 
-                    Assert.NotEmpty(repoMedicalPersons); 
-                }
+                Assert.NotEmpty(repoMedicalPersons);
             }
 
             await context.Database.EnsureDeletedAsync();
