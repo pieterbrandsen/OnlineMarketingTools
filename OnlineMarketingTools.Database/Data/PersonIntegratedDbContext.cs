@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.Core.Entities;
-using OnlineMarketingTools.DataExternal.Data;
 
 namespace OnlineMarketingTools.Database.Data
 {
@@ -27,10 +26,15 @@ namespace OnlineMarketingTools.Database.Data
 
         private void Seed()
         {
-            var hobbyPersons = InterGratedMockDataGenerator.InterGratedPersonData();
+            var persons = IntergratedMockDataGenerator.InterGratedPersonData();
 
-            PersonsIntegrated.AddRange(hobbyPersons);
+            PersonsIntegrated.AddRange(persons);
             SaveChanges();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            Seed();
         }
     }
 }

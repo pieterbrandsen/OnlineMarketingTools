@@ -1,20 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.Database.Data;
 using OnlineMarketingTools.Database.Repositories;
 using OnlineMarketingTools.DataExternal.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using static IdentityServer4.Models.IdentityResources;
 
-namespace OnlineMarketingTools.Tests.Data.Repositories
+namespace OnlineMarketingTools.Tests.Database.Data.Repositories
 {
     public class PersonIntergratedRepositoryTest
     {
@@ -26,17 +21,17 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
             new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("personintergratedEmpty-db")
                 .Options;
 
-        private readonly PersonIntegratedDbContext seededContext;
+        private readonly PersonIntegrated ExpectedPerson;
         private readonly IPersonIntegratedRepository PersonRepoSeeded;
 
-        private readonly PersonIntegrated ExpectedPerson;
+        private readonly PersonIntegratedDbContext seededContext;
 
         public PersonIntergratedRepositoryTest()
         {
             seededContext = new PersonIntegratedDbContext(dbOptions1, false);
             PersonRepoSeeded = new PersonIntegratedRepositoy(seededContext);
 
-            ExpectedPerson = new PersonIntegrated()
+            ExpectedPerson = new PersonIntegrated
             {
                 Key = MockDataGenerator.Ids[0],
                 Adress = MockDataGenerator.Addresses[0],
@@ -113,7 +108,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         {
             using (var context = new PersonIntegratedDbContext(dbOptions2))
             {
-                var person = new PersonIntegrated()
+                var person = new PersonIntegrated
                 {
                     Key = MockDataGenerator.Ids[0],
                     Adress = MockDataGenerator.Addresses[0],
@@ -151,9 +146,9 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
             using (var context = new PersonIntegratedDbContext(dbOptions2))
             {
                 var personList = new List<PersonIntegrated>();
-                for (int i = 0; i <= 2; i++)
+                for (var i = 0; i <= 2; i++)
                 {
-                    var person = new PersonIntegrated()
+                    var person = new PersonIntegrated
                     {
                         Key = MockDataGenerator.Ids[i],
                         Adress = MockDataGenerator.Addresses[i],
