@@ -14,5 +14,6 @@ namespace OnlineMarketingTools.Core.Interfaces
         public Task<bool> AddRange(IEnumerable<PersonIntegrated> people);
         public Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate);
         public Task<bool> UpdateRange(IEnumerable<PersonIntegrated> PeopleToUpdate);
+        public void Dispose();
     }
 }
