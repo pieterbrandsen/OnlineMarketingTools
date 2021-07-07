@@ -32,12 +32,12 @@ namespace OnlineMarketingTools.Database.Data
             if (builder == null)
             {
                 PersonsIntegrated.AddRange(persons);
+                SaveChanges();
             }
             else
             {
                 builder.Entity<PersonIntegrated>().HasData(persons);
             }
-            SaveChanges();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
