@@ -24,12 +24,8 @@ namespace OnlineMarketingTools.DataExternal.Repositories
             var result = new List<string>();
 
             foreach (var entity in _context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }

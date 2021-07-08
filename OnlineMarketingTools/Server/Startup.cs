@@ -41,12 +41,12 @@ namespace OnlineMarketingTools.Server
             services.AddDbContext<PersonProductDbContext>(options =>
                 options.UseInMemoryDatabase("PersonProductDb"));
 
-			/****Identity Context****/
-			services.AddDbContext<IdentityDbContext>(options =>
-				options.UseSqlServer(
-					Configuration.GetConnectionString("DefaultConnection")));
+            /****Identity Context****/
+            services.AddDbContext<IdentityDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-			services.AddScoped<IPersonIntegratedRepository, PersonIntegratedRepositoy>();
+            services.AddScoped<IPersonIntegratedRepository, PersonIntegratedRepositoy>();
 
             /****External repositories****/
             services.AddScoped<IExternalRepository<PersonHobby>, PersonHobbyExternalRepository>();
@@ -57,16 +57,16 @@ namespace OnlineMarketingTools.Server
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-			services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<IdentityDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<IdentityDbContext>();
 
-			services.AddIdentityServer()
-				.AddApiAuthorization<ApplicationUser, IdentityDbContext>();
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, IdentityDbContext>();
 
-			services.AddAuthentication()
-				.AddIdentityServerJwt();
+            services.AddAuthentication()
+                .AddIdentityServerJwt();
 
-			services.AddControllersWithViews();
+            services.AddControllersWithViews();
             services.AddRazorPages();
         }
 
@@ -92,11 +92,11 @@ namespace OnlineMarketingTools.Server
 
             app.UseRouting();
 
-			app.UseIdentityServer();
-			app.UseAuthentication();
-			app.UseAuthorization();
+            app.UseIdentityServer();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();

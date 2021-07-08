@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 namespace OnlineMarketingTools.Database.Data
 {
     public static class IntergratedMockDataGenerator
-    { 
-
+    {
         public static IEnumerable<PersonIntegrated> InterGratedPersonData()
         {
             var persons = new List<PersonIntegrated>();

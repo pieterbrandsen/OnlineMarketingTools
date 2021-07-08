@@ -24,12 +24,8 @@ namespace OnlineMarketingTools.DataExternal.Repositories
             var result = new List<string>();
 
             foreach (var entity in _context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }
@@ -63,14 +59,14 @@ namespace OnlineMarketingTools.DataExternal.Repositories
 			throw new System.NotImplementedException();
 		}
 
-		public Task<ICollection<PersonProduct>> GetICollectionByFieldNameAndValue(string value, string fieldName)
-		{
-			throw new System.NotImplementedException();
-		}
+        public Task<ICollection<PersonProduct>> GetICollectionByFieldNameAndValue(string value, string fieldName)
+        {
+            throw new System.NotImplementedException();
+        }
 
-		public Task<IEnumerable<string>> FieldNames()
-		{
-			throw new System.NotImplementedException();
-		}
-	}
+        public Task<IEnumerable<string>> FieldNames()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

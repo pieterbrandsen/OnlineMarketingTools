@@ -2,8 +2,8 @@
 
 namespace OnlineMarketingTools.Core.Entities
 {
-	public class PersonIntegratedBase
-	{
+    public class PersonIntegratedBase
+    {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

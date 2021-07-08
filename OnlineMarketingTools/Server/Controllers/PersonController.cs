@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace OnlineMarketingTools.Client.Controllers
+namespace OnlineMarketingTools.Server.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
@@ -16,10 +15,10 @@ namespace OnlineMarketingTools.Client.Controllers
 	{
 		private readonly IPersonIntegratedRepository _repository;
 
-		public PersonController(IPersonIntegratedRepository personIntegratedRepository)
-		{
-			_repository = personIntegratedRepository;
-		}
+        public PersonController(IPersonIntegratedRepository personIntegratedRepository)
+        {
+            _repository = personIntegratedRepository;
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()

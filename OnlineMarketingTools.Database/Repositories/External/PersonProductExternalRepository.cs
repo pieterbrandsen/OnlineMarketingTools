@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Database.Repositories.External
 {
-	public class PersonProductExternalRepository : IExternalRepository<PersonProduct>
+    public class PersonProductExternalRepository : IExternalRepository<PersonProduct>
     {
         private readonly PersonProductDbContext _context;
+
         public PersonProductExternalRepository(PersonProductDbContext context)
         {
             _context = context;
@@ -23,12 +24,8 @@ namespace OnlineMarketingTools.Database.Repositories.External
             var result = new List<string>();
 
             foreach (var entity in _context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }
@@ -42,17 +39,22 @@ namespace OnlineMarketingTools.Database.Repositories.External
             return await _context.PersonProducts.ToListAsync();
         }
 
-		/// <summary>
-		/// Gets a IEnumerable<PersonHobby> based on the name of the field and the value that field should have.
-		/// </summary>
-		/// <param name="value">The value of the field you want</param>
-		/// <param name="fieldName">The name of the field you want to check</param>
-		/// <returns></returns>
+        public Task<ICollection<PersonProduct>> GetICollectionByFieldNameAndValue(string value, string fieldName)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets a IEnumerable<PersonHobby> based on the name of the field and the value that field should have.
+        /// </summary>
+        /// <param name="value">The value of the field you want</param>
+        /// <param name="fieldName">The name of the field you want to check</param>
+        /// <returns></returns>
 		public async Task<ICollection<PersonProduct>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
         {
             var result = _context.PersonProducts
-               .Where(string.Format("{0} == {1}", fieldName, value))
-               .AsEnumerable<PersonProduct>();
+                .Where(string.Format("{0} == {1}", fieldName, value))
+                .AsEnumerable<PersonProduct>();
 
             return (ICollection<PersonProduct>)await Task.FromResult(result);
         }
