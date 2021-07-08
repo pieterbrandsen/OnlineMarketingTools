@@ -13,12 +13,13 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace OnlineMarketingTools.Database.Repositories.External
 {
-	public class PersonMedicalExternalRepository : IExternalRepository<PersonMedical>
+    public class PersonMedicalExternalRepository : IExternalRepository<PersonMedical>
     {
         private readonly PersonMedicalDbContext _context;
+
         public PersonMedicalExternalRepository(PersonMedicalDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<IEnumerable<string>> FieldNames()
@@ -26,12 +27,8 @@ namespace OnlineMarketingTools.Database.Repositories.External
             var result = new List<string>();
 
             foreach (var entity in _context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }
@@ -45,18 +42,18 @@ namespace OnlineMarketingTools.Database.Repositories.External
             return await _context.MedicalPersons.ToListAsync();
         }
 
-		public Task<ICollection<PersonMedical>> GetICollectionByFieldNameAndValue(string value, string fieldName)
-		{
-			throw new NotImplementedException();
-		}
+        public Task<ICollection<PersonMedical>> GetICollectionByFieldNameAndValue(string value, string fieldName)
+        {
+            throw new NotImplementedException();
+        }
 
-		/// <summary>
-		/// Gets a IEnumerable<PersonMedical> based on the name of the field and the value that field should have.
-		/// </summary>
-		/// <param name="value">The value of the field you want</param>
-		/// <param name="fieldName">The name of the field you want to check</param>
-		/// <returns></returns>
-		public async Task<IEnumerable<PersonMedical>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        /// <summary>
+        /// Gets a IEnumerable<PersonMedical> based on the name of the field and the value that field should have.
+        /// </summary>
+        /// <param name="value">The value of the field you want</param>
+        /// <param name="fieldName">The name of the field you want to check</param>
+        /// <returns></returns>
+        public async Task<IEnumerable<PersonMedical>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
         {
             var result = _context.MedicalPersons
                 .Where(string.Format("{0} == {1}", fieldName, value))
@@ -65,9 +62,9 @@ namespace OnlineMarketingTools.Database.Repositories.External
             return await Task.FromResult(result);
         }
 
-		Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAll()
-		{
-			throw new NotImplementedException();
-		}
-	}
+        Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

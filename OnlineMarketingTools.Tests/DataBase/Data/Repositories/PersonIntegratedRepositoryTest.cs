@@ -1,31 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.Core.Interfaces;
 using OnlineMarketingTools.Database.Data;
 using OnlineMarketingTools.Database.Repositories;
 using OnlineMarketingTools.DataExternal.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using static IdentityServer4.Models.IdentityResources;
 
-namespace OnlineMarketingTools.Tests.Data.Repositories
+namespace OnlineMarketingTools.Tests.DataBase.Data.Repositories
 {
     public class TestHelper : IDisposable
     {
         private readonly DbContextOptions<PersonIntegratedDbContext> _dbOptions =
             new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("db")
                 .Options;
+
         public PersonIntegratedDbContext DbContext { get; private set; }
         public IPersonIntegratedRepository Repo { get; private set; }
+
         public TestHelper()
         {
-            DbContext = new PersonIntegratedDbContext( _dbOptions, false);
+            DbContext = new PersonIntegratedDbContext(_dbOptions, false);
             Repo = new PersonIntegratedRepositoy(DbContext);
         }
 
@@ -33,11 +31,13 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         {
             DbContext.Database.EnsureDeleted();
         }
+
         public async void DisposeAsync()
         {
             await DbContext.Database.EnsureDeletedAsync();
         }
     }
+
     public class PersonIntegratedRepositoryTest : TestHelper
     {
         private readonly PersonIntegrated _expectedPerson;
@@ -65,23 +65,23 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         [Fact]
         public async Task GetByFirstNameLastNameAndPostCode()
         {
-                var firstName = _expectedPerson.FirstName;
-                var lastName = _expectedPerson.LastName;
-                var postCode = _expectedPerson.PostCode;
+            var firstName = _expectedPerson.FirstName;
+            var lastName = _expectedPerson.LastName;
+            var postCode = _expectedPerson.PostCode;
 
-                var person = await Repo.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
-                Assert.Equal(_expectedPerson.FirstName, person.FirstName);
-                Assert.Equal(_expectedPerson.MiddleName, person.MiddleName);
-                Assert.Equal(_expectedPerson.LastName, person.LastName);
-                Assert.Equal(_expectedPerson.Id, person.Id);
-                Assert.Equal(_expectedPerson.MedicalState, person.MedicalState);
-                Assert.Equal(_expectedPerson.ProductGenre, person.ProductGenre);
-                Assert.Equal(_expectedPerson.Hobby, person.Hobby);
-                Assert.Equal(_expectedPerson.HouseNumber, person.HouseNumber);
-                Assert.Equal(_expectedPerson.Email, person.Email);
-                Assert.Equal(_expectedPerson.Country, person.Country);
-                Assert.Equal(_expectedPerson.PhoneNumber, person.PhoneNumber);
-                Assert.Equal(_expectedPerson.Adress, person.Adress);
+            var person = await Repo.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
+            Assert.Equal(_expectedPerson.FirstName, person.FirstName);
+            Assert.Equal(_expectedPerson.MiddleName, person.MiddleName);
+            Assert.Equal(_expectedPerson.LastName, person.LastName);
+            Assert.Equal(_expectedPerson.Id, person.Id);
+            Assert.Equal(_expectedPerson.MedicalState, person.MedicalState);
+            Assert.Equal(_expectedPerson.ProductGenre, person.ProductGenre);
+            Assert.Equal(_expectedPerson.Hobby, person.Hobby);
+            Assert.Equal(_expectedPerson.HouseNumber, person.HouseNumber);
+            Assert.Equal(_expectedPerson.Email, person.Email);
+            Assert.Equal(_expectedPerson.Country, person.Country);
+            Assert.Equal(_expectedPerson.PhoneNumber, person.PhoneNumber);
+            Assert.Equal(_expectedPerson.Adress, person.Adress);
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         public async Task AddPersonTest()
         {
             var oldId = _expectedPerson.Id;
-            var oldFirstName = _expectedPerson.FirstName; 
+            var oldFirstName = _expectedPerson.FirstName;
             _expectedPerson.Id = 100;
             _expectedPerson.FirstName = "aaa";
             var taskSuccess = await Repo.AddPerson(_expectedPerson);

@@ -22,8 +22,9 @@ namespace OnlineMarketingTools.Client
             //ToDo check if this line is necessary
             //builder.Services.AddScoped(sp => http);
 
-            builder.Services.AddHttpClient<PersonHttpRepository>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-                            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            builder.Services.AddHttpClient<PersonHttpRepository>(client =>
+                    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp =>

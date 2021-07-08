@@ -28,4 +28,8 @@
       <ProjectReference Include="..\OnlineMarketingTools.DataExternal\OnlineMarketingTools.DataExternal.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DataBase" />
+    </ItemGroup>
+
 </Project>

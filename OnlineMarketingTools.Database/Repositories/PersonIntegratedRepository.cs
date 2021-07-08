@@ -16,21 +16,22 @@ namespace OnlineMarketingTools.Database.Repositories
     public class PersonIntegratedRepositoy : IPersonIntegratedRepository, IDisposable
     {
         private readonly PersonIntegratedDbContext context;
+
         public PersonIntegratedRepositoy(PersonIntegratedDbContext context)
         {
             this.context = context;
         }
 
-		//Todo
+        //Todo
 
-		/// <summary>
-		/// Gets an IEnumerable<PersonHobby> of All entity's in this DB
-		/// </summary>
-		/// <returns>Task<IEnumerable<PersonHobby>></returns>
-		public async Task<ICollection<PersonIntegrated>> GetAll()
-		{
-			return await context.PersonsIntegrated.ToListAsync();
-		}
+        /// <summary>
+        /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
+        /// </summary>
+        /// <returns>Task<IEnumerable<PersonHobby>></returns>
+        public async Task<ICollection<PersonIntegrated>> GetAll()
+        {
+            return await context.PersonsIntegrated.ToListAsync();
+        }
 
         /// <summary>
         ///     Gets a list of people by fieldname
@@ -40,11 +41,11 @@ namespace OnlineMarketingTools.Database.Repositories
         public async Task<IEnumerable<PersonIntegrated>> GetAllByPropertyNameAndValue(string value, string propertyName)
         {
             var result = context.PersonsIntegrated
-               .Where(string.Format("{0} == {1}", propertyName, value))
-               .AsEnumerable<PersonIntegrated>();
+                .Where(string.Format("{0} == {1}", propertyName, value))
+                .AsEnumerable<PersonIntegrated>();
 
-			return await Task.FromResult(result);
-		}
+            return await Task.FromResult(result);
+        }
 
         /// <summary>
         ///     Gets a single person based on the following 3 fields
@@ -56,14 +57,14 @@ namespace OnlineMarketingTools.Database.Repositories
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName,
             string postCode)
         {
-            PersonIntegrated result = context.PersonsIntegrated
+            var result = context.PersonsIntegrated
                 .Where(p => p.FirstName == firstName &&
-                p.LastName == lastName && 
-                p.PostCode == postCode)
+                            p.LastName == lastName &&
+                            p.PostCode == postCode)
                 .FirstOrDefault();
 
-			return Task.FromResult(result);
-		}
+            return Task.FromResult(result);
+        }
 
         /// <summary>
         ///     Gets a single person based on Id
@@ -74,8 +75,8 @@ namespace OnlineMarketingTools.Database.Repositories
         {
             var result = await context.PersonsIntegrated.FindAsync(id);
 
-			return result;
-		}
+            return result;
+        }
 
         /// <summary>
         /// Returns a bool weither adding succeeded or not.
@@ -104,7 +105,8 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <returns></returns>
         public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
         {
-            if (await GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null)
+            if (await GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName,
+                PersonToUpdate.PostCode) == null)
             {
                 return false;
             }
@@ -122,12 +124,8 @@ namespace OnlineMarketingTools.Database.Repositories
             var result = new List<string>();
 
             foreach (var entity in context.Model.GetEntityTypes())
-            {
-                foreach (var property in entity.GetProperties())
-                {
-                    result.Add(property.Name);
-                }
-            }
+            foreach (var property in entity.GetProperties())
+                result.Add(property.Name);
 
             return await Task.FromResult(result);
         }
@@ -137,17 +135,12 @@ namespace OnlineMarketingTools.Database.Repositories
             var newPeople = new List<PersonIntegrated>();
             foreach (var person in people)
             {
-                var result = await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
-                if (result == true)
-                {
-                    newPeople.Add(person);
-                }
+                var result =
+                    await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                if (result == true) newPeople.Add(person);
             }
 
-            if (newPeople.Count() <= 0)
-            {
-                return false;
-            }
+            if (newPeople.Count() <= 0) return false;
 
             await context.AddRangeAsync(newPeople);
 
@@ -161,17 +154,12 @@ namespace OnlineMarketingTools.Database.Repositories
             var peopleThatCanBeUpdated = new List<PersonIntegrated>();
             foreach (var person in PeopleToUpdate)
             {
-                var result = await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
-                if (result == false)
-                {
-                    peopleThatCanBeUpdated.Add(person);
-                }
+                var result =
+                    await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                if (result == false) peopleThatCanBeUpdated.Add(person);
             }
 
-            if (peopleThatCanBeUpdated.Count() <= 0)
-            {
-                return false;
-            }
+            if (peopleThatCanBeUpdated.Count() <= 0) return false;
 
             context.UpdateRange(peopleThatCanBeUpdated);
 
@@ -186,14 +174,14 @@ namespace OnlineMarketingTools.Database.Repositories
             GC.SuppressFinalize(this);
         }
 
-		public Task<ICollection<PersonIntegrated>> GetICollectionByFieldNameAndValue(string value, string fieldName)
-		{
-			throw new NotImplementedException();
-		}
+        public Task<ICollection<PersonIntegrated>> GetICollectionByFieldNameAndValue(string value, string fieldName)
+        {
+            throw new NotImplementedException();
+        }
 
-		public Task<IEnumerable<string>> FieldNames()
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public Task<IEnumerable<string>> FieldNames()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
