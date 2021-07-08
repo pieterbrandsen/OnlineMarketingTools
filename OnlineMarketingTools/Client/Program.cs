@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineMarketingTools.Client.Repositories;
 
 namespace OnlineMarketingTools.Client
 {
@@ -17,6 +18,12 @@ namespace OnlineMarketingTools.Client
             builder.Services.AddHttpClient("OnlineMarketingTools.ServerAPI",
                     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            //ToDo check if this line is necessary
+            //builder.Services.AddScoped(sp => http);
+
+            builder.Services.AddHttpClient<PersonHttpRepository>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+                            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp =>

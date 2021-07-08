@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using OnlineMarketingTools.Core.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using OnlineMarketingTools.Core.Entities;
 
 namespace OnlineMarketingTools.Core.Interfaces
 {
-    public interface IPersonIntegratedRepository : IExternalRepository<PersonIntegrated>
+	public interface IPersonIntegratedRepository : IExternalRepository<PersonIntegrated>
     {
         public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName,
             string postCode);
