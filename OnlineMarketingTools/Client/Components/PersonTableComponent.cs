@@ -17,11 +17,17 @@ namespace OnlineMarketingTools.Client.Components
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
 			PersonIntegratedBase personIntegratedBase = new();
-			List<PropertyInfo> properties = personIntegratedBase.GetType().GetRuntimeProperties().ToList();
-			List<PropertyInfo> derivedProperties = Persons.FirstOrDefault().GetType().GetProperties(BindingFlags.DeclaredOnly |
-																							 BindingFlags.Public |
-																							 BindingFlags.Instance).ToList();
+			List<PropertyInfo> properties = personIntegratedBase.GetType()
+																.GetRuntimeProperties()
+																.ToList();
+			List<PropertyInfo> derivedProperties = Persons.FirstOrDefault()
+														  .GetType()
+														  .GetProperties(BindingFlags.DeclaredOnly |
+																		 BindingFlags.Public |
+																		 BindingFlags.Instance)
+														  .ToList();
 			properties.AddRange(derivedProperties);
+
 			int index = 0;
 
 			base.BuildRenderTree(builder);
@@ -35,16 +41,20 @@ namespace OnlineMarketingTools.Client.Components
 				builder.CloseComponent();
 			}
 			builder.AddMarkupContent(index++, "</thead></tr>");
-			//foreach (var person in persons)
-			//{
-			//	builder.OpenElement(index++, "tr");
-			//	builder.OpenElement(index++, "td");
-			//	builder.AddContent(index++, property.GetValue());
-			//	builder.CloseElement();
-			//	builder.CloseElement();
-			//}
+			builder.OpenElement(index++, "tbody");
+			foreach (var person in Persons)
+			{
+				builder.OpenElement(index++, "tr");
+				foreach (var property in properties)
+				{
+					builder.OpenElement(index++, "td");
+					builder.AddContent(index++, person.GetType().GetProperty(property.Name).GetValue(person, null));
+					builder.CloseElement();
+				}
+				builder.CloseElement();
+			}
 			builder.CloseElement();
-			//builder.CloseComponent();
+			builder.CloseElement();
 		}
 	}
 }

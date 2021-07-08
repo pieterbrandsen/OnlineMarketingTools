@@ -21,32 +21,6 @@ else if (persons.Count() is 0)
 }
 else if (persons is not null)
 {
-	<table class="table table-striped small table-sm">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>FirstName</th>
-				<th>LastName</th>
-				<th>Country</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (PersonIntegrated person in persons)
-			{
-			<tr>
-				<td>@person.Id</td>
-				<td>@person.FirstName</td>
-				<td>@person.LastName</td>
-				<td>@person.Country</td>
-				@*<td>
-			<a class="btn btn-sm btn-success small" @onclick="@(() => Method())">Button Text</a>
-			<a class="btn btn-sm btn-danger small" @onclick="@(() => Method())">Button Text</a>
-		</td>*@
-			</tr>
-			}
-		</tbody>
-	</table>
-
 	<PersonTableComponent Persons="persons"></PersonTableComponent>
 }
 </AuthorizeView>
