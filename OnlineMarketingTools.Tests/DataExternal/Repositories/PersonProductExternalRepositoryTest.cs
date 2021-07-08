@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineMarketingTools.DataExternal.Data;
 using OnlineMarketingTools.DataExternal.Entities;
@@ -18,12 +19,12 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var context = new PersonProductDbContext(_dbOptions, false);
             return context;
         }
-
+        
         private PersonProductExternalRepository GetRepo(PersonProductDbContext context)
         {
-            return new(context);
+            return new (context);
         }
-
+        
         [Fact]
         private async void GetAllFieldNames()
         {
@@ -33,8 +34,11 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var repoAllPropertyNames = await repo.GetAllPropertyNames();
 
             var allPropertyNames = repoAllPropertyNames.ToList();
-            Assert.Equal(properties.Length, allPropertyNames.Count());
-            foreach (var prop in properties) Assert.Contains(prop.Name, allPropertyNames);
+            Assert.Equal(properties.Length,allPropertyNames.Count());
+            foreach (var prop in properties)
+            {
+                Assert.Contains(prop.Name, allPropertyNames);
+            }
 
             await context.Database.EnsureDeletedAsync();
         }
@@ -48,9 +52,12 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var hobbyPersons = context.PersonProducts.ToList();
             var repoHobbyPersons = (await repo.GetAll()).ToList();
 
-            Assert.Equal(hobbyPersons.Count, repoHobbyPersons.Count());
-            foreach (var person in hobbyPersons) Assert.Contains(person.Id, repoHobbyPersons.Select(p => p.Id));
-
+            Assert.Equal(hobbyPersons.Count,repoHobbyPersons.Count());
+            foreach (var person in hobbyPersons)
+            {
+                Assert.Contains(person.Id, repoHobbyPersons.Select(p=>p.Id));
+            } 
+            
             await context.Database.EnsureDeletedAsync();
         }
 
@@ -63,12 +70,14 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
 
             var propertyNames = (await repo.GetAllPropertyNames()).ToList();
             foreach (var person in hobbyPersons)
-            foreach (var propertyName in propertyNames)
             {
-                var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
-                var repoProductPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
+                foreach (var propertyName in propertyNames)
+                {
+                    var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
+                    var repoProductPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
 
-                Assert.NotEmpty(repoProductPersons);
+                    Assert.NotEmpty(repoProductPersons); 
+                }
             }
 
             await context.Database.EnsureDeletedAsync();

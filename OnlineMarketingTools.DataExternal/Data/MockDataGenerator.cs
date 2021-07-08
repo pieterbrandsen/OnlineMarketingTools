@@ -181,7 +181,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         {
             var persons = new List<TPerson>();
             for (var i = 0; i < 10; i++)
-                persons.Add(new TPerson
+                persons.Add(new TPerson()
                 {
                     Id = Ids[i],
                     Address = Addresses[i],
@@ -202,7 +202,7 @@ namespace OnlineMarketingTools.DataExternal.Data
         {
             var persons = new List<TPerson>();
             for (var i = amount; i >= 1; i--)
-                persons.Add(new TPerson
+                persons.Add(new TPerson()
                 {
                     Id = i,
                     Address = Addresses[Rnd.Next(Addresses.Count)],

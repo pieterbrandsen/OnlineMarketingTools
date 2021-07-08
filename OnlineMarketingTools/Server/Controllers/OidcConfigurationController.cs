@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace OnlineMarketingTools.Server.Controllers
+namespace TakeNoteBlazor.Server.Controllers
 {
     public class OidcConfigurationController : Controller
     {

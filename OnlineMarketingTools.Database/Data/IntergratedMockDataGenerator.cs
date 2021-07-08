@@ -1,18 +1,24 @@
-﻿using System.Collections.Generic;
-using OnlineMarketingTools.Core.Entities;
+﻿using OnlineMarketingTools.Core.Entities;
 using OnlineMarketingTools.DataExternal.Data;
+using OnlineMarketingTools.DataExternal.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineMarketingTools.Database.Data
 {
     public static class IntergratedMockDataGenerator
-    {
+    { 
+
         public static IEnumerable<PersonIntegrated> InterGratedPersonData()
         {
             var persons = new List<PersonIntegrated>();
             for (var i = 0; i < 10; i++)
-                persons.Add(new PersonIntegrated
+                persons.Add(new PersonIntegrated()
                 {
-                    Key = MockDataGenerator.Ids[i],
+                    Id = MockDataGenerator.Ids[i],
                     Adress = MockDataGenerator.Addresses[i],
                     Country = MockDataGenerator.Countries[i],
                     Email = MockDataGenerator.Emails[i],

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\OnlineMarketingTools.Shared.csproj" />
+    <ProjectReference Include="..\..\OnlineMarketingTools.Core\OnlineMarketingTools.Core.csproj" />
+    <ProjectReference Include="..\..\OnlineMarketingTools.Shared\OnlineMarketingTools.Shared.csproj" />
   </ItemGroup>
 
 </Project>
