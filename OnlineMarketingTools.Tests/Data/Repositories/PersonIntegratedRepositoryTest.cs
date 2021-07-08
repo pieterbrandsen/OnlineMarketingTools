@@ -21,30 +21,21 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         private readonly DbContextOptions<PersonIntegratedDbContext> _dbOptions =
             new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("db")
                 .Options;
-        public PersonIntegratedDbContext NonRandomDataContext { get; private set; }
-        public IPersonIntegratedRepository NonRandomDataRepo { get; private set; }
-
-        public PersonIntegratedDbContext RandomDataContext { get; private set; }
-        public IPersonIntegratedRepository RandomDataRepo { get; private set; }
-        public readonly int RandomDataCount = 10000;
+        public PersonIntegratedDbContext DbContext { get; private set; }
+        public IPersonIntegratedRepository Repo { get; private set; }
         public TestHelper()
         {
-            NonRandomDataContext = new PersonIntegratedDbContext( _dbOptions, false);
-            NonRandomDataRepo = new PersonIntegratedRepositoy(NonRandomDataContext);
-
-            RandomDataContext = new PersonIntegratedDbContext( _dbOptions, true, RandomDataCount);
-            RandomDataRepo = new PersonIntegratedRepositoy(RandomDataContext);
+            DbContext = new PersonIntegratedDbContext( _dbOptions, false);
+            Repo = new PersonIntegratedRepositoy(DbContext);
         }
 
         public void Dispose()
         {
-            NonRandomDataContext.Database.EnsureDeleted();
-            RandomDataContext.Database.EnsureDeleted();
+            DbContext.Database.EnsureDeleted();
         }
         public async void DisposeAsync()
         {
-            await NonRandomDataContext.Database.EnsureDeletedAsync();
-            await RandomDataContext.Database.EnsureDeletedAsync();
+            await DbContext.Database.EnsureDeletedAsync();
         }
     }
     public class PersonIntegratedRepositoryTest : TestHelper
@@ -74,102 +65,75 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         [Fact]
         public async Task GetByFirstNameLastNameAndPostCode()
         {
-                var firstName = MockDataGenerator.FirstNames[0];
-                var lastName = MockDataGenerator.LastNames[0];
-                var postCode = MockDataGenerator.PostalCodes[0];
+                var firstName = _expectedPerson.FirstName;
+                var lastName = _expectedPerson.LastName;
+                var postCode = _expectedPerson.PostCode;
 
-                var result = await NonRandomDataRepo.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
-
-                Assert.Equal(_expectedPerson.FirstName, result.FirstName);
-                Assert.Equal(_expectedPerson.MiddleName, result.MiddleName);
-                Assert.Equal(_expectedPerson.LastName, result.LastName);
-                Assert.Equal(_expectedPerson.Id, result.Id);
-                Assert.Equal(_expectedPerson.MedicalState, result.MedicalState);
-                Assert.Equal(_expectedPerson.ProductGenre, result.ProductGenre);
-                Assert.Equal(_expectedPerson.Hobby, result.Hobby);
-                Assert.Equal(_expectedPerson.HouseNumber, result.HouseNumber);
-                Assert.Equal(_expectedPerson.Email, result.Email);
-                Assert.Equal(_expectedPerson.Country, result.Country);
-                Assert.Equal(_expectedPerson.PhoneNumber, result.PhoneNumber);
+                var person = await Repo.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
+                Assert.Equal(_expectedPerson.FirstName, person.FirstName);
+                Assert.Equal(_expectedPerson.MiddleName, person.MiddleName);
+                Assert.Equal(_expectedPerson.LastName, person.LastName);
+                Assert.Equal(_expectedPerson.Id, person.Id);
+                Assert.Equal(_expectedPerson.MedicalState, person.MedicalState);
+                Assert.Equal(_expectedPerson.ProductGenre, person.ProductGenre);
+                Assert.Equal(_expectedPerson.Hobby, person.Hobby);
+                Assert.Equal(_expectedPerson.HouseNumber, person.HouseNumber);
+                Assert.Equal(_expectedPerson.Email, person.Email);
+                Assert.Equal(_expectedPerson.Country, person.Country);
+                Assert.Equal(_expectedPerson.PhoneNumber, person.PhoneNumber);
+                Assert.Equal(_expectedPerson.Adress, person.Adress);
         }
 
         [Fact]
         public async Task GetByIdTest()
         {
-            await using var context = new PersonIntegratedDbContext(_dbOptions1, false);
-            PersonIntegrated result;
-            using (var repo = new PersonIntegratedRepositoy(context))
-            {
-                result = await _personRepoSeeded.GetById(MockDataGenerator.Ids[0]);
-            }
+            var person = await Repo.GetById(_expectedPerson.Id);
 
-            Assert.Equal(_expectedPerson.FirstName, result.FirstName);
-            Assert.Equal(_expectedPerson.MiddleName, result.MiddleName);
-            Assert.Equal(_expectedPerson.LastName, result.LastName);
-            Assert.Equal(_expectedPerson.Id, result.Id);
-            Assert.Equal(_expectedPerson.MedicalState, result.MedicalState);
-            Assert.Equal(_expectedPerson.ProductGenre, result.ProductGenre);
-            Assert.Equal(_expectedPerson.Hobby, result.Hobby);
-            Assert.Equal(_expectedPerson.HouseNumber, result.HouseNumber);
-            Assert.Equal(_expectedPerson.Email, result.Email);
-            Assert.Equal(_expectedPerson.Country, result.Country);
-            Assert.Equal(_expectedPerson.PhoneNumber, result.PhoneNumber);
-
-            await context.Database.EnsureDeletedAsync();
+            Assert.Equal(_expectedPerson.FirstName, person.FirstName);
+            Assert.Equal(_expectedPerson.MiddleName, person.MiddleName);
+            Assert.Equal(_expectedPerson.LastName, person.LastName);
+            Assert.Equal(_expectedPerson.Id, person.Id);
+            Assert.Equal(_expectedPerson.MedicalState, person.MedicalState);
+            Assert.Equal(_expectedPerson.ProductGenre, person.ProductGenre);
+            Assert.Equal(_expectedPerson.Hobby, person.Hobby);
+            Assert.Equal(_expectedPerson.HouseNumber, person.HouseNumber);
+            Assert.Equal(_expectedPerson.Email, person.Email);
+            Assert.Equal(_expectedPerson.Country, person.Country);
+            Assert.Equal(_expectedPerson.PhoneNumber, person.PhoneNumber);
+            Assert.Equal(_expectedPerson.Adress, person.Adress);
         }
 
         [Fact]
         public async Task AddPersonTest()
         {
-            await using var context = new PersonIntegratedDbContext(_dbOptions2);
-            var person = new PersonIntegrated()
-            {
-                Id = MockDataGenerator.Ids[0],
-                Adress = MockDataGenerator.Addresses[0],
-                Country = MockDataGenerator.Countries[0],
-                Email = MockDataGenerator.Emails[0],
-                FirstName = MockDataGenerator.FirstNames[0],
-                Hobby = MockDataGenerator.HobbyEnumValues[0].ToString(),
-                HouseNumber = 0,
-                LastName = MockDataGenerator.LastNames[0],
-                MedicalState = MockDataGenerator.MedicalEnumValues[0].ToString(),
-                MiddleName = MockDataGenerator.MiddleNames[0],
-                PhoneNumber = MockDataGenerator.PhoneNumbers[0],
-                PostCode = MockDataGenerator.PostalCodes[0],
-                ProductGenre = MockDataGenerator.ProductGenreEnumValues[0].ToString()
-            };
+            var oldId = _expectedPerson.Id;
+            var oldFirstName = _expectedPerson.FirstName; 
+            _expectedPerson.Id = 100;
+            _expectedPerson.FirstName = "aaa";
+            var taskSuccess = await Repo.AddPerson(_expectedPerson);
+            _expectedPerson.Id = oldId;
+            _expectedPerson.FirstName = oldFirstName;
 
-            bool taskResult;
-
-            using (var repo = new PersonIntegratedRepositoy(context))
-            {
-                taskResult = await repo.AddPerson(person);
-            }
-
-            Assert.True(taskResult);
-
-            Assert.Equal(1, context.PersonsIntegrated.Count());
-
-            await context.Database.EnsureDeletedAsync();
+            Assert.True(taskSuccess);
+            Assert.Equal(11, DbContext.PersonsIntegrated.Count());
         }
 
         [Fact]
         public async Task AddRangeTest()
         {
-            await using var context = new PersonIntegratedDbContext(_dbOptions2);
             var personList = new List<PersonIntegrated>();
             for (var i = 0; i <= 2; i++)
             {
                 var person = new PersonIntegrated()
                 {
-                    Id = MockDataGenerator.Ids[i],
+                    Id = MockDataGenerator.Ids[i] + 10,
                     Adress = MockDataGenerator.Addresses[i],
                     Country = MockDataGenerator.Countries[i],
                     Email = MockDataGenerator.Emails[i],
                     FirstName = MockDataGenerator.FirstNames[i],
                     Hobby = MockDataGenerator.HobbyEnumValues[i].ToString(),
                     HouseNumber = i,
-                    LastName = MockDataGenerator.LastNames[i],
+                    LastName = MockDataGenerator.LastNames[i] + "aaa",
                     MedicalState = MockDataGenerator.MedicalEnumValues[i].ToString(),
                     MiddleName = MockDataGenerator.MiddleNames[i],
                     PhoneNumber = MockDataGenerator.PhoneNumbers[i],
@@ -179,18 +143,10 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
                 personList.Add(person);
             }
 
-            bool result;
-
-            using (var repo = new PersonIntegratedRepositoy(context))
-            {
-                result = await repo.AddRange(personList);
-            }
+            var result = await Repo.AddRange(personList);
 
             Assert.True(result);
-
-            Assert.Equal(3, context.PersonsIntegrated.Count());
-
-            await context.Database.EnsureDeletedAsync();
+            Assert.Equal(13, DbContext.PersonsIntegrated.Count());
         }
 
 
