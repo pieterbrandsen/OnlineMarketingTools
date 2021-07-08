@@ -11,42 +11,22 @@
     Person List
 </h3>
 <AuthorizeView>
-    @if (persons is null)
-    {
-        <p>Loading</p>
-    }
-    else if (persons.Count() is 0)
-    {
-        <p>No Notes Found</p>
-    }
-    else if (persons is not null)
-    {
-        <table class="table table-striped small table-sm">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var person in persons)
-            {
-                <tr>
-                    <td>@person.Id</td>
-                    <td>@person.FirstName</td>
-                    @*<td>
-							<a class="btn btn-sm btn-success small" @onclick="@(() => Method())">Button Text</a>
-							<a class="btn btn-sm btn-danger small" @onclick="@(() => Method())">Button Text</a>
-						</td>*@
-                </tr>
-            }
-            </tbody>
-        </table>
-    }
+@if (persons is null)
+{
+	<p>Loading</p>
+}
+else if (persons.Count() is 0)
+{
+	<p>No Notes Found</p>
+}
+else if (persons is not null)
+{
+	<PersonTableComponent Persons="persons"></PersonTableComponent>
+}
 </AuthorizeView>
 
 @code {
-    private IEnumerable<PersonIntegrated> persons { get; set; }
+	private ICollection<PersonIntegrated> persons { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

@@ -11,10 +11,12 @@ namespace OnlineMarketingTools.Client.Repositories
     {
         private readonly HttpClient httpClient;
 
-        public PersonHttpRepository(HttpClient httpClient)
-        {
-            this.httpClient = httpClient;
-        }
+		public PersonHttpRepository(HttpClient httpClient)
+		{
+			this.httpClient = httpClient;
+		}
+		public async Task<ICollection<T>> GetAllAsync<T>(string path) =>
+			(ICollection<T>)await httpClient.GetFromJsonAsync<IEnumerable<T>>(path);
 
         public async Task<IEnumerable<T>> GetAllAsync<T>(string path)
         {
