@@ -16,26 +16,43 @@ using static IdentityServer4.Models.IdentityResources;
 
 namespace OnlineMarketingTools.Tests.Data.Repositories
 {
-    public class PersonIntegratedRepositoryTest
+    public class TestHelper : IDisposable
     {
-        private readonly DbContextOptions<PersonIntegratedDbContext> _dbOptions1 =
-            new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("personintergratedSeeded-db")
+        private readonly DbContextOptions<PersonIntegratedDbContext> _dbOptions =
+            new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("db")
                 .Options;
+        public PersonIntegratedDbContext NonRandomDataContext { get; private set; }
+        public IPersonIntegratedRepository NonRandomDataRepo { get; private set; }
 
-        private readonly DbContextOptions<PersonIntegratedDbContext> _dbOptions2 =
-            new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("personintergratedEmpty-db")
-                .Options;
+        public PersonIntegratedDbContext RandomDataContext { get; private set; }
+        public IPersonIntegratedRepository RandomDataRepo { get; private set; }
+        public readonly int RandomDataCount = 10000;
+        public TestHelper()
+        {
+            NonRandomDataContext = new PersonIntegratedDbContext( _dbOptions, false);
+            NonRandomDataRepo = new PersonIntegratedRepositoy(NonRandomDataContext);
 
-        private readonly PersonIntegratedDbContext _seededContext;
-        private readonly IPersonIntegratedRepository _personRepoSeeded;
+            RandomDataContext = new PersonIntegratedDbContext( _dbOptions, true, RandomDataCount);
+            RandomDataRepo = new PersonIntegratedRepositoy(RandomDataContext);
+        }
 
+        public void Dispose()
+        {
+            NonRandomDataContext.Database.EnsureDeleted();
+            RandomDataContext.Database.EnsureDeleted();
+        }
+        public async void DisposeAsync()
+        {
+            await NonRandomDataContext.Database.EnsureDeletedAsync();
+            await RandomDataContext.Database.EnsureDeletedAsync();
+        }
+    }
+    public class PersonIntegratedRepositoryTest : TestHelper
+    {
         private readonly PersonIntegrated _expectedPerson;
 
         public PersonIntegratedRepositoryTest()
         {
-            _seededContext = new PersonIntegratedDbContext(_dbOptions1, false);
-            _personRepoSeeded = new PersonIntegratedRepositoy(_seededContext);
-
             _expectedPerson = new PersonIntegrated()
             {
                 Id = MockDataGenerator.Ids[0],
@@ -52,20 +69,16 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
                 PostCode = MockDataGenerator.PostalCodes[0],
                 ProductGenre = MockDataGenerator.ProductGenreEnumValues[0].ToString()
             };
-            
-            _seededContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task GetByFirstNameLastNameAndPostCode()
         {
-            await using (_seededContext)
-            {
                 var firstName = MockDataGenerator.FirstNames[0];
                 var lastName = MockDataGenerator.LastNames[0];
                 var postCode = MockDataGenerator.PostalCodes[0];
 
-                var result = await _personRepoSeeded.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
+                var result = await NonRandomDataRepo.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
 
                 Assert.Equal(_expectedPerson.FirstName, result.FirstName);
                 Assert.Equal(_expectedPerson.MiddleName, result.MiddleName);
@@ -78,9 +91,6 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
                 Assert.Equal(_expectedPerson.Email, result.Email);
                 Assert.Equal(_expectedPerson.Country, result.Country);
                 Assert.Equal(_expectedPerson.PhoneNumber, result.PhoneNumber);
-
-                await _seededContext.Database.EnsureDeletedAsync();
-            }
         }
 
         [Fact]
