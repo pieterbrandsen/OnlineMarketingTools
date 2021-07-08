@@ -16,7 +16,7 @@ using static IdentityServer4.Models.IdentityResources;
 
 namespace OnlineMarketingTools.Tests.Data.Repositories
 {
-    public class PersonIntergratedRepositoryTest
+    public class PersonIntegratedRepositoryTest
     {
         private readonly DbContextOptions<PersonIntegratedDbContext> _dbOptions1 =
             new DbContextOptionsBuilder<PersonIntegratedDbContext>().UseInMemoryDatabase("personintergratedSeeded-db")
@@ -31,7 +31,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
 
         private readonly PersonIntegrated _expectedPerson;
 
-        public PersonIntergratedRepositoryTest()
+        public PersonIntegratedRepositoryTest()
         {
             _seededContext = new PersonIntegratedDbContext(_dbOptions1, false);
             _personRepoSeeded = new PersonIntegratedRepositoy(_seededContext);
