@@ -29,9 +29,9 @@ namespace OnlineMarketingTools.Server.Services
 
         public async Task GetAndCombine()
         {
-            var hobbyList = await hobbyContext.GetAll();
-            var medicalList = await medicalContext.GetAll();
-            var productList = await productContext.GetAll();
+            var hobbyList = await hobbyContext.GetAllAsync();
+            var medicalList = await medicalContext.GetAllAsync();
+            var productList = await productContext.GetAllAsync();
 
             var combined = new List<PersonIntegrated>();
 
@@ -59,7 +59,7 @@ namespace OnlineMarketingTools.Server.Services
                 combined.Add(newPerson);
             }
 
-            await intergratedContext.AddRange(combined);
+            await intergratedContext.AddRangeAsync(combined);
         }
     }
 }

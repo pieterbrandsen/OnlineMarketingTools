@@ -10,7 +10,7 @@ namespace OnlineMarketingTools.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PersonController : ControllerBase
     {
         private readonly IPersonIntegratedRepository _repository;
@@ -21,9 +21,9 @@ namespace OnlineMarketingTools.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            var persons = await _repository.GetAll();
+            var persons = await _repository.GetAllAsync();
             if (persons.Count() is not 0)
             {
                 return Ok(persons);

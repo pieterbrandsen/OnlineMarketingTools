@@ -19,7 +19,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
             _context = context;
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<ICollection<string>> GetAllPropertyNamesAsync()
         {
             var result = new List<string>();
 
@@ -34,7 +34,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<IEnumerable<PersonHobby>> GetAll()
+        public async Task<ICollection<PersonHobby>> GetAllAsync()
         {
             return await _context.PersonHobbies.ToListAsync();
         }
@@ -50,16 +50,16 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonHobby>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<ICollection<PersonHobby>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
         {
             var result = _context.PersonHobbies
                 .Where(string.Format("{0} == {1}", fieldName, value))
                 .AsEnumerable<PersonHobby>();
 
-            return await Task.FromResult(result);
+            return (ICollection<PersonHobby>) await Task.FromResult(result);
         }
 
-        Task<ICollection<PersonHobby>> IExternalRepository<PersonHobby>.GetAll()
+        Task<ICollection<PersonHobby>> IExternalRepository<PersonHobby>.GetAllAsync()
         {
             throw new NotImplementedException();
         }

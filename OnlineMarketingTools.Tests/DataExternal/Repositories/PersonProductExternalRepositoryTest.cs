@@ -31,7 +31,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var context = GetNonRandomDataContext();
             var repo = GetRepo(context);
             var properties = typeof(PersonProduct).GetProperties();
-            var repoAllPropertyNames = await repo.GetAllPropertyNames();
+            var repoAllPropertyNames = await repo.GetAllPropertyNamesAsync();
 
             var allPropertyNames = repoAllPropertyNames.ToList();
             Assert.Equal(properties.Length, allPropertyNames.Count());
@@ -47,7 +47,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var context = GetNonRandomDataContext();
             var repo = GetRepo(context);
             var hobbyPersons = context.PersonProducts.ToList();
-            var repoHobbyPersons = (await repo.GetAll()).ToList();
+            var repoHobbyPersons = (await repo.GetAllAsync()).ToList();
 
             Assert.Equal(hobbyPersons.Count, repoHobbyPersons.Count());
             foreach (var person in hobbyPersons) Assert.Contains(person.Id, repoHobbyPersons.Select(p => p.Id));
@@ -62,12 +62,12 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var repo = GetRepo(context);
             var hobbyPersons = context.PersonProducts.ToList();
 
-            var propertyNames = (await repo.GetAllPropertyNames()).ToList();
+            var propertyNames = (await repo.GetAllPropertyNamesAsync()).ToList();
             foreach (var person in hobbyPersons)
             foreach (var propertyName in propertyNames)
             {
                 var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
-                var repoProductPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
+                var repoProductPersons = await repo.GetAllByPropertyNameAndValueAsync(value, propertyName);
 
                 Assert.NotEmpty(repoProductPersons);
             }

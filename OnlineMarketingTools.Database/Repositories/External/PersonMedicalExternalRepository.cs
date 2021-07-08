@@ -22,7 +22,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
             _context = context;
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<ICollection<string>> GetAllPropertyNamesAsync()
         {
             var result = new List<string>();
 
@@ -37,7 +37,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// Gets an IEnumerable<PersonMedical> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
-        public async Task<IEnumerable<PersonMedical>> GetAll()
+        public async Task<ICollection<PersonMedical>> GetAllAsync()
         {
             return await _context.MedicalPersons.ToListAsync();
         }
@@ -53,16 +53,16 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonMedical>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+        public async Task<ICollection<PersonMedical>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
         {
             var result = _context.MedicalPersons
                 .Where(string.Format("{0} == {1}", fieldName, value))
                 .AsEnumerable<PersonMedical>();
 
-            return await Task.FromResult(result);
+            return (ICollection<PersonMedical>) await Task.FromResult(result);
         }
 
-        Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAll()
+        Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAllAsync()
         {
             throw new NotImplementedException();
         }

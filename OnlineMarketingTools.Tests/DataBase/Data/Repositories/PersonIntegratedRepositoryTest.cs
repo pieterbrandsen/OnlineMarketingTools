@@ -69,7 +69,7 @@ namespace OnlineMarketingTools.Tests.DataBase.Data.Repositories
             var lastName = _expectedPerson.LastName;
             var postCode = _expectedPerson.PostCode;
 
-            var person = await Repo.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
+            var person = await Repo.GetByFirstNameLastNameAndPostCodeAsync(firstName, lastName, postCode);
             Assert.Equal(_expectedPerson.FirstName, person.FirstName);
             Assert.Equal(_expectedPerson.MiddleName, person.MiddleName);
             Assert.Equal(_expectedPerson.LastName, person.LastName);
@@ -87,7 +87,7 @@ namespace OnlineMarketingTools.Tests.DataBase.Data.Repositories
         [Fact]
         public async Task GetByIdTest()
         {
-            var person = await Repo.GetById(_expectedPerson.Id);
+            var person = await Repo.GetByIdAsync(_expectedPerson.Id);
 
             Assert.Equal(_expectedPerson.FirstName, person.FirstName);
             Assert.Equal(_expectedPerson.MiddleName, person.MiddleName);
@@ -110,7 +110,7 @@ namespace OnlineMarketingTools.Tests.DataBase.Data.Repositories
             var oldFirstName = _expectedPerson.FirstName;
             _expectedPerson.Id = 100;
             _expectedPerson.FirstName = "aaa";
-            var taskSuccess = await Repo.AddPerson(_expectedPerson);
+            var taskSuccess = await Repo.AddAsync(_expectedPerson);
             _expectedPerson.Id = oldId;
             _expectedPerson.FirstName = oldFirstName;
 
@@ -143,7 +143,7 @@ namespace OnlineMarketingTools.Tests.DataBase.Data.Repositories
                 personList.Add(person);
             }
 
-            var result = await Repo.AddRange(personList);
+            var result = await Repo.AddRangeAsync(personList);
 
             Assert.True(result);
             Assert.Equal(13, DbContext.PersonsIntegrated.Count());

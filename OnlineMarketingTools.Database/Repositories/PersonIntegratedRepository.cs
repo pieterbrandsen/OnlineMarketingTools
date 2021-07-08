@@ -28,7 +28,7 @@ namespace OnlineMarketingTools.Database.Repositories
         /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<ICollection<PersonIntegrated>> GetAll()
+        public async Task<ICollection<PersonIntegrated>> GetAllAsync()
         {
             return await context.PersonsIntegrated.ToListAsync();
         }
@@ -38,13 +38,14 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<IEnumerable<PersonIntegrated>> GetAllByPropertyNameAndValue(string value, string propertyName)
+        public async Task<ICollection<PersonIntegrated>> GetAllByPropertyNameAndValueAsync(string value,
+            string propertyName)
         {
             var result = context.PersonsIntegrated
                 .Where(string.Format("{0} == {1}", propertyName, value))
                 .AsEnumerable<PersonIntegrated>();
 
-            return await Task.FromResult(result);
+            return (ICollection<PersonIntegrated>) await Task.FromResult(result);
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <param name="lastName"></param>
         /// <param name="postCode"></param>
         /// <returns>Task<PersonHobby></returns>
-        public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName,
+        public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCodeAsync(string firstName, string lastName,
             string postCode)
         {
             var result = context.PersonsIntegrated
@@ -71,7 +72,7 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Task<PersonHobby></returns>
-        public async Task<PersonIntegrated> GetById(int id)
+        public async Task<PersonIntegrated> GetByIdAsync(int id)
         {
             var result = await context.PersonsIntegrated.FindAsync(id);
 
@@ -83,9 +84,10 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="person">The PersonIntergrated object to add</param>
         /// <returns></returns>
-        public async Task<bool> AddPerson(PersonIntegrated person)
+        public async Task<bool> AddAsync(PersonIntegrated person)
         {
-            if (!(await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null))
+            if (!(await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) ==
+                  null))
             {
                 return false;
             }
@@ -103,9 +105,9 @@ namespace OnlineMarketingTools.Database.Repositories
         /// </summary>
         /// <param name="PersonToUpdate">The PersonIntergrated object to update</param>
         /// <returns></returns>
-        public async Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate)
+        public async Task<bool> UpdateAsync(PersonIntegrated PersonToUpdate)
         {
-            if (await GetByFirstNameLastNameAndPostCode(PersonToUpdate.FirstName, PersonToUpdate.LastName,
+            if (await GetByFirstNameLastNameAndPostCodeAsync(PersonToUpdate.FirstName, PersonToUpdate.LastName,
                 PersonToUpdate.PostCode) == null)
             {
                 return false;
@@ -119,7 +121,7 @@ namespace OnlineMarketingTools.Database.Repositories
             }
         }
 
-        public async Task<IEnumerable<string>> GetAllPropertyNames()
+        public async Task<ICollection<string>> GetAllPropertyNamesAsync()
         {
             var result = new List<string>();
 
@@ -130,13 +132,14 @@ namespace OnlineMarketingTools.Database.Repositories
             return await Task.FromResult(result);
         }
 
-        public async Task<bool> AddRange(IEnumerable<PersonIntegrated> people)
+        public async Task<bool> AddRangeAsync(ICollection<PersonIntegrated> people)
         {
             var newPeople = new List<PersonIntegrated>();
             foreach (var person in people)
             {
                 var result =
-                    await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                    await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) ==
+                    null;
                 if (result == true) newPeople.Add(person);
             }
 
@@ -149,13 +152,14 @@ namespace OnlineMarketingTools.Database.Repositories
             return true;
         }
 
-        public async Task<bool> UpdateRange(IEnumerable<PersonIntegrated> PeopleToUpdate)
+        public async Task<bool> UpdateRangeAsync(ICollection<PersonIntegrated> PeopleToUpdate)
         {
             var peopleThatCanBeUpdated = new List<PersonIntegrated>();
             foreach (var person in PeopleToUpdate)
             {
                 var result =
-                    await GetByFirstNameLastNameAndPostCode(person.FirstName, person.LastName, person.PostCode) == null;
+                    await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) ==
+                    null;
                 if (result == false) peopleThatCanBeUpdated.Add(person);
             }
 
