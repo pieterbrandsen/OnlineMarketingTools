@@ -15,8 +15,8 @@ namespace OnlineMarketingTools.Client.Repositories
 		{
 			this.httpClient = httpClient;
 		}
-		public async Task<IEnumerable<T>> GetAllAsync<T>(string path) => 
-			await httpClient.GetFromJsonAsync<IEnumerable<T>>(path);
+		public async Task<ICollection<T>> GetAllAsync<T>(string path) =>
+			(ICollection<T>)await httpClient.GetFromJsonAsync<IEnumerable<T>>(path);
 
 		//public async Task<T> GetAsync<T>(string id) =>
 		//	await httpClient.GetFromJsonAsync<T>($"api/{typeof(T).Name.ToLower()}/{id}");
