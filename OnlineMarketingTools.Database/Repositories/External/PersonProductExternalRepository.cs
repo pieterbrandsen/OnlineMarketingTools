@@ -35,7 +35,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// </summary>
         /// <returns>Task<IEnumerable<PersonProduct>></returns>
         public async Task<IEnumerable<PersonProduct>> GetAllAsync()
-{
+        {
             return await _context.PersonProducts.ToListAsync();
         }
 
@@ -50,18 +50,18 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-		public async Task<ICollection<PersonProduct>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
+        public async Task<ICollection<PersonProduct>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
         {
             var result = _context.PersonProducts
                 .Where(string.Format("{0} == {1}", fieldName, value))
                 .AsEnumerable<PersonProduct>();
 
-            return (ICollection<PersonProduct>)await Task.FromResult(result);
+            return (ICollection<PersonProduct>) await Task.FromResult(result);
         }
 
-		Task<ICollection<PersonProduct>> IExternalRepository<PersonProduct>.GetAllAsync()
-		{
-			throw new NotImplementedException();
-		}
-	}
+        Task<ICollection<PersonProduct>> IExternalRepository<PersonProduct>.GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -24,28 +24,29 @@ namespace OnlineMarketingTools.Database.Repositories
 
         //Todo
 
-		/// <summary>
-		/// Gets an IEnumerable<PersonHobby> of All entity's in this DB
-		/// </summary>
-		/// <returns>Task<IEnumerable<PersonHobby>></returns>
-		public async Task<ICollection<PersonIntegrated>> GetAllAsync()
-		{
-			return await context.PersonsIntegrated.ToListAsync();
-		}
+        /// <summary>
+        /// Gets an IEnumerable<PersonHobby> of All entity's in this DB
+        /// </summary>
+        /// <returns>Task<IEnumerable<PersonHobby>></returns>
+        public async Task<ICollection<PersonIntegrated>> GetAllAsync()
+        {
+            return await context.PersonsIntegrated.ToListAsync();
+        }
 
         /// <summary>
         ///     Gets a list of people by fieldname
         /// </summary>
         /// <param name="fieldName"> The name of the field you want to search for </param>
         /// <returns>Task<IEnumerable<PersonHobby>></returns>
-        public async Task<ICollection<PersonIntegrated>> GetAllByPropertyNameAndValueAsync(string value, string propertyName)
+        public async Task<ICollection<PersonIntegrated>> GetAllByPropertyNameAndValueAsync(string value,
+            string propertyName)
         {
             var result = context.PersonsIntegrated
                 .Where(string.Format("{0} == {1}", propertyName, value))
                 .AsEnumerable<PersonIntegrated>();
 
-			return (ICollection<PersonIntegrated>)await Task.FromResult(result);
-		}
+            return (ICollection<PersonIntegrated>) await Task.FromResult(result);
+        }
 
         /// <summary>
         ///     Gets a single person based on the following 3 fields
@@ -85,7 +86,8 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <returns></returns>
         public async Task<bool> AddAsync(PersonIntegrated person)
         {
-            if (!(await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) == null))
+            if (!(await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) ==
+                  null))
             {
                 return false;
             }
@@ -105,7 +107,8 @@ namespace OnlineMarketingTools.Database.Repositories
         /// <returns></returns>
         public async Task<bool> UpdateAsync(PersonIntegrated PersonToUpdate)
         {
-            if (await GetByFirstNameLastNameAndPostCodeAsync(PersonToUpdate.FirstName, PersonToUpdate.LastName, PersonToUpdate.PostCode) == null)
+            if (await GetByFirstNameLastNameAndPostCodeAsync(PersonToUpdate.FirstName, PersonToUpdate.LastName,
+                PersonToUpdate.PostCode) == null)
             {
                 return false;
             }
@@ -134,11 +137,10 @@ namespace OnlineMarketingTools.Database.Repositories
             var newPeople = new List<PersonIntegrated>();
             foreach (var person in people)
             {
-                var result = await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) == null;
-                if (result == true)
-                {
-                    newPeople.Add(person);
-                }
+                var result =
+                    await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) ==
+                    null;
+                if (result == true) newPeople.Add(person);
             }
 
             if (newPeople.Count() <= 0) return false;
@@ -155,11 +157,10 @@ namespace OnlineMarketingTools.Database.Repositories
             var peopleThatCanBeUpdated = new List<PersonIntegrated>();
             foreach (var person in PeopleToUpdate)
             {
-                var result = await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) == null;
-                if (result == false)
-                {
-                    peopleThatCanBeUpdated.Add(person);
-                }
+                var result =
+                    await GetByFirstNameLastNameAndPostCodeAsync(person.FirstName, person.LastName, person.PostCode) ==
+                    null;
+                if (result == false) peopleThatCanBeUpdated.Add(person);
             }
 
             if (peopleThatCanBeUpdated.Count() <= 0) return false;

@@ -50,16 +50,16 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// <param name="value">The value of the field you want</param>
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <returns></returns>
-		public async Task<ICollection<PersonHobby>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
+        public async Task<ICollection<PersonHobby>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
         {
             var result = _context.PersonHobbies
                 .Where(string.Format("{0} == {1}", fieldName, value))
                 .AsEnumerable<PersonHobby>();
 
-            return (ICollection<PersonHobby>)await Task.FromResult(result);
+            return (ICollection<PersonHobby>) await Task.FromResult(result);
         }
 
-        Task<ICollection<PersonHobby>> IExternalRepository<PersonHobby>.GetAll()
+        Task<ICollection<PersonHobby>> IExternalRepository<PersonHobby>.GetAllAsync()
         {
             throw new NotImplementedException();
         }

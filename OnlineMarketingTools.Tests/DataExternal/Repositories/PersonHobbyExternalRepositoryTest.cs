@@ -62,14 +62,12 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var repo = GetRepo(context);
             var hobbyPersons = context.PersonHobbies.ToList();
 
-            var propertyNames = (await repo.GetAllPropertyNames()).ToList();
+            var propertyNames = (await repo.GetAllPropertyNamesAsync()).ToList();
             foreach (var person in hobbyPersons)
             foreach (var propertyName in propertyNames)
             {
-                foreach (var propertyName in propertyNames)
-                {
-                    var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
-                    var repoHobbyPersons = await repo.GetAllByPropertyNameAndValueAsync(value, propertyName);
+                var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
+                var repoHobbyPersons = await repo.GetAllByPropertyNameAndValueAsync(value, propertyName);
 
                 Assert.NotEmpty(repoHobbyPersons);
             }

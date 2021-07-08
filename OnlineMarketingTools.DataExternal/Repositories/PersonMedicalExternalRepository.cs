@@ -46,17 +46,18 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public async Task<ICollection<PersonMedical>> GetAllByPropertyNameAndValueAsync(string value, string propertyName)
+        public async Task<ICollection<PersonMedical>> GetAllByPropertyNameAndValueAsync(string value,
+            string propertyName)
         {
             var result = _context.MedicalPersons
                 .Where(string.Format("{0} == {1}", propertyName, Expression.Constant(value)))
                 .AsEnumerable<PersonMedical>();
 
             var lenght = result.Count();
-            return (ICollection<PersonMedical>)await Task.FromResult(result);
+            return (ICollection<PersonMedical>) await Task.FromResult(result);
         }
 
-        Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAll()
+        Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAllAsync()
         {
             throw new System.NotImplementedException();
         }

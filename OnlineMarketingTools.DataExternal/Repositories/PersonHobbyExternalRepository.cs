@@ -52,32 +52,32 @@ namespace OnlineMarketingTools.DataExternal.Repositories
                 .Where(string.Format("{0} == {1}", propertyName, Expression.Constant(value)))
                 .AsEnumerable<PersonHobby>();
 
-            return (ICollection<PersonHobby>)await Task.FromResult(result);
+            return (ICollection<PersonHobby>) await Task.FromResult(result);
         }
 
-		public Task<ICollection<PersonHobby>> GetICollectionByFieldNameAndValue(string value, string fieldName)
-		{
-			throw new System.NotImplementedException();
-		}
+        public Task<ICollection<PersonHobby>> GetICollectionByFieldNameAndValue(string value, string fieldName)
+        {
+            throw new System.NotImplementedException();
+        }
 
-		public Task<IEnumerable<string>> FieldNames()
-		{
-			throw new System.NotImplementedException();
-		}
+        public Task<IEnumerable<string>> FieldNames()
+        {
+            throw new System.NotImplementedException();
+        }
 
-		Task<ICollection<PersonHobby>> IExternalRepository<PersonHobby>.GetAllAsync()
-		{
-			throw new System.NotImplementedException();
-		}
+        Task<ICollection<PersonHobby>> IExternalRepository<PersonHobby>.GetAllAsync()
+        {
+            throw new System.NotImplementedException();
+        }
 
-		public Task<ICollection<PersonHobby>> GetAllByFieldNameAndValueAsync(string value, string fieldName)
-		{
-			throw new System.NotImplementedException();
-		}
+        public Task<ICollection<PersonHobby>> GetAllByFieldNameAndValueAsync(string value, string fieldName)
+        {
+            throw new System.NotImplementedException();
+        }
 
-		public Task<ICollection<string>> GetAllPropertyNamesAsync()
-		{
-			throw new System.NotImplementedException();
-		}
-	}
+        public Task<ICollection<string>> GetAllPropertyNamesAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
