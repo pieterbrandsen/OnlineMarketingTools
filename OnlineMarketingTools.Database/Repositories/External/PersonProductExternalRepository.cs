@@ -18,7 +18,7 @@ namespace OnlineMarketingTools.Database.Repositories.External
             _context = context;
         }
 
-        public async Task<IEnumerable<string>> FieldNames()
+        public async Task<ICollection<string>> GetAllPropertyNamesAsync()
         {
             var result = new List<string>();
 
@@ -37,15 +37,10 @@ namespace OnlineMarketingTools.Database.Repositories.External
         /// Gets an IEnumerable<PersonProduct> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonProduct>></returns>
-        public async Task<IEnumerable<PersonProduct>> GetAll()
+        public async Task<IEnumerable<PersonProduct>> GetAllAsync()
 {
             return await _context.PersonProducts.ToListAsync();
         }
-
-		public Task<ICollection<PersonProduct>> GetICollectionByFieldNameAndValue(string value, string fieldName)
-		{
-			throw new NotImplementedException();
-		}
 
 		/// <summary>
 		/// Gets a IEnumerable<PersonHobby> based on the name of the field and the value that field should have.
@@ -53,16 +48,16 @@ namespace OnlineMarketingTools.Database.Repositories.External
 		/// <param name="value">The value of the field you want</param>
 		/// <param name="fieldName">The name of the field you want to check</param>
 		/// <returns></returns>
-		public async Task<IEnumerable<PersonProduct>> GetIEnumerableByFieldNameAndValue(string value, string fieldName)
+		public async Task<ICollection<PersonProduct>> GetAllByPropertyNameAndValueAsync(string value, string fieldName)
         {
             var result = _context.PersonProducts
                .Where(string.Format("{0} == {1}", fieldName, value))
                .AsEnumerable<PersonProduct>();
 
-            return await Task.FromResult(result);
+            return (ICollection<PersonProduct>)await Task.FromResult(result);
         }
 
-		Task<ICollection<PersonProduct>> IExternalRepository<PersonProduct>.GetAll()
+		Task<ICollection<PersonProduct>> IExternalRepository<PersonProduct>.GetAllAsync()
 		{
 			throw new NotImplementedException();
 		}

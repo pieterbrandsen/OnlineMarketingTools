@@ -6,14 +6,14 @@ namespace OnlineMarketingTools.Core.Interfaces
 {
 	public interface IPersonIntegratedRepository : IExternalRepository<PersonIntegrated>
     {
-        public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCode(string firstName, string lastName,
+        public Task<PersonIntegrated> GetByFirstNameLastNameAndPostCodeAsync(string firstName, string lastName,
             string postCode);
 
-        public Task<PersonIntegrated> GetById(int id);
-        public Task<bool> AddPerson(PersonIntegrated person);
-        public Task<bool> AddRange(IEnumerable<PersonIntegrated> people);
-        public Task<bool> UpdatePerson(PersonIntegrated PersonToUpdate);
-        public Task<bool> UpdateRange(IEnumerable<PersonIntegrated> PeopleToUpdate);
+        public Task<PersonIntegrated> GetByIdAsync(int id);
+        public Task<bool> AddAsync(PersonIntegrated person);
+        public Task<bool> AddRangeAsync(ICollection<PersonIntegrated> persons);
+        public Task<bool> UpdateAsync(PersonIntegrated updatedPerson);
+        public Task<bool> UpdateRangeAsync(ICollection<PersonIntegrated> updatedPersons);
         public void Dispose();
     }
 }

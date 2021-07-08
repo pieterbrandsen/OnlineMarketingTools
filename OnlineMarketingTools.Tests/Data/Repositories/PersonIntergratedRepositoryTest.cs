@@ -63,7 +63,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
                 var lastName = MockDataGenerator.LastNames[0];
                 var postCode = MockDataGenerator.PostalCodes[0];
 
-                var result = await _personRepoSeeded.GetByFirstNameLastNameAndPostCode(firstName, lastName, postCode);
+                var result = await _personRepoSeeded.GetByFirstNameLastNameAndPostCodeAsync(firstName, lastName, postCode);
 
                 Assert.Equal(_expectedPerson.FirstName, result.FirstName);
                 Assert.Equal(_expectedPerson.MiddleName, result.MiddleName);
@@ -89,7 +89,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
                 PersonIntegrated result;
                 using (var repo = new PersonIntegratedRepositoy(context))
                 {
-                    result = await _personRepoSeeded.GetById(MockDataGenerator.Ids[0]);
+                    result = await _personRepoSeeded.GetByIdAsync(MockDataGenerator.Ids[0]);
                 }
 
                 Assert.Equal(_expectedPerson.FirstName, result.FirstName);
@@ -131,9 +131,9 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
 
             bool taskResult;
 
-            using (var repo = new PersonIntegratedRepositoy(context))
+            using (var personIntegratedRepository = new PersonIntegratedRepositoy(context))
             {
-                taskResult = await repo.AddPerson(person);
+                taskResult = await personIntegratedRepository.AddAsync(person);
             }
 
             Assert.True(taskResult);
@@ -173,7 +173,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
 
             using (var repo = new PersonIntegratedRepositoy(context))
             {
-                result = await repo.AddRange(personList);
+                result = await repo.AddRangeAsync(personList);
             }
 
             Assert.True(result);

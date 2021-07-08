@@ -19,7 +19,7 @@ namespace OnlineMarketingTools.DataExternal.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<string>> GetAllPropertyNames()
+        public async Task<ICollection<string>> GetAllPropertyNamesAsync()
         {
             var result = new List<string>();
 
@@ -38,7 +38,7 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         ///     Gets an IEnumerable<PersonMedical> of All entity's in this DB
         /// </summary>
         /// <returns>Task<IEnumerable<PersonMedical>></returns>
-        public async Task<IEnumerable<PersonMedical>> GetAll()
+        public async Task<ICollection<PersonMedical>> GetAllAsync()
         {
             return await _context.MedicalPersons.ToListAsync();
         }
@@ -50,27 +50,17 @@ namespace OnlineMarketingTools.DataExternal.Repositories
         /// <param name="fieldName">The name of the field you want to check</param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<PersonMedical>> GetAllByPropertyNameAndValue(string value, string propertyName)
+        public async Task<ICollection<PersonMedical>> GetAllByPropertyNameAndValueAsync(string value, string propertyName)
         {
             var result = _context.MedicalPersons
                 .Where(string.Format("{0} == {1}", propertyName, Expression.Constant(value)))
                 .AsEnumerable<PersonMedical>();
 
             var lenght = result.Count();
-            return await Task.FromResult(result);
+            return (ICollection<PersonMedical>)await Task.FromResult(result);
         }
 
-		Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAll()
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public Task<ICollection<PersonMedical>> GetICollectionByFieldNameAndValue(string value, string fieldName)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public Task<IEnumerable<string>> FieldNames()
+		Task<ICollection<PersonMedical>> IExternalRepository<PersonMedical>.GetAllAsync()
 		{
 			throw new System.NotImplementedException();
 		}

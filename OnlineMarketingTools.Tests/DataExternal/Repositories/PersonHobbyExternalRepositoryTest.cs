@@ -50,7 +50,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
             var context = GetNonRandomDataContext();
             var repo = GetRepo(context);
             var hobbyPersons = context.PersonHobbies.ToList();
-            var repoHobbyPersons = (await repo.GetAll()).ToList();
+            var repoHobbyPersons = (await repo.GetAllAsync()).ToList();
 
             Assert.Equal(hobbyPersons.Count,repoHobbyPersons.Count());
             foreach (var person in hobbyPersons)
@@ -74,7 +74,7 @@ namespace OnlineMarketingTools.Tests.DataExternal.Repositories
                 foreach (var propertyName in propertyNames)
                 {
                     var value = person.GetType().GetProperty(propertyName)?.GetValue(person)?.ToString();
-                    var repoHobbyPersons = await repo.GetAllByPropertyNameAndValue(value, propertyName);
+                    var repoHobbyPersons = await repo.GetAllByPropertyNameAndValueAsync(value, propertyName);
 
                     Assert.NotEmpty(repoHobbyPersons); 
                 }
