@@ -52,12 +52,14 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
                 PostCode = MockDataGenerator.PostalCodes[0],
                 ProductGenre = MockDataGenerator.ProductGenreEnumValues[0].ToString()
             };
+            
+            _seededContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task GetByFirstNameLastNameAndPostCode()
         {
-            using (_seededContext)
+            await using (_seededContext)
             {
                 var firstName = MockDataGenerator.FirstNames[0];
                 var lastName = MockDataGenerator.LastNames[0];
@@ -84,28 +86,26 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         [Fact]
         public async Task GetByIdTest()
         {
-            using (var context = new PersonIntegratedDbContext(_dbOptions1, false))
+            await using var context = new PersonIntegratedDbContext(_dbOptions1, false);
+            PersonIntegrated result;
+            using (var repo = new PersonIntegratedRepositoy(context))
             {
-                PersonIntegrated result;
-                using (var repo = new PersonIntegratedRepositoy(context))
-                {
-                    result = await _personRepoSeeded.GetById(MockDataGenerator.Ids[0]);
-                }
-
-                Assert.Equal(_expectedPerson.FirstName, result.FirstName);
-                Assert.Equal(_expectedPerson.MiddleName, result.MiddleName);
-                Assert.Equal(_expectedPerson.LastName, result.LastName);
-                Assert.Equal(_expectedPerson.Id, result.Id);
-                Assert.Equal(_expectedPerson.MedicalState, result.MedicalState);
-                Assert.Equal(_expectedPerson.ProductGenre, result.ProductGenre);
-                Assert.Equal(_expectedPerson.Hobby, result.Hobby);
-                Assert.Equal(_expectedPerson.HouseNumber, result.HouseNumber);
-                Assert.Equal(_expectedPerson.Email, result.Email);
-                Assert.Equal(_expectedPerson.Country, result.Country);
-                Assert.Equal(_expectedPerson.PhoneNumber, result.PhoneNumber);
-
-                await context.Database.EnsureDeletedAsync();
+                result = await _personRepoSeeded.GetById(MockDataGenerator.Ids[0]);
             }
+
+            Assert.Equal(_expectedPerson.FirstName, result.FirstName);
+            Assert.Equal(_expectedPerson.MiddleName, result.MiddleName);
+            Assert.Equal(_expectedPerson.LastName, result.LastName);
+            Assert.Equal(_expectedPerson.Id, result.Id);
+            Assert.Equal(_expectedPerson.MedicalState, result.MedicalState);
+            Assert.Equal(_expectedPerson.ProductGenre, result.ProductGenre);
+            Assert.Equal(_expectedPerson.Hobby, result.Hobby);
+            Assert.Equal(_expectedPerson.HouseNumber, result.HouseNumber);
+            Assert.Equal(_expectedPerson.Email, result.Email);
+            Assert.Equal(_expectedPerson.Country, result.Country);
+            Assert.Equal(_expectedPerson.PhoneNumber, result.PhoneNumber);
+
+            await context.Database.EnsureDeletedAsync();
         }
 
         [Fact]
@@ -148,7 +148,7 @@ namespace OnlineMarketingTools.Tests.Data.Repositories
         {
             await using var context = new PersonIntegratedDbContext(_dbOptions2);
             var personList = new List<PersonIntegrated>();
-            for (int i = 0; i <= 2; i++)
+            for (var i = 0; i <= 2; i++)
             {
                 var person = new PersonIntegrated()
                 {

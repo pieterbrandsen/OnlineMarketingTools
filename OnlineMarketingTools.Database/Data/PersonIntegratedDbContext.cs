@@ -39,10 +39,5 @@ namespace OnlineMarketingTools.Database.Data
                 builder.Entity<PersonIntegrated>().HasData(persons);
             }
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            Seed(modelBuilder);
-        }
     }
 }
